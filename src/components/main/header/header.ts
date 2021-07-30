@@ -1,11 +1,9 @@
 import {Options, Vue} from 'vue-class-component';
-import Messages from './messages/messages.vue';
 import Notifications from './notifications/notifications.vue';
 import User from './user/user.vue';
 
 @Options({
     components: {
-        'messages-dropdown': Messages,
         'notifications-dropdown': Notifications,
         'user-dropdown': User
     }
