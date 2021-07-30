@@ -1,12 +1,12 @@
 import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router';
 
-import Main from '@/modules/main/main.vue';
-import Login from '@/modules/login/login.vue';
-import Register from '@/modules/register/register.vue';
+import Main from '@/components/main/main.vue';
+import Login from '@/components/login/login.vue';
+import Register from '@/components/register/register.vue';
 
-import Dashboard from '@/pages/dashboard/dashboard.vue';
-import Profile from '@/pages/profile/profile.vue';
-import ForgotPassword from '@/modules/forgot-password/forgot-password.vue';
+import Dashboard from '@/views/dashboard/dashboard.vue';
+import Profile from '@/views/profile/profile.vue';
+import ForgotPassword from '@/components/forgot-password/forgot-password.vue';
 
 const routes: Array<RouteRecordRaw> = [
     {
