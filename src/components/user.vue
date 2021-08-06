@@ -23,7 +23,29 @@
                     alt="User Image"
                 />
 
-                <p>
+                <div  v-if="loginfflag">
+                    <p>{{currentUser.username}}</p>
+                    <!-- 
+                    <p>
+                        <strong>Token:</strong>
+                        {{currentUser.accessToken.substring(0, 20)}} ... {{currentUser.accessToken.substr(currentUser.accessToken.length - 20)}}
+                    </p>
+                    <p>
+                    <strong>Id:</strong>
+                    {{currentUser.id}}
+                    </p>
+                    <p>
+                        <strong>Email:</strong>
+                        {{currentUser.email}}
+                    </p>
+                    <strong>Authorities:</strong>
+                    <ul>
+                        <li v-for="role in currentUser.roles" :key="role">{{role}}</li>
+                    </ul> 
+                    -->
+                </div>
+
+                <p  v-if="!loginfflag">
                     Guest
                 </p>
             </li>
@@ -34,7 +56,7 @@
                     class="btn btn-default btn-flat"
                     @click="isDropdownOpened = false;"
                 >
-                    Profile
+                    <p   v-if="loginfflag">Profile</p>
                 </router-link>
                 <button
                     @click="login"
@@ -49,21 +71,30 @@
 
 <script>
     export default {
-        name: "profile",
+        name: "user",
         data() {
             return {
+                loginflag : false
             };
         },
-        currentUser() {
-            return this.$store.state.auth.user;
+        computed: {
+            currentUser() {
+                console.log(this.$store.state.auth.user)
+                return this.$store.state.auth.user;
+            }
         },
         methods : {
          login(){
             this.$router.push('/login');
          },
-       }
+         logout(){
+              this.$router.push('/login');
+         },
+       },
+        mounted() {
+             if (!this.currentUser) {
+                 this.loginflag = true
+             }
+        },
     };
-    // private logout() {
-    //     this.$router.push('/login');
-    // }
 </script>
