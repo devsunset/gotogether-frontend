@@ -29,6 +29,17 @@
                             <p>Go Together</p>
                         </router-link>
                     </li>
+                    <li class="nav-item">
+                        <router-link
+                            to="/locationmap"
+                            class="nav-link"
+                            exact
+                            exact-active-class="active"
+                        >
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>Location Map</p>
+                        </router-link>
+                    </li>
                     <li class="nav-item"    v-if="currentUser">
                         <router-link
                             to="/profile"
