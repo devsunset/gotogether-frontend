@@ -1,0 +1,28 @@
+<template>
+    <footer class="main-footer">
+        <strong>
+            <span>Copyright &copy; 2021 </span>
+            Go Together
+            <span>.</span>
+        </strong>
+        <span> All rights reserved.</span>
+        <div class="float-right d-none d-sm-inline-block">
+            <b>Version </b>
+            <span>{{version}}</span>
+        </div>
+    </footer>
+</template>
+
+
+<script>
+    import {version} from '../../package.json';
+
+    export default {
+        name: "profile",
+        data() {
+            return {
+                version : version
+            };
+        }
+    };
+</script>

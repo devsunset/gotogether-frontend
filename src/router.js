@@ -1,7 +1,53 @@
 import { createWebHistory, createRouter } from "vue-router";
+
+import Main from '@/layout/main.vue';
+import Login from '@/components/login.vue';
+import Register from '@/components/register.vue';
+import ForgotPassword from '@/components/forgot-password.vue';
+
+import Dashboard from '@/views/dashboard.vue';
+import Profile from '@/views/profile.vue';
+
+const routes = [
+  {
+      path: '/',
+      name: 'Main',
+      component: Main,
+      children: [
+          {
+              path: '',
+              name: 'Dashboard',
+              component: Dashboard
+          },
+          {
+              path: 'profile',
+              name: 'Profile',
+              component: Profile
+          }
+      ]
+  },
+  {
+      path: '/login',
+      name: 'Login',
+      component: Login
+  },
+  {
+      path: '/register',
+      name: 'Register',
+      component: Register
+  },
+  {
+      path: '/forgot-password',
+      name: 'ForgotPassword',
+      component: ForgotPassword
+  },
+];
+
+/*
 import Home from "./components/Home.vue";
 import Login from "./components/Login.vue";
 import Register from "./components/Register.vue";
+
 // lazy-loaded
 const Profile = () => import("./components/Profile.vue")
 const BoardAdmin = () => import("./components/BoardAdmin.vue")
@@ -51,6 +97,7 @@ const routes = [
     component: BoardUser,
   },
 ];
+*/
 
 const router = createRouter({
   history: createWebHistory(),

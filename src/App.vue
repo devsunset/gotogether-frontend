@@ -1,4 +1,38 @@
 <template>
+    <router-view />
+</template>
+
+<style>
+  @import url('https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css');
+  @import url('https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.3.0/css/flag-icon.min.css');
+  @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700');
+
+  @import '~admin-lte/plugins/fontawesome-free/css/all.min.css';
+  @import '~admin-lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css';
+  @import '~admin-lte/dist/css/adminlte.min.css';
+
+  #app {
+      width: 100vw;
+      height: 100vh;
+  }
+
+  .main-header .navbar-nav .nav-item .nav-link {
+      background: transparent;
+      border: none;
+      outline: none;
+      cursor: pointer;
+  }
+
+  .navbar-nav > .user-menu .user-image {
+      height: 1.6rem;
+      width: 1.6rem;
+      margin-right: 0;
+      margin-left: -8px;
+  }
+</style>
+
+<!--
+<template>
   <div id="app">
     <nav class="navbar navbar-expand navbar-dark bg-dark">
       <a href="/" class="navbar-brand">bezKoder</a>
@@ -92,3 +126,4 @@ export default {
   }
 };
 </script>
+-->
