@@ -35,6 +35,7 @@
                                 </div>
                             </div>
                         </div>
+                        <div><ErrorMessage name="password" class="error-feedback" /></div>
                         <div class="input-group mb-1">
                             <Field name="retypepassword" type="password" class="form-control" placeholder="Retype password"/>
                             <div class="input-group-append">
@@ -43,7 +44,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div><ErrorMessage name="password" class="error-feedback" /></div>
+                        <div><ErrorMessage name="retypepassword" class="error-feedback" /></div>
                         <div class="row">
                             <!--
                             <div class="col-8">
@@ -72,6 +73,9 @@
                             </div>
                             <!-- /.col -->
                         </div>
+                        <router-link to="/login" class="text-center">
+                            I already have a membership
+                        </router-link>
                     </div>
                 </Form>
                 <!--
@@ -89,11 +93,6 @@
                 >
                     {{ message }}
                 </div>
-
-                <router-link to="/login" class="text-center">
-                    I already have a membership
-                </router-link>
-
             </div>
             <!-- /.form-box -->
         </div>
@@ -134,27 +133,28 @@
             .max(40, "Must be maximum 40 characters!"),
         retypepassword: yup
             .string()
-            .required("Password is required!")
+            .required("Retype Password is required!")
             .min(6, "Must be at least 6 characters!")
-            .max(40, "Must be maximum 40 characters!"),
+            .max(40, "Must be maximum 40 characters!")
+            .oneOf([yup.ref('password'), null], 'Passwords must match'),
         });
 
         return {
-        successful: false,
-        loading: false,
-        message: "",
-        schema,
+            successful: false,
+            loading: false,
+            message: "",
+            schema,
         };
     },
     computed: {
         loggedIn() {
-        return this.$store.state.auth.status.loggedIn;
+            return this.$store.state.auth.status.loggedIn;
         },
     },
     mounted() {
         appElement.classList.add('register-page');
         if (this.loggedIn) {
-        this.$router.push("/profile");
+            this.$router.push("/profile");
         }
     },
     unmounted(){
@@ -162,27 +162,27 @@
     },
     methods: {
         handleRegister(user) {
-        this.message = "";
-        this.successful = false;
-        this.loading = true;
-
-        this.$store.dispatch("auth/register", user).then(
-            (data) => {
-            this.message = data.message;
-            this.successful = true;
-            this.loading = false;
-            },
-            (error) => {
-            this.message =
-                (error.response &&
-                error.response.data &&
-                error.response.data.message) ||
-                error.message ||
-                error.toString();
+            this.message = "";
             this.successful = false;
-            this.loading = false;
-            }
-        );
+            this.loading = true;
+
+            this.$store.dispatch("auth/register", user).then(
+                (data) => {
+                this.message = data.message;
+                this.successful = true;
+                this.loading = false;
+                },
+                (error) => {
+                this.message =
+                    (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                    error.message ||
+                    error.toString();
+                this.successful = false;
+                this.loading = false;
+                }
+            );
         },
     },
 };    
