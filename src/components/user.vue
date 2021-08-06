@@ -23,7 +23,7 @@
                     alt="User Image"
                 />
 
-                <div  v-if="loginfflag">
+                <div  v-if="currentUser">
                     <p>{{currentUser.username}}</p>
                     <!-- 
                     <p>
@@ -45,7 +45,7 @@
                     -->
                 </div>
 
-                <p  v-if="!loginfflag">
+                <p  v-if="!currentUser">
                     Guest
                 </p>
             </li>
@@ -56,7 +56,7 @@
                     class="btn btn-default btn-flat"
                     @click="isDropdownOpened = false;"
                 >
-                    <p   v-if="loginfflag">Profile</p>
+                    <p   v-if="currentUser">Profile</p>
                 </router-link>
                 <button
                     @click="login"
@@ -74,12 +74,10 @@
         name: "user",
         data() {
             return {
-                loginflag : false
             };
         },
         computed: {
             currentUser() {
-                console.log(this.$store.state.auth.user)
                 return this.$store.state.auth.user;
             }
         },
@@ -92,9 +90,6 @@
          },
        },
         mounted() {
-             if (!this.currentUser) {
-                 this.loginflag = true
-             }
         },
     };
 </script>
