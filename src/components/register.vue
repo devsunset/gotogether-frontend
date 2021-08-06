@@ -10,7 +10,7 @@
                 <Form @submit="handleRegister" :validation-schema="schema">
                     <div v-if="!successful">
                         <div class="input-group mb-1">
-                            <Field name="username" type="text" class="form-control" placeholder="Username"/>
+                            <Field name="username" type="text" class="form-control" placeholder="UserId"/>
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-user"></span>
@@ -94,7 +94,7 @@
                     {{ message }}
                 </div>
 
-                <div v-if="successful">
+                <div v-if="successful" style="text-align:center">
                     <router-link to="/login" class="text-center">Login</router-link>
                 </div>
             </div>
@@ -122,7 +122,7 @@
         const schema = yup.object().shape({
         username: yup
             .string()
-            .required("Username is required!")
+            .required("UserId is required!")
             .min(3, "Must be at least 3 characters!")
             .max(20, "Must be maximum 20 characters!"),
         email: yup

@@ -10,7 +10,7 @@
 
                 <Form @submit="handleLogin" :validation-schema="schema">
                     <div class="input-group mb-1">
-                        <Field name="username" type="text" class="form-control"  placeholder="Username"/>
+                        <Field name="username" type="text" class="form-control"  placeholder="UserId"/>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -98,7 +98,7 @@ export default {
   },
   data() {
     const schema = yup.object().shape({
-      username: yup.string().required("Username is required!"),
+      username: yup.string().required("UserId is required!"),
       password: yup.string().required("Password is required!"),
     });
 
@@ -119,7 +119,7 @@ export default {
   },
   created() {
     if (this.loggedIn) {
-      this.$router.push("/profile");
+      this.$router.push("/");
     }
   },
   methods: {
@@ -128,7 +128,7 @@ export default {
 
       this.$store.dispatch("auth/login", user).then(
         () => {
-          this.$router.push("/profile");
+          this.$router.push("/");
         },
         (error) => {
           this.loading = false;

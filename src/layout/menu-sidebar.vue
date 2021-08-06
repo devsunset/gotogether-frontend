@@ -31,13 +31,13 @@
                     </li>
                     <li class="nav-item">
                         <router-link
-                            to="/locationmap"
+                            to="/location"
                             class="nav-link"
                             exact
                             exact-active-class="active"
                         >
                             <i class="nav-icon fas fa-tachometer-alt"></i>
-                            <p>Location Map</p>
+                            <p>Location</p>
                         </router-link>
                     </li>
                     <li class="nav-item"    v-if="currentUser">

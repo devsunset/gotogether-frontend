@@ -36,7 +36,7 @@
 <script>
 
 export default {
-  name: "locationmap",
+  name: "location",
   data() {
     return {
       content: "",
