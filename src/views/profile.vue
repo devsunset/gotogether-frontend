@@ -90,7 +90,7 @@
                                         class="nav-link"
                                         href="#notes"
                                         data-toggle="tab"
-                                        >Nots</a
+                                        >Notes</a
                                     >
                                 </li>
                             </ul>
@@ -101,7 +101,6 @@
                                 <div class="active tab-pane" id="activity">
                                     
                                 <div  v-if="currentUser">
-                                    <p>{{currentUser.username}}</p>
                                     <p>
                                         <strong>Token:</strong>
                                         {{currentUser.accessToken.substring(0, 20)}} ... {{currentUser.accessToken.substr(currentUser.accessToken.length - 20)}}

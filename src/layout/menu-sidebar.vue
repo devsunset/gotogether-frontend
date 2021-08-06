@@ -25,7 +25,7 @@
                             exact
                             exact-active-class="active"
                         >
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <i class="nav-icon fas fa-th"></i>
                             <p>Go Together</p>
                         </router-link>
                     </li>
@@ -36,7 +36,7 @@
                             exact
                             exact-active-class="active"
                         >
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <i class="nav-icon fas fa-map-marker"></i>
                             <p>Location</p>
                         </router-link>
                     </li>
