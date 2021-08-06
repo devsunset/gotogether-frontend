@@ -95,7 +95,7 @@
                 </div>
 
                 <div v-if="successful">
-                    <router-link to="/login">Login</router-link>
+                    <router-link to="/login" class="text-center">Login</router-link>
                 </div>
             </div>
             <!-- /.form-box -->
