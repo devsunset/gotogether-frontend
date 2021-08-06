@@ -62,7 +62,12 @@
                     @click="login"
                     class="btn btn-default btn-flat float-right"
                 >
-                    Sign In
+                     <p  v-if="currentUser">
+                       Sign Out
+                    </p>
+                    <p  v-if="!currentUser">
+                       Sign In
+                    </p>
                 </button>
             </li>
         </ul>
@@ -83,11 +88,13 @@
         },
         methods : {
          login(){
-            this.$router.push('/login');
-         },
-         logout(){
-              this.$router.push('/login');
-         },
+            if(this.currentUser){
+                this.$store.dispatch('auth/logout')
+                this.$router.push('/')
+            }else{
+                this.$router.push('/login')
+            }
+         }
        },
         mounted() {
         },
