@@ -5,7 +5,7 @@ import Login from '@/components/login.vue';
 import Register from '@/components/register.vue';
 import ForgotPassword from '@/components/forgot-password.vue';
 
-import Dashboard from '@/views/dashboard.vue';
+import GoTogether from '@/views/gotogether.vue';
 import Profile from '@/views/profile.vue';
 
 const routes = [
@@ -16,8 +16,8 @@ const routes = [
       children: [
           {
               path: '',
-              name: 'Dashboard',
-              component: Dashboard
+              name: 'GoTogether',
+              component: GoTogether
           },
           {
               path: 'profile',

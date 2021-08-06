@@ -33,26 +33,11 @@
                                     alt="User profile picture"
                                 />
                             </div>
-
                             <h3 class="profile-username text-center">
-                                devsunset
+                                 <div  v-if="currentUser">
+                                    <p>{{currentUser.username}}</p>
+                                 </div>
                             </h3>
-
-                            <p class="text-muted text-center">FreeLancer developer</p>
-
-                            <ul class="list-group list-group-unbordered mb-3">
-                                <li class="list-group-item">
-                                    <b>Followers</b>
-                                    <a class="float-right">1</a>
-                                </li>
-                                <li class="list-group-item">
-                                    <b>Following</b> <a class="float-right">1</a>
-                                </li>
-                            </ul>
-
-                            <button class="btn btn-primary btn-block">
-                                <b>Follow</b>
-                            </button>
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -89,15 +74,23 @@
                                         class="nav-link active"
                                         href="#activity"
                                         data-toggle="tab"
-                                        >Activity</a
+                                        >Info</a
                                     >
                                 </li>
                                 <li class="nav-item">
                                     <a
                                         class="nav-link"
-                                        href="#settings"
+                                        href="#skills"
                                         data-toggle="tab"
-                                        >Settings</a
+                                        >Skills</a
+                                    >
+                                </li>
+                                <li class="nav-item">
+                                    <a
+                                        class="nav-link"
+                                        href="#notes"
+                                        data-toggle="tab"
+                                        >Notes</a
                                     >
                                 </li>
                             </ul>
@@ -106,11 +99,35 @@
                         <div class="card-body">
                             <div class="tab-content">
                                 <div class="active tab-pane" id="activity">
-                                    Activity
+                                    
+                                <div  v-if="currentUser">
+                                    <p>{{currentUser.username}}</p>
+                                    <p>
+                                        <strong>Token:</strong>
+                                        {{currentUser.accessToken.substring(0, 20)}} ... {{currentUser.accessToken.substr(currentUser.accessToken.length - 20)}}
+                                    </p>
+                                    <p>
+                                    <strong>Id:</strong>
+                                    {{currentUser.id}}
+                                    </p>
+                                    <p>
+                                        <strong>Email:</strong>
+                                        {{currentUser.email}}
+                                    </p>
+                                    <strong>Authorities:</strong>
+                                    <ul>
+                                        <li v-for="role in currentUser.roles" :key="role">{{role}}</li>
+                                    </ul> 
+                                </div>
                                 </div>
                                 <!-- /.tab-pane -->
-                                <div class="tab-pane" id="settings">
+                                <div class="tab-pane" id="skills">
+                                    Skills
+                                </div>
 
+                                 <!-- /.tab-pane -->
+                                <div class="tab-pane" id="notes">
+                                    Notes
                                 </div>
                                 <!-- /.tab-pane -->
                             </div>
@@ -134,8 +151,11 @@
         data() {
             return {
             };
-        }
+        },
+        computed: {
+            currentUser() {
+                return this.$store.state.auth.user;
+            }
+        },
     };
 </script>
-
-

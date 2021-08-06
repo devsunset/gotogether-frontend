@@ -26,10 +26,10 @@
                             exact-active-class="active"
                         >
                             <i class="nav-icon fas fa-tachometer-alt"></i>
-                            <p>Dashboard</p>
+                            <p>Go Together</p>
                         </router-link>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item"    v-if="currentUser">
                         <router-link
                             to="/profile"
                             class="nav-link"
@@ -46,11 +46,12 @@
 </template>
 
 <script>
-    export default {
-        name: "menu-sidbar",
-        data() {
-            return {
-            };
-        }
-    };
+export default {
+name: "menu-sidbar",
+  computed: {
+    currentUser() {
+      return this.$store.state.auth.user;
+    },
+  }
+};
 </script>
