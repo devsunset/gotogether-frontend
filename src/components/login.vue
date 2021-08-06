@@ -68,7 +68,7 @@
 
                 <p class="mb-1">
                     <router-link to="/forgot-password">
-                        I forgot my password
+                      <!--  I forgot my password -->
                     </router-link>
                 </p>
                 <p class="mb-0">

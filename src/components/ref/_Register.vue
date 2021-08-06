@@ -43,6 +43,10 @@
       >
         {{ message }}
       </div>
+
+      <div v-if="!successful">
+        
+      </div>
     </div>
   </div>
 </template>

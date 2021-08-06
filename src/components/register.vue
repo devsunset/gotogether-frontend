@@ -93,6 +93,10 @@
                 >
                     {{ message }}
                 </div>
+
+                <div v-if="successful">
+                    <router-link to="/login">Login</router-link>
+                </div>
             </div>
             <!-- /.form-box -->
         </div>

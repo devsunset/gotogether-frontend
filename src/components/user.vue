@@ -40,7 +40,7 @@
                     @click="login"
                     class="btn btn-default btn-flat float-right"
                 >
-                    Sign in
+                    Sign In
                 </button>
             </li>
         </ul>
@@ -54,11 +54,14 @@
             return {
             };
         },
-         methods : {
-            login(){
-                this.$router.push('/login');
-            },
-        }
+        currentUser() {
+            return this.$store.state.auth.user;
+        },
+        methods : {
+         login(){
+            this.$router.push('/login');
+         },
+       }
     };
     // private logout() {
     //     this.$router.push('/login');
