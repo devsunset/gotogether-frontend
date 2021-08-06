@@ -24,7 +24,7 @@
                 />
 
                 <p>
-                    devsunset
+                    Guest
                 </p>
             </li>
             <!-- Menu Footer-->
@@ -60,39 +60,7 @@
             },
         }
     };
-
-    // private isDropdownOpened = false;
-
-    // public mounted(): void {
-    //     document.addEventListener('click', this.documentClick);
-    // }
-
-    // public unmounted(): void {
-    //     document.removeEventListener('click', this.documentClick);
-    // }
-
-    // private toggleDropdown() {
-    //     this.isDropdownOpened = !this.isDropdownOpened;
-    // }
-
-    // private documentClick(event: Event) {
-    //     const el: HTMLElement = this.$refs.dropdown as HTMLElement;
-    //     const target: HTMLElement = event.target as HTMLElement;
-    //     if (el !== target && !el.contains(target)) {
-    //         this.isDropdownOpened = false;
-    //     }
-    // }
-
     // private logout() {
     //     this.$router.push('/login');
     // }
 </script>
-
-<style scoped>
-    /* .user-menu {
-        .user-image {
-            width: 1.6rem !important;
-            height: 1.6rem !important;
-        }
-    } */
-</style>>
