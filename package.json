@@ -59,6 +59,10 @@
       "parser": "babel-eslint"
     },
     "rules": {}
+    , 
+    "globals": {
+      "kakao": false
+    }
   },
   "browserslist": [
     "> 1%",
