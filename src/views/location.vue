@@ -51,7 +51,6 @@ export default {
   methods: {
     addKakaoMapScript() {
       const script = document.createElement("script");
-      /* global kakao */
       script.onload = () => kakao.maps.load(this.initMap);
       script.src =
         "http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=fc3ffc2cce82269dd8b0295c881c7e2c";
@@ -60,8 +59,8 @@ export default {
     initMap() {
       var container = document.getElementById("map"); 
       var options = {
-        center: new kakao.maps.LatLng(37.564343, 126.947613), 
-        level: 3 
+        center: new kakao.maps.LatLng(37.47973476787492, 126.82248036958089), 
+        level: 4 
       };
       var map = new kakao.maps.Map(container, options); 
       console.log(map)
@@ -70,12 +69,9 @@ export default {
         var positions = [
           {
             id: 1,
-            store: '학생문화관점',
-            location: '학생문화관 지하1층 로비',
-            time: '학기 중: 월~금 08:30~19:00 | 토 09:00~14:00',
-            vacation: '방학 중: 월~금 08:30~18:00 | 토 09:00~14:00',
-            tel: '02-3277-3707',
-            latlng: new kakao.maps.LatLng(37.562632898194835, 126.9454282268269),
+            study: '항동 모각코',
+            location: 'Twosome place',
+            latlng: new kakao.maps.LatLng(37.479751116607545, 126.82286755783196),
           },
         ]
 
@@ -89,7 +85,7 @@ export default {
         positions.forEach(function(pos) {
           // 마커를 생성합니다
           var marker = new kakao.maps.Marker({
-            map: map, // 마커를 표시할 지도
+            map: map,             // 마커를 표시할 지도
             position: pos.latlng, // 마커의 위치
             image: markerImage,
           });
@@ -106,71 +102,57 @@ export default {
           var title = document.createElement('div');
           title.className = 'map-popup-title';
 
-          var store = document.createElement('h3');
-          store.className = 'popup-name';
-          store.appendChild(document.createTextNode(pos.store));
-          title.appendChild(store);
+          var study = document.createElement('h3');
+          study.className = 'popup-name';
+          study.appendChild(document.createTextNode(pos.study));
+          title.appendChild(study);
           content.appendChild(title);
 
           var location = document.createElement('span');
-          location.className = 'store-location';
+          location.className = 'study-location';
           location.appendChild(document.createTextNode(pos.location));
           content.appendChild(location);
 
-          var timeContainer = document.createElement('div');
-
-          var time = document.createElement('p');
-          time.className = 'time-text';
-          time.appendChild(document.createTextNode(pos.time));
-          timeContainer.appendChild(time);
-          var vacation = document.createElement('p');
-          vacation.className = 'time-text';
-          vacation.appendChild(document.createTextNode(pos.vacation));
-          timeContainer.appendChild(vacation);
-          content.appendChild(timeContainer);
-
-          var tel = document.createElement('span');
-          tel.className = 'telephone';
-          tel.appendChild(document.createTextNode(pos.tel));
-          content.appendChild(tel);
 
           var buttonContainer = document.createElement('div');
           buttonContainer.className = 'popup-buttons';
 
           var closeBtn = document.createElement('button');
           closeBtn.className = 'popup-button';
-          closeBtn.appendChild(document.createTextNode('취소'));
+          closeBtn.appendChild(document.createTextNode('Close'));
           closeBtn.onclick = function() {
             customOverlay.setMap(null);
           };
 
-          var selectBtn = document.createElement('button');
-          selectBtn.className = 'popup-button';
-          selectBtn.appendChild(document.createTextNode('선택'));
-          selectBtn.onclick = function() {
-            if (localStorage.getItem('store-id') != pos.id) { //store가 바뀌면 현재 장바구니를 비운다
-              if (localStorage.length > 0) {
-                for (let i = 0; i < localStorage.length; i++) {
-                  if (
-                    localStorage.key(i) !== 'loglevel:webpack-dev-server' &&
-                    localStorage.key(i) !== 'store-id' &&
-                    localStorage.key(i) !== 'store' &&
-                    localStorage.key(i) !== 'nearest-store-id' &&
-                    localStorage.key(i) !== 'nearest-store'
-                  ) {
-                    localStorage.removeItem(localStorage.key(i));
+          /*
+            var selectBtn = document.createElement('button');
+            selectBtn.className = 'popup-button';
+            selectBtn.appendChild(document.createTextNode('선택'));
+            selectBtn.onclick = function() {
+              if (localStorage.getItem('study-id') != pos.id) { 
+                if (localStorage.length > 0) {
+                  for (let i = 0; i < localStorage.length; i++) {
+                    if (
+                      localStorage.key(i) !== 'loglevel:webpack-dev-server' &&
+                      localStorage.key(i) !== 'study-id' &&
+                      localStorage.key(i) !== 'study' &&
+                      localStorage.key(i) !== 'nearest-study-id' &&
+                      localStorage.key(i) !== 'nearest-study'
+                    ) {
+                      localStorage.removeItem(localStorage.key(i));
+                    }
                   }
                 }
               }
-            }
-            localStorage.setItem('store-id', pos.id);
-            localStorage.setItem('store', pos.store);
-            customOverlay.setMap(null);
-            window.location.reload();
-          };
+              localStorage.setItem('study-id', pos.id);
+              localStorage.setItem('study', pos.study);
+              customOverlay.setMap(null);
+              window.location.reload();
+            };
 
+            buttonContainer.appendChild(selectBtn);
+          */
           buttonContainer.appendChild(closeBtn);
-          buttonContainer.appendChild(selectBtn);
 
           content.appendChild(buttonContainer);
 
@@ -184,10 +166,9 @@ export default {
     ///////////////////////////////////////////////////////////////////
     if (navigator.geolocation) {
         // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-
         navigator.geolocation.getCurrentPosition(function(position) {
-          var lat = position.coords.latitude, // 위도
-              lon = position.coords.longitude; // 경도
+          var lat = position.coords.latitude,   // 위도
+              lon = position.coords.longitude;  // 경도
 
           var polyline = new kakao.maps.Polyline({
             path: [new kakao.maps.LatLng(lat, lon), positions[0].latlng],
@@ -205,18 +186,15 @@ export default {
             }
           }
 
-          localStorage.setItem('nearest-store-id', positions[minIndex].id);
-
-          localStorage.setItem('nearest-store', positions[minIndex].store);
+          localStorage.setItem('nearest-study-id', positions[minIndex].id);
+          localStorage.setItem('nearest-study', positions[minIndex].study);
         });
       } else {
         // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
         // eslint-disable-next-line no-unused-vars
-        var locPosition = new kakao.maps.LatLng(37.564343, 126.947613);
+        var locPosition = new kakao.maps.LatLng(37.47973476787492, 126.82248036958089);
       }
       /////////////
-
-
     }
   }
 };
@@ -225,6 +203,6 @@ export default {
 <style>
 .map {
   width: 100%;
-  height: 400px;
-}
+  height: 700px;
+} 
 </style>

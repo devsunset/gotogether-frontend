@@ -68,10 +68,10 @@
                     <div class="inner">
                         <h3>1<sup style="font-size: 20px"></sup></h3>
 
-                        <p>Statistics</p>
+                        <p>Talk</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-stats-bars"></i>
+                        <i class="far fa-keyboard"></i>
                     </div>
                     <router-link to="/" class="small-box-footer"
                         >More info <i class="fas fa-arrow-circle-right"></i
@@ -85,10 +85,10 @@
                     <div class="inner">
                         <h3>1</h3>
 
-                        <p>Unique Visitors</p>
+                        <p>Q&amp;A</p>
                     </div>
                     <div class="icon">
-                        <i class="far fa-star"></i>
+                        <i class="fas fa-question"></i>
                     </div>
                     <router-link to="/" class="small-box-footer"
                         >More info <i class="fas fa-arrow-circle-right"></i
@@ -101,7 +101,7 @@
     </div>
     <!-- /.container-fluid -->
 </section>
-{{ content }}
+<p style="text-align:center">{{ content }}</p>
 <!-- /.content -->
 </template>
 
