@@ -41,12 +41,18 @@ export default {
   data() {
     return {
       content: "",
+      width: 0,
+      height: 0
     };
   },
    mounted() {
     window.kakao && window.kakao.maps
       ? this.initMap()
       : this.addKakaoMapScript();
+    window.addEventListener('resize', this.handleResize);
+  },
+  beforeUnmout() {
+    window.removeEventListener('resize', this.handleResize);
   },
   methods: {
     addKakaoMapScript() {
@@ -56,8 +62,19 @@ export default {
         "http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=fc3ffc2cce82269dd8b0295c881c7e2c";
       document.head.appendChild(script);
     },
+    handleResize() {
+        this.width = window.innerWidth;
+        this.height = window.innerHeight;
+        var mapContainer = document.getElementById('map');
+        mapContainer.style.height = (this.height-200)+'px'; 
+    },
     initMap() {
       var container = document.getElementById("map"); 
+
+      this.width = window.innerWidth;
+      this.height = window.innerHeight;
+      container.style.height = (this.height-200)+'px'; 
+
       var options = {
         center: new kakao.maps.LatLng(37.47973476787492, 126.82248036958089), 
         level: 4 
@@ -96,105 +113,91 @@ export default {
             yAnchor: 1.05,
           });
 
+          // <div class="info-box shadow-sm">
+          //     <span class="info-box-icon bg-success"><i class="far fa-comments"></i></span>
+          //     <div class="info-box-content">
+          //       <span class="info-box-text">Shadows</span>
+          //       <span class="info-box-number">Small</span>
+          //       <span><button class='btn btn-block btn-primary btn-sm'>Close</button></span>
+          //     </div>
+          // </div>
+
           var content = document.createElement('div');
-          content.className = 'overlaybox';
+          content.className = 'info-box shadow-sm';
 
-          var title = document.createElement('div');
-          title.className = 'map-popup-title';
+          var spanicon = document.createElement('span');
+          spanicon.className = 'info-box-icon bg-success';
 
-          var study = document.createElement('h3');
-          study.className = 'popup-name';
-          study.appendChild(document.createTextNode(pos.study));
-          title.appendChild(study);
-          content.appendChild(title);
+          var itag = document.createElement('i');
+          itag.className = 'far fa-comments';
+          spanicon.appendChild(itag);
 
-          var location = document.createElement('span');
-          location.className = 'study-location';
-          location.appendChild(document.createTextNode(pos.location));
-          content.appendChild(location);
+          var contentSub = document.createElement('div');
+          contentSub.className = 'info-box-content';
 
+          var spanTitle = document.createElement('span');
+          spanTitle.className = 'info-box-number';
+          spanTitle.appendChild(document.createTextNode(pos.study));
+          contentSub.appendChild(spanTitle);
 
-          var buttonContainer = document.createElement('div');
-          buttonContainer.className = 'popup-buttons';
+          var spanLocation = document.createElement('span');
+          spanLocation.className = 'info-box-text';
+          spanLocation.appendChild(document.createTextNode(pos.location));
+          contentSub.appendChild(spanLocation);
 
+          var buttonContainer = document.createElement('span');
           var closeBtn = document.createElement('button');
-          closeBtn.className = 'popup-button';
+          closeBtn.className = 'btn btn-block btn-primary btn-sm';
           closeBtn.appendChild(document.createTextNode('Close'));
           closeBtn.onclick = function() {
             customOverlay.setMap(null);
           };
 
-          /*
-            var selectBtn = document.createElement('button');
-            selectBtn.className = 'popup-button';
-            selectBtn.appendChild(document.createTextNode('선택'));
-            selectBtn.onclick = function() {
-              if (localStorage.getItem('study-id') != pos.id) { 
-                if (localStorage.length > 0) {
-                  for (let i = 0; i < localStorage.length; i++) {
-                    if (
-                      localStorage.key(i) !== 'loglevel:webpack-dev-server' &&
-                      localStorage.key(i) !== 'study-id' &&
-                      localStorage.key(i) !== 'study' &&
-                      localStorage.key(i) !== 'nearest-study-id' &&
-                      localStorage.key(i) !== 'nearest-study'
-                    ) {
-                      localStorage.removeItem(localStorage.key(i));
-                    }
-                  }
-                }
-              }
-              localStorage.setItem('study-id', pos.id);
-              localStorage.setItem('study', pos.study);
-              customOverlay.setMap(null);
-              window.location.reload();
-            };
-
-            buttonContainer.appendChild(selectBtn);
-          */
           buttonContainer.appendChild(closeBtn);
+          contentSub.appendChild(buttonContainer);
 
-          content.appendChild(buttonContainer);
+          content.appendChild(spanicon);
+          content.appendChild(contentSub);
+
+          customOverlay.setContent(content);
 
           kakao.maps.event.addListener(marker, 'click', function() {
             customOverlay.setMap(map);
           });
-
-          customOverlay.setContent(content);
+          
         });
-
     ///////////////////////////////////////////////////////////////////
-    if (navigator.geolocation) {
-        // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-        navigator.geolocation.getCurrentPosition(function(position) {
-          var lat = position.coords.latitude,   // 위도
-              lon = position.coords.longitude;  // 경도
+    /*
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+              var lat = position.coords.latitude,   
+                  lon = position.coords.longitude;  
 
-          var polyline = new kakao.maps.Polyline({
-            path: [new kakao.maps.LatLng(lat, lon), positions[0].latlng],
-          });
-          var minDistance = polyline.getLength();
-          var minIndex = 0;
-          for (let i = 1; i < positions.length; i++) {
-            polyline = new kakao.maps.Polyline({
-              path: [new kakao.maps.LatLng(lat, lon), positions[i].latlng],
+              var polyline = new kakao.maps.Polyline({
+                path: [new kakao.maps.LatLng(lat, lon), positions[0].latlng],
+              });
+              var minDistance = polyline.getLength();
+              var minIndex = 0;
+              for (let i = 1; i < positions.length; i++) {
+                polyline = new kakao.maps.Polyline({
+                  path: [new kakao.maps.LatLng(lat, lon), positions[i].latlng],
+                });
+                var distance = polyline.getLength();
+                if (minDistance > distance) {
+                  minDistance = distance;
+                  minIndex = i;
+                }
+              }
+              console.log(positions[minIndex].id);
+              console.log(positions[minIndex].study);
             });
-            var distance = polyline.getLength();
-            if (minDistance > distance) {
-              minDistance = distance;
-              minIndex = i;
-            }
+          } else {
+            // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+            // eslint-disable-next-line no-unused-vars
+            var locPosition = new kakao.maps.LatLng(37.47973476787492, 126.82248036958089);
           }
-
-          localStorage.setItem('nearest-study-id', positions[minIndex].id);
-          localStorage.setItem('nearest-study', positions[minIndex].study);
-        });
-      } else {
-        // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
-        // eslint-disable-next-line no-unused-vars
-        var locPosition = new kakao.maps.LatLng(37.47973476787492, 126.82248036958089);
-      }
-      /////////////
+    */
+    ///////////////////////////////////////////////////////////////////
     }
   }
 };
