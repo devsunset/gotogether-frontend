@@ -7,6 +7,9 @@ import ForgotPassword from '@/components/forgot-password.vue';
 
 import GoTogether from '@/views/gotogether.vue';
 import Together from '@/views/together.vue';
+import Member from '@/views/member.vue';
+import Talk from '@/views/talk.vue';
+import Qa from '@/views/qa.vue';
 import Profile from '@/views/profile.vue';
 
 const routes = [
@@ -24,6 +27,21 @@ const routes = [
             path: 'together',
             name: 'Together',
             component: Together
+          },
+          {
+            path: 'member',
+            name: 'Member',
+            component: Member
+          },
+          {
+            path: 'talk',
+            name: 'Talk',
+            component: Talk
+          },
+          {
+            path: 'qa',
+            name: 'Qa',
+            component: Qa
           },
           {
               path: 'profile',
