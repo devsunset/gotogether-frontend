@@ -3,9 +3,11 @@
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
         <ul class="navbar-nav">
             <li class="nav-item">
+                <router-link to="/">
                 <button class="nav-link" role="button" @click="onToggleMenuSidebar">
                     <i class="fas fa-bars"></i>
                 </button>
+               </router-link>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
                 <router-link to="/" class="nav-link">Home</router-link>

@@ -1,5 +1,5 @@
 <template>
-    <footer class="main-footer">
+    <footer class="main-footer" style="font-size:0.7rem">
         <strong>
             <span>Copyright &copy; 2022 </span>
             Go Together
