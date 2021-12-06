@@ -6,7 +6,7 @@ import Register from '@/components/register.vue';
 import ForgotPassword from '@/components/forgot-password.vue';
 
 import GoTogether from '@/views/gotogether.vue';
-import Location from '@/views/location.vue';
+import Together from '@/views/together.vue';
 import Profile from '@/views/profile.vue';
 
 const routes = [
@@ -21,9 +21,9 @@ const routes = [
               component: GoTogether
           },
           {
-            path: 'location',
-            name: 'Location',
-            component: Location
+            path: 'together',
+            name: 'Together',
+            component: Together
           },
           {
               path: 'profile',

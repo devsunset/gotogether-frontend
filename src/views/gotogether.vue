@@ -34,7 +34,7 @@
                     <div class="inner">
                         <h3>1</h3>
 
-                        <p>Study</p>
+                        <p>Together</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-comments"></i>

@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Location</h1>
+                <h1 class="m-0">Together</h1>
             </div>
             <!-- /.col -->
             <div class="col-sm-6">
@@ -12,7 +12,7 @@
                     <li class="breadcrumb-item">
                         <router-link to="/">Home</router-link>
                     </li>
-                    <li class="breadcrumb-item active">Location</li>
+                    <li class="breadcrumb-item active">Together</li>
                 </ol>
             </div>
             <!-- /.col -->
@@ -37,7 +37,7 @@
 
 <script>
 export default {
-  name: "location",
+  name: "together",
   data() {
     return {
       content: "",
@@ -86,7 +86,7 @@ export default {
         var positions = [
           {
             id: 1,
-            study: '항동 모각코',
+            together: '항동 모각코',
             location: 'Twosome place',
             latlng: new kakao.maps.LatLng(37.479751116607545, 126.82286755783196),
           },
@@ -137,7 +137,7 @@ export default {
 
           var spanTitle = document.createElement('span');
           spanTitle.className = 'info-box-number';
-          spanTitle.appendChild(document.createTextNode(pos.study));
+          spanTitle.appendChild(document.createTextNode(pos.together));
           contentSub.appendChild(spanTitle);
 
           var spanLocation = document.createElement('span');
@@ -189,7 +189,7 @@ export default {
                 }
               }
               console.log(positions[minIndex].id);
-              console.log(positions[minIndex].study);
+              console.log(positions[minIndex].together);
             });
           } else {
             // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
