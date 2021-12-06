@@ -39,7 +39,7 @@
                     <div class="icon">
                         <i class="fas fa-comments"></i>
                     </div>
-                    <router-link to="/" class="small-box-footer"
+                    <router-link to="/together" class="small-box-footer"
                         >More info <i class="fas fa-arrow-circle-right"></i
                     ></router-link>
                 </div>
@@ -56,7 +56,7 @@
                     <div class="icon">
                         <i class="ion ion-person-add"></i>
                     </div>
-                    <router-link to="/" class="small-box-footer"
+                    <router-link to="/member" class="small-box-footer"
                         >More info <i class="fas fa-arrow-circle-right"></i
                     ></router-link>
                 </div>
@@ -73,7 +73,7 @@
                     <div class="icon">
                         <i class="far fa-keyboard"></i>
                     </div>
-                    <router-link to="/" class="small-box-footer"
+                    <router-link to="/talk" class="small-box-footer"
                         >More info <i class="fas fa-arrow-circle-right"></i
                     ></router-link>
                 </div>
@@ -90,7 +90,7 @@
                     <div class="icon">
                         <i class="fas fa-question"></i>
                     </div>
-                    <router-link to="/" class="small-box-footer"
+                    <router-link to="/qa" class="small-box-footer"
                         >More info <i class="fas fa-arrow-circle-right"></i
                     ></router-link>
                 </div>
