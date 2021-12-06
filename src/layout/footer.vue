@@ -1,7 +1,7 @@
 <template>
     <footer class="main-footer">
         <strong>
-            <span>Copyright &copy; 2021 </span>
+            <span>Copyright &copy; 2022 </span>
             Go Together
             <span>.</span>
         </strong>

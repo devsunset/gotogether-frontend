@@ -36,8 +36,41 @@
                             exact
                             exact-active-class="active"
                         >
-                            <i class="nav-icon fas fa-map-marker"></i>
+                            <i class="nav-icon fas fa-comments"></i>
                             <p>Together</p>
+                        </router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link
+                            to="/member"
+                            class="nav-link"
+                            exact
+                            exact-active-class="active"
+                        >
+                            <i class="nav-icon ion ion-person-add"></i>
+                            <p>Member</p>
+                        </router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link
+                            to="/talk"
+                            class="nav-link"
+                            exact
+                            exact-active-class="active"
+                        >
+                            <i class="nav-icon far fa-keyboard"></i>
+                            <p>Talk</p>
+                        </router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link
+                            to="/qa"
+                            class="nav-link"
+                            exact
+                            exact-active-class="active"
+                        >
+                            <i class="nav-icon fas fa-question"></i>
+                            <p>Q&A</p>
                         </router-link>
                     </li>
                     <li class="nav-item"    v-if="currentUser">

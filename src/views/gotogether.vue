@@ -51,7 +51,7 @@
                     <div class="inner">
                         <h3>1</h3>
 
-                        <p>User Registrations</p>
+                        <p>Member</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-person-add"></i>
