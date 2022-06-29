@@ -5,7 +5,7 @@ import Login from '@/components/login.vue';
 import Register from '@/components/register.vue';
 import ForgotPassword from '@/components/forgot-password.vue';
 
-import GoTogether from '@/views/gotogether.vue';
+import Home from '@/views/home.vue';
 import Together from '@/views/together.vue';
 import Member from '@/views/member.vue';
 import Talk from '@/views/talk.vue';
@@ -20,8 +20,8 @@ const routes = [
       children: [
           {
               path: '',
-              name: 'GoTogether',
-              component: GoTogether
+              name: 'Home',
+              component: Home
           },
           {
             path: 'together',

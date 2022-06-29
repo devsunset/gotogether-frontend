@@ -26,7 +26,7 @@
                             exact-active-class="active"
                         >
                             <i class="nav-icon fas fa-th"></i>
-                            <p>Go Together</p>
+                            <p>Home</p>
                         </router-link>
                     </li>
                     <li class="nav-item">
