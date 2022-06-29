@@ -50,9 +50,9 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
+                            <strong><i class="fas fa-pencil-alt mr-1"></i> Introduce</strong>
                             <p class="text-muted">
-                            Skills
+                            하루에 한가지씩 배우기
                             </p>
                             <hr />
                             <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
@@ -80,17 +80,17 @@
                                 <li class="nav-item">
                                     <a
                                         class="nav-link"
-                                        href="#skills"
+                                        href="#Interest"
                                         data-toggle="tab"
-                                        >Skills</a
+                                        >Interest</a
                                     >
                                 </li>
                                 <li class="nav-item">
                                     <a
                                         class="nav-link"
-                                        href="#notes"
+                                        href="#Skills"
                                         data-toggle="tab"
-                                        >Notes</a
+                                        >Skills</a
                                     >
                                 </li>
                             </ul>
@@ -120,13 +120,13 @@
                                 </div>
                                 </div>
                                 <!-- /.tab-pane -->
-                                <div class="tab-pane" id="skills">
-                                    Skills
+                                <div class="tab-pane" id="Interest">
+                                    Interest
                                 </div>
 
                                  <!-- /.tab-pane -->
-                                <div class="tab-pane" id="notes">
-                                    Notes
+                                <div class="tab-pane" id="Skills">
+                                    Skills
                                 </div>
                                 <!-- /.tab-pane -->
                             </div>

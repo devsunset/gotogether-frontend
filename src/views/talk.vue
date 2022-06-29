@@ -56,28 +56,28 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>자유로운 이야기 ~ 1</td>
+                                        <td>자유로운 이야기 ~ 4</td>
                                         <td>devsunset</td>
                                         <td>22-06-29 11:00</td>
                                         <td>0</td>
                                         <td>11</td>
                                     </tr>
                                     <tr>
-                                        <td>자유로운 이야기 ~ 2</td>
+                                        <td>자유로운 이야기 ~ 3</td>
                                         <td>devsunset</td>
                                         <td>22-06-29 10:30</td>
                                         <td>1</td>
                                         <td>2</td>
                                     </tr>
                                     <tr>
-                                        <td>자유로운 이야기 ~ 3</td>
+                                        <td>자유로운 이야기 ~ 2</td>
                                         <td>devsunset</td>
                                         <td>22-06-29 10:00</td>
                                         <td>5</td>
                                         <td>31</td>
                                     </tr>
                                     <tr>
-                                        <td>자유로운 이야기 ~ 3</td>
+                                        <td>자유로운 이야기 ~ 1</td>
                                         <td>devsunset</td>
                                         <td>22-06-29 09:00</td>
                                         <td>9</td>

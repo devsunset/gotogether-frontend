@@ -120,7 +120,7 @@
             <tbody>
                 <tr>
                     <td>1.</td>
-                    <td>GoTogether Toy Project 참가자 모집</td>
+                    <td>GoTogether Toy Project 함께 공부하며 만들어 가실 분 ^^</td>
                     <td>
                         <div class="progress progress-xs">
                             <div class="progress-bar progress-bar-danger" style="width: 55%"></div>

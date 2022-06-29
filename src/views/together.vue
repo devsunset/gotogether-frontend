@@ -26,8 +26,65 @@
 <!-- Main content -->
 <section class="content">
     <div class="container-fluid">
-        <div>
-            <div id="map" class="map"></div>
+        <div>           
+            <div class="card" style="padding:15px;margin:3px">
+              <div class="card-header">
+                  <h3 class="card-title">Together Project</h3>
+              </div>
+
+              <div class="card-body p-0">
+                  <table class="table table-striped">
+                      <thead>
+                          <tr>
+                              <th>Project</th>
+                              <th>Progress</th>
+                              <th style="width: 40px"></th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <td>GoTogether Toy Project 함께 공부하며 만들어 가실 분 ^^</td>
+                              <td>
+                                  <div class="progress progress-xs">
+                                      <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                                  </div>
+                              </td>
+                              <td><span class="badge bg-danger">55%</span></td>
+                          </tr>
+                          <tr>
+                              <td>FullStack 개발 스터디</td>
+                              <td>
+                                  <div class="progress progress-xs">
+                                      <div class="progress-bar bg-warning" style="width: 70%"></div>
+                                  </div>
+                              </td>
+                              <td><span class="badge bg-warning">70%</span></td>
+                          </tr>
+                          <tr>
+                              <td>코딩 테스트 준비 모임</td>
+                              <td>
+                                  <div class="progress progress-xs progress-striped active">
+                                      <div class="progress-bar bg-primary" style="width: 30%"></div>
+                                  </div>
+                              </td>
+                              <td><span class="badge bg-primary">30%</span></td>
+                          </tr>
+                          <tr>
+                              <td>공모전 참가팀 인원 충원</td>
+                              <td>
+                                  <div class="progress progress-xs progress-striped active">
+                                      <div class="progress-bar bg-success" style="width: 90%"></div>
+                                  </div>
+                              </td>
+                              <td><span class="badge bg-success">90%</span></td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+          
+          <div id="map" class="map"></div>
+       
         </div>
     </div>
     <!-- /.container-fluid -->
