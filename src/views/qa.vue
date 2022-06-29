@@ -27,8 +27,8 @@
 <section class="content">
     <div class="container-fluid">
         <div>
-                <div class="col-12">
-                        <div class="card">
+              <div class="col-12">
+                    <div class="card">
                         <div class="card-header">
                             <h3 class="card-title"></h3>
                             <div class="card-tools">
@@ -43,46 +43,60 @@
                             </div>
                         </div>
 
-                            <div class="card-body table-responsive p-0">
-                                <table class="table table-hover text-nowrap">
-                                    <thead>
-                                        <tr>
-                                            <th>Status</th>
-                                            <th>Question</th>
-                                            <th>User</th>
-                                            <th>Date</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><span class="tag tag-success">Reply</span></td>
-                                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                            <td>John Doe</td>
-                                            <td>11-7-2014</td>
-                                        </tr>
-                                        <tr>
-                                            <td><span class="tag tag-warning">Not Reply</span></td>
-                                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                            <td>Alexander Pierce</td>
-                                            <td>11-7-2014</td>
-                                        </tr>
-                                        <tr>
-                                            <td><span class="tag tag-primary">Reply</span></td>
-                                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                            <td>Bob Doe</td>
-                                            <td>11-7-2014</td>
-                                        </tr>
-                                        <tr>
-                                            <td><span class="tag tag-danger">Denied</span></td>
-                                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                            <td>Mike Doe</td>
-                                            <td>11-7-2014</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-hover text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>Question</th>
+                                        <th style="width: 5%">User</th>
+                                        <th style="width: 5%">Date</th>
+                                        <th style="width: 5%">Reply</th>
+                                        <th style="width: 5%">View</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>자유로운 이야기 ~ 1</td>
+                                        <td>devsunset</td>
+                                        <td>22-06-29 11:00</td>
+                                        <td>0</td>
+                                        <td>11</td>
+                                    </tr>
+                                    <tr>
+                                        <td>자유로운 이야기 ~ 2</td>
+                                        <td>devsunset</td>
+                                        <td>22-06-29 10:30</td>
+                                        <td>1</td>
+                                        <td>2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>자유로운 이야기 ~ 3</td>
+                                        <td>devsunset</td>
+                                        <td>22-06-29 10:00</td>
+                                        <td>5</td>
+                                        <td>31</td>
+                                    </tr>
+                                    <tr>
+                                        <td>자유로운 이야기 ~ 3</td>
+                                        <td>devsunset</td>
+                                        <td>22-06-29 09:00</td>
+                                        <td>9</td>
+                                        <td>99</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
+                        <div class="card-footer clearfix">
+                            <ul class="pagination pagination-sm m-0 float-right">
+                                <li class="page-item"><a class="page-link" href="#">«</a></li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">»</a></li>
+                            </ul>
+                        </div>
+                </div>
             </div>
     </div>
     <!-- /.container-fluid -->

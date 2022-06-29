@@ -27,7 +27,51 @@
 <section class="content">
     <div class="container-fluid">
         <div>
-            To-Do
+                <div class="card">
+                   <div class="card-header">
+                            <h3 class="card-title"></h3>
+                            <div class="card-tools">
+                                <div class="input-group input-group-sm" style="width: 270px;">
+                                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-default">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+
+
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th style="width: 5%">#</th>
+                                    <th style="width: 10%">Member</th>
+                                    <th style="width: 25%">Introduce</th>
+                                    <th style="width: 60%">Interest</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1.</td>
+                                    <td>devsunset</td>
+                                    <td>하루에 한가지씩 배우기</td>
+                                    <td><span class="badge bg-warning">Backend</span> <span class="badge bg-success">Frontend</span> <span class="badge bg-danger">DB</span> <span class="badge bg-primary">CI/CD</span></td>
+                                </tr>                                
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="card-footer clearfix">
+                        <ul class="pagination pagination-sm m-0 float-right">
+                            <li class="page-item"><a class="page-link" href="#">«</a></li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">»</a></li>
+                        </ul>
+                    </div>
+                </div>
         </div>
     </div>
     <!-- /.container-fluid -->

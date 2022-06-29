@@ -120,7 +120,7 @@
             <tbody>
                 <tr>
                     <td>1.</td>
-                    <td>Update software</td>
+                    <td>GoTogether Toy Project 참가자 모집</td>
                     <td>
                         <div class="progress progress-xs">
                             <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
@@ -130,7 +130,7 @@
                 </tr>
                 <tr>
                     <td>2.</td>
-                    <td>Clean database</td>
+                    <td>FullStack 개발 스터디</td>
                     <td>
                         <div class="progress progress-xs">
                             <div class="progress-bar bg-warning" style="width: 70%"></div>
@@ -140,7 +140,7 @@
                 </tr>
                 <tr>
                     <td>3.</td>
-                    <td>Cron job running</td>
+                    <td>코딩 테스트 준비 모임</td>
                     <td>
                         <div class="progress progress-xs progress-striped active">
                             <div class="progress-bar bg-primary" style="width: 30%"></div>
@@ -150,7 +150,7 @@
                 </tr>
                 <tr>
                     <td>4.</td>
-                    <td>Fix and squish bugs</td>
+                    <td>공모전 참가팀 인원 충원</td>
                     <td>
                         <div class="progress progress-xs progress-striped active">
                             <div class="progress-bar bg-success" style="width: 90%"></div>
