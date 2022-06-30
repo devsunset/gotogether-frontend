@@ -1,2 +1,2 @@
-# gotogether-frontend
-gotogether-frontend - frontend go together (vue.js) 
+# gotogether-frontend-vue
+gotogether-frontend-vue - frontend go together (vue.js) 
