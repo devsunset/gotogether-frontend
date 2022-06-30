@@ -10,7 +10,16 @@
                 <Form @submit="handleRegister" :validation-schema="schema">
                     <div v-if="!successful">
                         <div class="input-group mb-1">
-                            <Field name="username" type="text" class="form-control" placeholder="UserId"/>
+                            <Field name="userid" type="text" class="form-control" placeholder="userid"/>
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-user"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div><ErrorMessage name="userid" class="error-feedback" /></div>
+                        <div class="input-group mb-1">
+                            <Field name="username" type="text" class="form-control" placeholder="username"/>
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-user"></span>
@@ -19,7 +28,7 @@
                         </div>
                         <div><ErrorMessage name="username" class="error-feedback" /></div>
                         <div class="input-group mb-1">
-                            <Field name="email" type="email" class="form-control" placeholder="Email" />
+                            <Field name="email" type="email" class="form-control" placeholder="email" />
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-envelope"></span>
@@ -28,7 +37,7 @@
                         </div>
                         <div><ErrorMessage name="email" class="error-feedback" /></div>
                         <div class="input-group mb-1">
-                            <Field name="password" type="password" class="form-control" placeholder="Password"/>
+                            <Field name="password" type="password" class="form-control" placeholder="password"/>
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-lock"></span>
@@ -37,7 +46,7 @@
                         </div>
                         <div><ErrorMessage name="password" class="error-feedback" /></div>
                         <div class="input-group mb-1">
-                            <Field name="retypepassword" type="password" class="form-control" placeholder="Retype password"/>
+                            <Field name="retypepassword" type="password" class="form-control" placeholder="retype password"/>
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-lock"></span>
@@ -120,24 +129,29 @@
     },
     data() {
         const schema = yup.object().shape({
+        userid: yup
+            .string()
+            .required("userid is required!")
+            .min(3, "Must be at least 3 characters!")
+            .max(20, "Must be maximum 20 characters!"),
         username: yup
             .string()
-            .required("UserId is required!")
+            .required("username is required!")
             .min(3, "Must be at least 3 characters!")
             .max(20, "Must be maximum 20 characters!"),
         email: yup
             .string()
-            .required("Email is required!")
-            .email("Email is invalid!")
+            .required("email is required!")
+            .email("email is invalid!")
             .max(50, "Must be maximum 50 characters!"),
         password: yup
             .string()
-            .required("Password is required!")
+            .required("password is required!")
             .min(6, "Must be at least 6 characters!")
             .max(40, "Must be maximum 40 characters!"),
         retypepassword: yup
             .string()
-            .required("Retype Password is required!")
+            .required("retype password is required!")
             .min(6, "Must be at least 6 characters!")
             .max(40, "Must be maximum 40 characters!")
             .oneOf([yup.ref('password'), null], 'Passwords must match'),

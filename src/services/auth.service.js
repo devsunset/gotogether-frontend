@@ -2,10 +2,10 @@ import api from "./api";
 import TokenService from "./token.service";
 
 class AuthService {
-  login({ username, password }) {
+  login({ userid, password }) {
     return api
       .post("/auth/signin", {
-        username,
+        userid,
         password
       })
       .then((response) => {
@@ -21,8 +21,9 @@ class AuthService {
     TokenService.removeUser();
   }
 
-  register({ username, email, password }) {
+  register({ userid,username, email, password }) {
     return api.post("/auth/signup", {
+      userid,
       username,
       email,
       password
