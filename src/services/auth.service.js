@@ -12,7 +12,6 @@ class AuthService {
         //alert(JSON.stringify(response.data));
         if (response.data.token) {
           TokenService.setUser(response.data);
-        }else{
         }
 
         return response.data;
