@@ -2,15 +2,17 @@ import api from "./api";
 import TokenService from "./token.service";
 
 class AuthService {
-  login({ userid, password }) {
+  login({ username, password }) {
     return api
       .post("/auth/signin", {
-        userid,
+        username,
         password
       })
       .then((response) => {
-        if (response.data.accessToken) {
+        //alert(JSON.stringify(response.data));
+        if (response.data.token) {
           TokenService.setUser(response.data);
+        }else{
         }
 
         return response.data;
@@ -21,10 +23,10 @@ class AuthService {
     TokenService.removeUser();
   }
 
-  register({ userid,username, email, password }) {
+  register({ username, nickname, email, password }) {
     return api.post("/auth/signup", {
-      userid,
       username,
+      nickname,
       email,
       password
     });

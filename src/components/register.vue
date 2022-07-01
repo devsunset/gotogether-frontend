@@ -10,15 +10,6 @@
                 <Form @submit="handleRegister" :validation-schema="schema">
                     <div v-if="!successful">
                         <div class="input-group mb-1">
-                            <Field name="userid" type="text" class="form-control" placeholder="userid"/>
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-user"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div><ErrorMessage name="userid" class="error-feedback" /></div>
-                        <div class="input-group mb-1">
                             <Field name="username" type="text" class="form-control" placeholder="username"/>
                             <div class="input-group-append">
                                 <div class="input-group-text">
@@ -26,7 +17,16 @@
                                 </div>
                             </div>
                         </div>
-                        <div><ErrorMessage name="username" class="error-feedback" /></div>
+                        <div><ErrorMessage name="nickname" class="error-feedback" /></div>
+                        <div class="input-group mb-1">
+                            <Field name="nickname" type="text" class="form-control" placeholder="nickname"/>
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-user"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div><ErrorMessage name="nickname" class="error-feedback" /></div>
                         <div class="input-group mb-1">
                             <Field name="email" type="email" class="form-control" placeholder="email" />
                             <div class="input-group-append">
@@ -129,15 +129,15 @@
     },
     data() {
         const schema = yup.object().shape({
-        userid: yup
-            .string()
-            .required("userid is required!")
-            .min(3, "Must be at least 3 characters!")
-            .max(20, "Must be maximum 20 characters!"),
         username: yup
             .string()
             .required("username is required!")
             .min(3, "Must be at least 3 characters!")
+            .max(20, "Must be maximum 20 characters!"),
+        nickname: yup
+            .string()
+            .required("nickname is required!")
+            .min(2, "Must be at least 2 characters!")
             .max(20, "Must be maximum 20 characters!"),
         email: yup
             .string()

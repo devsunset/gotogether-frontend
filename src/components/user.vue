@@ -24,7 +24,7 @@
                 />
 
                 <div  v-if="currentUser">
-                    <p>{{currentUser.username}}</p>
+                    <p>{{currentUser.nickaname}}</p>
                 </div>
 
                 <p  v-if="!currentUser">
