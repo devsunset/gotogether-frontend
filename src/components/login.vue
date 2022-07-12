@@ -10,7 +10,7 @@
 
                 <Form @submit="handleLogin" :validation-schema="schema">
                     <div class="input-group mb-1">
-                        <Field name="username" type="text" class="form-control"  placeholder="username"/>
+                        <Field name="username" type="text" class="form-control"  placeholder="userid"/>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -98,7 +98,7 @@ export default {
   },
   data() {
     const schema = yup.object().shape({
-      username: yup.string().required("username is required!"),
+      username: yup.string().required("userid is required!"),
       password: yup.string().required("password is required!"),
     });
 
