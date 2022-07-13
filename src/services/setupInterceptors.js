@@ -33,7 +33,7 @@ const setup = (store) => {
               refreshToken: TokenService.getLocalRefreshToken(),
             });
 
-            const { token } = rs.data;
+            const { token } = rs.data.data;
 
             store.dispatch('auth/refreshToken', token);
             TokenService.updateLocalToken(token);
