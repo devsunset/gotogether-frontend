@@ -28,7 +28,7 @@
                 </div>
 
                 <p  v-if="!currentUser">
-                    Guest
+                    Anonymous
                 </p>
             </li>
             <!-- Menu Footer-->
