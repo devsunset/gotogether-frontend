@@ -111,15 +111,15 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th style="width: 10px">#</th>
-                    <th>Project</th>
+                    <th>Together</th>                                   
                     <th>Progress</th>
                     <th style="width: 40px"></th>
+                    <th>Nickname</th>
+                    <th>Date</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>1.</td>
                     <td>GoTogether Toy Project 함께 공부하며 만들어 가실 분 ^^</td>
                     <td>
                         <div class="progress progress-xs">
@@ -127,9 +127,10 @@
                         </div>
                     </td>
                     <td><span class="badge bg-danger">55%</span></td>
+                    <td>devsunset</td>
+                    <td>22-06-29 10:30</td>
                 </tr>
                 <tr>
-                    <td>2.</td>
                     <td>FullStack 개발 스터디</td>
                     <td>
                         <div class="progress progress-xs">
@@ -137,9 +138,10 @@
                         </div>
                     </td>
                     <td><span class="badge bg-warning">70%</span></td>
+                    <td>devsunset</td>
+                    <td>22-06-29 10:30</td>
                 </tr>
                 <tr>
-                    <td>3.</td>
                     <td>코딩 테스트 준비 모임</td>
                     <td>
                         <div class="progress progress-xs progress-striped active">
@@ -147,9 +149,10 @@
                         </div>
                     </td>
                     <td><span class="badge bg-primary">30%</span></td>
+                    <td>devsunset</td>
+                    <td>22-06-29 10:30</td>
                 </tr>
                 <tr>
-                    <td>4.</td>
                     <td>공모전 참가팀 인원 충원</td>
                     <td>
                         <div class="progress progress-xs progress-striped active">
@@ -157,6 +160,8 @@
                         </div>
                     </td>
                     <td><span class="badge bg-success">90%</span></td>
+                    <td>devsunset</td>
+                    <td>22-06-29 10:30</td>
                 </tr>
             </tbody>
         </table>

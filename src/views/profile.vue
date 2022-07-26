@@ -50,15 +50,29 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <strong><i class="fas fa-pencil-alt mr-1"></i> Introduce</strong>
-                            <p class="text-muted">
-                            하루에 한가지씩 배우기
+                            <div  v-if="currentUser">
+                            <!-- <p>
+                                <strong>Token:</strong>
+                                {{currentUser.token.substring(0, 20)}} ... {{currentUser.token.substr(currentUser.token.length - 20)}}
+                            </p> -->
+                            <p>
+                            <strong>UserId:</strong>
+                            {{currentUser.username}}
                             </p>
-                            <hr />
-                            <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
-                            <p class="text-muted">
-                            Notes
+                            <p>
+                            <strong>Nickname:</strong>
+                            {{currentUser.nickname}}
                             </p>
+                            <p>
+                                <strong>Email:</strong>
+                                {{currentUser.email}}
+                            </p>
+                            <strong>Authorities:</strong>
+                            <ul>
+                                <li v-for="role in currentUser.roles" :key="role">{{role}}</li>
+                            </ul> 
+                        </div>
+                           
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -80,17 +94,9 @@
                                 <li class="nav-item">
                                     <a
                                         class="nav-link"
-                                        href="#Interest"
+                                        href="#Skill"
                                         data-toggle="tab"
-                                        >Interest</a
-                                    >
-                                </li>
-                                <li class="nav-item">
-                                    <a
-                                        class="nav-link"
-                                        href="#Skills"
-                                        data-toggle="tab"
-                                        >Skills</a
+                                        >Skill</a
                                     >
                                 </li>
                             </ul>
@@ -99,38 +105,28 @@
                         <div class="card-body">
                             <div class="tab-content">
                                 <div class="active tab-pane" id="activity">
-                                    
-                                <div  v-if="currentUser">
-                                    <p>
-                                        <strong>Token:</strong>
-                                        {{currentUser.token.substring(0, 20)}} ... {{currentUser.token.substr(currentUser.token.length - 20)}}
+                                    <strong><i class="fas fa-pencil-alt mr-1"></i> Introduce</strong>
+                                    <p class="text-muted">
+                                    하루에 한가지씩 배우기
                                     </p>
-                                    <p>
-                                    <strong>Username:</strong>
-                                    {{currentUser.username}}
+                                    <hr />
+                                    <strong><i class="far fa-file-alt mr-1"></i> Note</strong>
+                                    <p class="text-muted">
+                                    Talk is Cheap. Show me the Code.   - Linus Torvalds
                                     </p>
-                                    <p>
-                                    <strong>Nickname:</strong>
-                                    {{currentUser.nickname}}
+                                   <strong><i class="far fa-file-alt mr-1"></i> Github</strong>
+                                    <p class="text-muted">
+                                    Github
                                     </p>
-                                    <p>
-                                        <strong>Email:</strong>
-                                        {{currentUser.email}}
+                                    <strong><i class="far fa-file-alt mr-1"></i>Homepage</strong>
+                                    <p class="text-muted">
+                                    Homepage
                                     </p>
-                                    <strong>Authorities:</strong>
-                                    <ul>
-                                        <li v-for="role in currentUser.roles" :key="role">{{role}}</li>
-                                    </ul> 
-                                </div>
                                 </div>
                                 <!-- /.tab-pane -->
-                                <div class="tab-pane" id="Interest">
-                                    Interest
-                                </div>
-
                                  <!-- /.tab-pane -->
-                                <div class="tab-pane" id="Skills">
-                                    Skills
+                                <div class="tab-pane" id="Skill">
+                                    Skill
                                 </div>
                                 <!-- /.tab-pane -->
                             </div>

@@ -47,18 +47,18 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th style="width: 5%">#</th>
-                                    <th style="width: 10%">Member</th>
+                                    <th style="width: 10%">Nickname</th>
                                     <th style="width: 25%">Introduce</th>
-                                    <th style="width: 60%">Interest</th>
+                                    <th>Skill</th>
+                                    <th style="width: 10%">Date</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>1.</td>
                                     <td>devsunset</td>
                                     <td>하루에 한가지씩 배우기</td>
                                     <td><span class="badge bg-warning">Backend</span> <span class="badge bg-success">Frontend</span> <span class="badge bg-danger">DB</span> <span class="badge bg-primary">CI/CD</span></td>
+                                    <td>22-06-29 11:00</td>
                                 </tr>                                
                             </tbody>
                         </table>

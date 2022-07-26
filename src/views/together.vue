@@ -28,62 +28,91 @@
     <div class="container-fluid">
         <div>           
             <div class="card" style="padding:15px;margin:3px">
-              <div class="card-header">
-                  <h3 class="card-title">Together Project</h3>
+                <div class="card-header">
+                  <h3 class="card-title"></h3>
+                  <div class="card-tools">
+                      <div class="input-group input-group-sm" style="width: 270px;">
+                          <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                          <div class="input-group-append">
+                              <button type="submit" class="btn btn-default">
+                                  <i class="fas fa-search"></i>
+                              </button>
+                          </div>
+                      </div>
+                  </div>
               </div>
 
               <div class="card-body p-0">
-                  <table class="table table-striped">
-                      <thead>
-                          <tr>
-                              <th>Project</th>
-                              <th>Progress</th>
-                              <th style="width: 40px"></th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <tr>
-                              <td>GoTogether Toy Project 함께 공부하며 만들어 가실 분 ^^</td>
-                              <td>
-                                  <div class="progress progress-xs">
-                                      <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                                  </div>
-                              </td>
-                              <td><span class="badge bg-danger">55%</span></td>
-                          </tr>
-                          <tr>
-                              <td>FullStack 개발 스터디</td>
-                              <td>
-                                  <div class="progress progress-xs">
-                                      <div class="progress-bar bg-warning" style="width: 70%"></div>
-                                  </div>
-                              </td>
-                              <td><span class="badge bg-warning">70%</span></td>
-                          </tr>
-                          <tr>
-                              <td>코딩 테스트 준비 모임</td>
-                              <td>
-                                  <div class="progress progress-xs progress-striped active">
-                                      <div class="progress-bar bg-primary" style="width: 30%"></div>
-                                  </div>
-                              </td>
-                              <td><span class="badge bg-primary">30%</span></td>
-                          </tr>
-                          <tr>
-                              <td>공모전 참가팀 인원 충원</td>
-                              <td>
-                                  <div class="progress progress-xs progress-striped active">
-                                      <div class="progress-bar bg-success" style="width: 90%"></div>
-                                  </div>
-                              </td>
-                              <td><span class="badge bg-success">90%</span></td>
-                          </tr>
-                      </tbody>
-                  </table>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Together</th>                                   
+                    <th>Progress</th>
+                    <th style="width: 40px"></th>
+                    <th>Nickname</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>GoTogether Toy Project 함께 공부하며 만들어 가실 분 ^^</td>
+                    <td>
+                        <div class="progress progress-xs">
+                            <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                        </div>
+                    </td>
+                    <td><span class="badge bg-danger">55%</span></td>
+                    <td>devsunset</td>
+                    <td>22-06-29 10:30</td>
+                </tr>
+                <tr>
+                    <td>FullStack 개발 스터디</td>
+                    <td>
+                        <div class="progress progress-xs">
+                            <div class="progress-bar bg-warning" style="width: 70%"></div>
+                        </div>
+                    </td>
+                    <td><span class="badge bg-warning">70%</span></td>
+                    <td>devsunset</td>
+                    <td>22-06-29 10:30</td>
+                </tr>
+                <tr>
+                    <td>코딩 테스트 준비 모임</td>
+                    <td>
+                        <div class="progress progress-xs progress-striped active">
+                            <div class="progress-bar bg-primary" style="width: 30%"></div>
+                        </div>
+                    </td>
+                    <td><span class="badge bg-primary">30%</span></td>
+                    <td>devsunset</td>
+                    <td>22-06-29 10:30</td>
+                </tr>
+                <tr>
+                    <td>공모전 참가팀 인원 충원</td>
+                    <td>
+                        <div class="progress progress-xs progress-striped active">
+                            <div class="progress-bar bg-success" style="width: 90%"></div>
+                        </div>
+                    </td>
+                    <td><span class="badge bg-success">90%</span></td>
+                    <td>devsunset</td>
+                    <td>22-06-29 10:30</td>
+                </tr>
+            </tbody>
+        </table>
               </div>
+                <div class="card-footer clearfix">
+                    <ul class="pagination pagination-sm m-0 float-right">
+                        <li class="page-item"><a class="page-link" href="#">«</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">»</a></li>
+                    </ul>
+                </div>
           </div>
           
-          <div id="map" class="map"></div>
+          <div id="map" class="map" style="margin-top:20px"></div>
        
         </div>
     </div>

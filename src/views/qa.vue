@@ -47,41 +47,41 @@
                             <table class="table table-hover text-nowrap">
                                 <thead>
                                     <tr>
-                                        <th>Question</th>
-                                        <th style="width: 5%">User</th>
-                                        <th style="width: 5%">Date</th>
+                                        <th>Q&A</th>
                                         <th style="width: 5%">Reply</th>
                                         <th style="width: 5%">View</th>
+                                        <th style="width: 5%">Nickname</th>
+                                        <th style="width: 5%">Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>개발 관련 질문 ~ 4</td>
-                                        <td>devsunset</td>
-                                        <td>22-06-29 11:00</td>
                                         <td>0</td>
                                         <td>11</td>
+                                        <td>devsunset</td>
+                                        <td>22-06-29 11:00</td>
                                     </tr>
                                     <tr>
                                         <td>개발 관련 질문 ~ 3</td>
-                                        <td>devsunset</td>
-                                        <td>22-06-29 10:30</td>
                                         <td>1</td>
                                         <td>2</td>
+                                        <td>devsunset</td>
+                                        <td>22-06-29 10:30</td>
                                     </tr>
                                     <tr>
                                         <td>개발 관련 질문 ~ 2</td>
-                                        <td>devsunset</td>
-                                        <td>22-06-29 10:00</td>
                                         <td>5</td>
                                         <td>31</td>
+                                        <td>devsunset</td>
+                                        <td>22-06-29 10:00</td>
                                     </tr>
                                     <tr>
                                         <td>개발 관련 질문 ~ 1</td>
-                                        <td>devsunset</td>
-                                        <td>22-06-29 09:00</td>
                                         <td>9</td>
                                         <td>99</td>
+                                        <td>devsunset</td>
+                                        <td>22-06-29 09:00</td>
                                     </tr>
                                 </tbody>
                             </table>
