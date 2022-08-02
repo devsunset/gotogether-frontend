@@ -181,7 +181,7 @@ export default {
     };
   },
   mounted() {
-    UserService.getPublicContent().then(
+    UserService.getNotice().then(
       (response) => {
         this.content = response.data;
       },
