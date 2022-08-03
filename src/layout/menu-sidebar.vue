@@ -83,6 +83,16 @@
                             <p>Profile</p>
                         </router-link>
                     </li>
+                     <li class="nav-item"    v-if="currentUser">
+                        <router-link
+                            to="/note"
+                            class="nav-link"
+                            active-class="active"
+                        >
+                            <i class="nav-icon fas fa-edit"></i>
+                            <p>Note</p>
+                        </router-link>
+                    </li>
                 </ul>
             </nav>
         </div>

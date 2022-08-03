@@ -9,9 +9,9 @@
             class="dropdown-menu dropdown-menu-lg dropdown-menu-right"
             :class="{'show':isDropdownOpened}"
         >
-            <span class="dropdown-item dropdown-header">{{note}} New Note</span>
+            <span @click="goNote"  class="dropdown-item dropdown-header">{{note}} New Note</span>
             <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item dropdown-footer"
+            <a href="#"  @click="goNote" class="dropdown-item dropdown-footer"
                 >See All Note</a
             >
         </div>
@@ -49,27 +49,10 @@ export default {
         );
     }
   },
+    methods: {
+    goNote() {
+     this.$router.push('/note');
+    },
+  },
 };
-
-    // private isDropdownOpened = false;
-
-    // public mounted(): void {
-    //     document.addEventListener('click', this.documentClick);
-    // }
-
-    // public unmounted(): void {
-    //     document.removeEventListener('click', this.documentClick);
-    // }
-
-    // private toggleDropdown() {
-    //     this.isDropdownOpened = !this.isDropdownOpened;
-    // }
-
-    // private documentClick(event: Event) {
-    //     const el: HTMLElement = this.$refs.dropdown as HTMLElement;
-    //     const target: HTMLElement = event.target as HTMLElement;
-    //     if (el !== target && !el.contains(target)) {
-    //         this.isDropdownOpened = false;
-    //     }
-    // }
 </script>
