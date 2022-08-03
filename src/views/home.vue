@@ -30,9 +30,9 @@
         <div class="row">
             <div class="col-lg-3 col-6">
                 <!-- small box -->
-                <div class="small-box bg-info">
+                <div class="small-box bg-warning">
                     <div class="inner">
-                        <h3>1</h3>
+                        <h3>{{together}}</h3>
 
                         <p>Together</p>
                     </div>
@@ -47,9 +47,9 @@
             <!-- ./col -->
             <div class="col-lg-3 col-6">
                 <!-- small box -->
-                <div class="small-box bg-warning">
+                <div class="small-box bg-info">
                     <div class="inner">
-                        <h3>1</h3>
+                        <h3>{{user}}</h3>
 
                         <p>Member</p>
                     </div>
@@ -66,8 +66,7 @@
                 <!-- small box -->
                 <div class="small-box bg-success">
                     <div class="inner">
-                        <h3>1<sup style="font-size: 20px"></sup></h3>
-
+                         <h3>{{talk}}</h3>
                         <p>Talk</p>
                     </div>
                     <div class="icon">
@@ -83,7 +82,7 @@
                 <!-- small box -->
                 <div class="small-box bg-danger">
                     <div class="inner">
-                        <h3>1</h3>
+                        <h3>{{qa}}</h3>
 
                         <p>Q&amp;A</p>
                     </div>
@@ -101,7 +100,7 @@
     </div>
     <!-- /.container-fluid -->
 </section>
-<p style="text-align:center">{{ content }}</p>
+<p style="text-align:center">{{ notice }}</p>
 <div class="card" style="padding:15px;margin:10px">
     <div class="card-header">
         <h3 class="card-title">Recent Project</h3>
@@ -171,22 +170,30 @@
 </template>
 
 <script>
-import UserService from "../services/user.service";
+import CommonService from "../services/common.service";
 
 export default {
   name: "dashboard",
   data() {
     return {
-      content: "",
+      notice: "",
+      together: 0,
+      user: 0,
+      talk : 0,
+      qa : 0
     };
   },
   mounted() {
-    UserService.getNotice().then(
+    CommonService.getHome().then(
       (response) => {
-        this.content = response.data;
+        this.together = response.data.data.TOGETHER;
+        this.user = response.data.data.USER;
+        this.talk = response.data.data.TALK;
+        this.qa = response.data.data.QA;
+        this.notice = response.data.data.NOTICE;
       },
       (error) => {
-        this.content =
+        this.notice =
           (error.response &&
             error.response.data &&
             error.response.data.message) ||

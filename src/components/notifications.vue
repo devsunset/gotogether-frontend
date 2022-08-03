@@ -1,45 +1,55 @@
 <template>
-    <li class="nav-item dropdown" ref="dropdown">
-        <button class="nav-link" data-toggle="dropdown" @click="toggleDropdown">
+    <li class="nav-item dropdown" ref="dropdown" v-if="currentUser">
+        <button class="nav-link" data-toggle="dropdown" @click="toggleDropdown" aria-expanded="true">
             <i class="far fa-bell"></i>
-            <span class="badge badge-warning navbar-badge">3</span>
+            <span class="badge badge-warning navbar-badge">{{note}}</span>
+            <i class="far fa-bell"></i>
         </button>
         <div
             class="dropdown-menu dropdown-menu-lg dropdown-menu-right"
             :class="{'show':isDropdownOpened}"
         >
-            <span class="dropdown-item dropdown-header">3 Notifications</span>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
-                <i class="fas fa-envelope mr-2"></i> 1 new messages
-                <span class="float-right text-muted text-sm">1 mins</span>
-            </a>
-            <div class="dropdown-divider"></div>
-        <a href="#" class="dropdown-item">
-                <i class="fas fa-envelope mr-2"></i> 2 new messages
-                <span class="float-right text-muted text-sm">2 mins</span>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
-                <i class="fas fa-envelope mr-2"></i> 3 new messages
-                <span class="float-right text-muted text-sm">3 mins</span>
-            </a>
+            <span class="dropdown-item dropdown-header">{{note}} New Note</span>
             <div class="dropdown-divider"></div>
             <a href="#" class="dropdown-item dropdown-footer"
-                >See All Notifications</a
+                >See All Note</a
             >
         </div>
     </li>
 </template>
 
 <script>
-    export default {
-        name: "dashboard",
-        data() {
-            return {
-            };
-        }
+import NoteService from "../services/note.service";
+
+export default {
+  name: "notifications",
+  data() {
+    return {
+      note: 0,
     };
+  },
+  computed: {
+    currentUser() {
+      return this.$store.state.auth.user;
+    },
+  },
+  mounted() {
+    if(this.$store.state.auth.user){
+        NoteService.getNewReceiveNote().then(
+        (response) => {
+            this.together = response.data.data.NOTE;
+        },
+        (error) => {
+            console.log((error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+            error.message ||
+            error.toString());
+        }
+        );
+    }
+  },
+};
 
     // private isDropdownOpened = false;
 
