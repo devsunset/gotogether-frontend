@@ -135,8 +135,8 @@ export default {
           this.message =
             (error.response &&
               error.response.data &&
-              error.response.data.message) ||
-            error.message ||
+              error.response.data.description) ||
+            error.description ||
             error.toString();
         }
       );
