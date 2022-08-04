@@ -35,7 +35,7 @@
                             </div>
                             <h3 class="profile-username text-center">
                                  <div  v-if="currentUser">
-                                    <p>{{currentUser.username}}</p>
+                                    <p>{{nickname}}</p>
                                  </div>
                             </h3>
                         </div>
@@ -53,20 +53,20 @@
                             <div  v-if="currentUser">
                             <p>
                             <strong>UserId:</strong>
-                            {{currentUser.username}}
+                            {{userid}}
                             </p>
                             <p>
                             <strong>Nickname:</strong>
-                            {{currentUser.nickname}}
+                            {{nickname}}
                             </p>
                             <p>
                                 <strong>Email:</strong>
-                                {{currentUser.email}}
+                                {{email}}
                             </p>
+                            <p>
                             <strong>Authorities:</strong>
-                            <ul>
-                                <li v-for="role in currentUser.roles" :key="role">{{role}}</li>
-                            </ul> 
+                                {{roles}}
+                            </p> 
                         </div>
                            
                         </div>
@@ -103,20 +103,20 @@
                                 <div class="active tab-pane" id="activity">
                                     <strong><i class="fas fa-pencil-alt mr-1"></i> Introduce</strong>
                                     <p class="text-muted">
-                                    하루에 한가지씩 배우기
+                                    {{introduce}}
                                     </p>
                                     <hr />
                                     <strong><i class="far fa-file-alt mr-1"></i> Note</strong>
                                     <p class="text-muted">
-                                    Talk is Cheap. Show me the Code.   - Linus Torvalds
+                                    {{note}}
                                     </p>
                                    <strong><i class="far fa-file-alt mr-1"></i> Github</strong>
                                     <p class="text-muted">
-                                    Github
+                                    {{github}}
                                     </p>
                                     <strong><i class="far fa-file-alt mr-1"></i>Homepage</strong>
                                     <p class="text-muted">
-                                    Homepage
+                                    {{homepage}}
                                     </p>
                                 </div>
                                 <!-- /.tab-pane -->
@@ -141,16 +141,78 @@
 </template>
 
 <script>
+import UserService from "../services/user.service";
+
     export default {
         name: "profile",
         data() {
             return {
+                userid : "",
+                nickname : "",
+                email : "",
+                roles : "",
+                userInfoId : "",
+                introduce : "",
+                note : "",
+                github : "",
+                homepage : "",
+                profileImageLink : "",
             };
         },
         computed: {
             currentUser() {
                 return this.$store.state.auth.user;
             }
+        },
+        mounted(){
+            if(this.currentUser){
+                const user = JSON.parse(localStorage.getItem('user'));
+                 this.userid = user.username;
+                 this.nickname = user.nickname;
+                 this.email = user.email;
+                 this.roles= user.roles[0];
+            }
+            this.getUserInfo();
+            this.getUserSkill();
+        },
+         methods: {
+            getUserInfo() {
+                UserService.getUserInfo().then(
+                    (response) => {
+                        if(response.data.data !=null){
+                            this.userInfoId = response.data.data.userInfoId ;
+                            this.introduce = response.data.data.introduce;
+                            this.note = response.data.data.note;
+                            this.github = response.data.data.github;
+                            this.homepage  = response.data.data.homepage ;
+                            this.profileImageLink  = response.data.data.profileImageLink ;
+                        }
+                    },
+                    (error) => {
+                        console.log(
+                        (error.response &&
+                            error.response.data &&
+                            error.response.data.message) ||
+                        error.message ||
+                        error.toString());
+                    }
+                    );
+            },
+            getUserSkill() {
+                UserService.getUserInfo().then(
+                    (response) => {
+                            console.log(response);
+                    },
+                    (error) => {
+                        console.log(
+                        (error.response &&
+                            error.response.data &&
+                            error.response.data.message) ||
+                        error.message ||
+                        error.toString());
+                    }
+                    );
+            },
         },
     };
 </script>
