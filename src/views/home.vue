@@ -171,6 +171,7 @@
 
 <script>
 import CommonService from "../services/common.service";
+import TogetherService from "../services/together.service";
 
 export default {
   name: "dashboard",
@@ -183,24 +184,46 @@ export default {
       qa : 0
     };
   },
-  mounted() {
-    CommonService.getHome().then(
-      (response) => {
-        this.together = response.data.data.TOGETHER;
-        this.user = response.data.data.USER;
-        this.talk = response.data.data.TALK;
-        this.qa = response.data.data.QA;
-        this.notice = response.data.data.NOTICE;
-      },
-      (error) => {
-        this.notice =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
-      }
-    );
+  mounted: function () {
+     this.getHome();
+     this.getRecentTogether();
+    }
+ ,
+  methods: {
+    getHome() {
+         CommonService.getHome().then(
+            (response) => {
+                this.together = response.data.data.TOGETHER;
+                this.user = response.data.data.USER;
+                this.talk = response.data.data.TALK;
+                this.qa = response.data.data.QA;
+                this.notice = response.data.data.NOTICE;
+            },
+            (error) => {
+                this.notice =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+            }
+            );
+    },
+     getRecentTogether() {
+         TogetherService.getRecentTogether().then(
+            (response) => {
+                    alert(JSON.stringify(response));
+            },
+            (error) => {
+                this.notice =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+            }
+            );
+    },
   },
 };
 </script>
