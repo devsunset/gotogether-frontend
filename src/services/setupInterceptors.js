@@ -23,6 +23,10 @@ const setup = (store) => {
     async (err) => {
       const originalConfig = err.config;
 
+        // To-Do
+        // Global  Jwt expire Handler
+        // this.$store.dispatch('auth/logout');
+
       if (originalConfig.url !== "/auth/signin" && err.response) {
         // Access Token was expired
         if (err.response.status === 401 && !originalConfig._retry) {
@@ -39,7 +43,9 @@ const setup = (store) => {
             TokenService.updateLocalToken(token);
 
             return axiosInstance(originalConfig);
+
           } catch (_error) {
+            alert(_error);
             return Promise.reject(_error);
           }
         }

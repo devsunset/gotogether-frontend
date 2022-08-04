@@ -212,7 +212,7 @@ export default {
      getRecentTogether() {
          TogetherService.getRecentTogether().then(
             (response) => {
-                    alert(JSON.stringify(response));
+                    console.log(response)//alert(JSON.stringify(response));
             },
             (error) => {
                 this.notice =
