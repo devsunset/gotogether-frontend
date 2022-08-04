@@ -110,7 +110,7 @@ export default {
   },mounted() {
             appElement.classList.add('login-page');
  },unmounted(){
-        appElement.classList.remove('login-page');
+            appElement.classList.remove('login-page');
   },
   computed: {
     loggedIn() {

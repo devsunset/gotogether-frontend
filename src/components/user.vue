@@ -23,10 +23,7 @@
                     alt="User Image"
                 />
 
-                <div  v-if="currentUser">
-                    <p>{{currentUser.nickname}}</p>
-                </div>
-
+                <p  v-if="currentUser">{{nickname}}</p>
                 <p  v-if="!currentUser">
                     Anonymous
                 </p>
@@ -61,6 +58,7 @@
         name: "user",
         data() {
             return {
+                nickname : "Anonymous"
             };
         },
         computed: {
@@ -76,9 +74,13 @@
             }else{
                 this.$router.push('/login')
             }
+         },
+         toggleDropdown(){
+            if(this.currentUser){
+                const user = JSON.parse(localStorage.getItem('user'));
+                this.nickname = user.nickname;
+            }
          }
-       },
-        mounted() {
-        },
-    };
+       }
+    }; 
 </script>

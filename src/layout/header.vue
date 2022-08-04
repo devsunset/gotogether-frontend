@@ -4,7 +4,7 @@
         <ul class="navbar-nav">
             <li class="nav-item">
                 <router-link to="/">
-                <button class="nav-link" role="button" @click="onToggleMenuSidebar">
+                <button class="nav-link" role="button">
                     <i class="fas fa-bars"></i>
                 </button>
                </router-link>
@@ -15,7 +15,6 @@
         </ul>
 
         <ul class="navbar-nav ml-auto">
-
             <notifications-dropdown ></notifications-dropdown>        
             <user-dropdown></user-dropdown>
         </ul>
@@ -37,9 +36,5 @@ import User from '../components/user.vue';
             'user-dropdown': User
         }
     };
-
-    // public onToggleMenuSidebar(): void {
-    //     this.$emit('toggle-menu-sidebar');
-    // }
 </script>
 

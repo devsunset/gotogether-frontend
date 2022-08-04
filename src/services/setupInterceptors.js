@@ -33,6 +33,9 @@ const setup = (store) => {
           originalConfig._retry = true;
 
           try {
+            if (TokenService.getLocalRefreshToken() === undefined){
+              return;
+            }
             const rs = await axiosInstance.post("/auth/refreshtoken", {
               refreshToken: TokenService.getLocalRefreshToken(),
             });
@@ -45,7 +48,6 @@ const setup = (store) => {
             return axiosInstance(originalConfig);
 
           } catch (_error) {
-            alert(_error);
             return Promise.reject(_error);
           }
         }
