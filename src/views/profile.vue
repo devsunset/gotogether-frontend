@@ -239,9 +239,10 @@ import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 
                 var skill = "";
                 this.items.forEach(function(d){
-                    if(d.item !='' ){
-                        skill +=d.item+'^'+d.level+"|"
-                    }
+                    let tmp = d.item.trim().replace("|",'').replace("^",'');
+                    if(tmp !='' ){
+                        skill +=tmp+'^'+d.level+"|"
+                    } 
                 })
 
                 if(skill !=''){
