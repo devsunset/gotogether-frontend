@@ -211,10 +211,7 @@ import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
                 note : "",
                 github : "",
                 homepage : "",
-                items : [
-                                    {"item" : "vue", "level" : "BASIC"}
-                                    ,{"item" : "react", "level" : "TOY_PROJECT"}
-                                ] 
+                items : [ ] 
             };
         },
         components: {
