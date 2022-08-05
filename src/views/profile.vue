@@ -29,7 +29,7 @@
                             <div class="text-center">
                                 <img
                                     class="profile-user-img img-fluid img-circle"
-                                    src="https://avatars.githubusercontent.com/u/9853358?v=4"
+                                    src="../assets/img/devsunset.jpg"
                                     alt="User profile picture"
                                 />
                             </div>
@@ -78,7 +78,7 @@
                 <div class="col-md-9">
                     <div class="card">
                         <div class="card-header p-2">
-                            <ul class="nav nav-pills">
+                            <ul class="nav nav-pills" style="float:right">
                                 <li class="nav-item">
                                     <a
                                         class="nav-link active"
@@ -92,37 +92,98 @@
                                         class="nav-link"
                                         href="#Skill"
                                         data-toggle="tab"
-                                        >Skill</a
+                                        >Skills</a
                                     >
                                 </li>
+                                <li>
+                                    <button type="submit" class="btn btn-danger" style="margin-left:45px">Submit</button>
+                                </li>
                             </ul>
+                            
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <div class="tab-content">
                                 <div class="active tab-pane" id="activity">
-                                    <strong><i class="fas fa-pencil-alt mr-1"></i> Introduce</strong>
-                                    <p class="text-muted">
-                                    {{introduce}}
-                                    </p>
-                                    <hr />
-                                    <strong><i class="far fa-file-alt mr-1"></i> Note</strong>
-                                    <p class="text-muted">
-                                    {{note}}
-                                    </p>
-                                   <strong><i class="far fa-file-alt mr-1"></i> Github</strong>
-                                    <p class="text-muted">
-                                    {{github}}
-                                    </p>
-                                    <strong><i class="far fa-file-alt mr-1"></i>Homepage</strong>
-                                    <p class="text-muted">
-                                    {{homepage}}
-                                    </p>
+                                        <div class="form-group row">
+                                        <label for="inputName" class="col-sm-2 col-form-label"><i class="far fa-file-alt mr-1"></i>Introduce</label>
+                                        <div class="col-sm-10">
+                                        <input type="text" class="form-control"  placeholder="한줄 소개" v-model="introduce">
+                                        </div>
+                                        </div>
+                                        <div class="form-group row">
+                                        <label for="inputExperience" class="col-sm-2 col-form-label"><i class="far fa-file-alt mr-1"></i>Note</label>
+                                        <div class="col-sm-10">
+                                        <textarea class="form-control"  placeholder="자기 소개" v-model="note"></textarea>
+                                        </div>
+                                        </div>
+                                         <div class="form-group row">
+                                        <label for="inputEmail" class="col-sm-2 col-form-label"><i class="far fa-file-alt mr-1"></i>Github</label>
+                                        <div class="col-sm-10">
+                                        <input type="text" class="form-control" placeholder="Github" v-model="github">
+                                        </div>
+                                        </div>
+                                         <div class="form-group row">
+                                        <label for="inputName2" class="col-sm-2 col-form-label"><i class="far fa-file-alt mr-1"></i>Homepage</label>
+                                        <div class="col-sm-10">
+                                        <input type="text" class="form-control" placeholder="Homepage" v-model="homepage">
+                                        </div>
+                                        </div>
                                 </div>
                                 <!-- /.tab-pane -->
                                  <!-- /.tab-pane -->
                                 <div class="tab-pane" id="Skill">
-                                    Skill
+                                    
+                                    <div class="card">
+                                            <div class="card-header">
+                                            <h3 class="card-title">Skill 항목을 추가해 주세요.</h3>
+                                            </div>
+
+                                            <div class="card-body p-0">
+                                            <table class="table table-striped">
+                                            <thead>
+                                            <tr>
+                                            <th>Item</th>
+                                            <th>Level</th>
+                                            <th style="width: 40px"></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                <td><input type="text" class="form-control" placeholder="skill"></td>
+                                                <td>
+                                                        <select class="form-control">
+                                                        <option value="INTEREST">관심있음</option>
+                                                        <option value="HELLO_WORLD">Hello Word</option>
+                                                        <option value="BASIC">기본 공부</option>
+                                                        <option value="TOY_PROJECT">Toy Pjt. 개발 </option> 
+                                                        <option value="JOB_BEGINNER">업무 기본 사용</option>
+                                                        <option value="JOB_PROFESSIAL">업무 많이 사용</option> 
+                                                        </select>
+                                                </td>
+                                                <td><button type="button" class="btn btn-block btn-warning btn-sm">-</button></td>
+                                                </tr>
+                                                      <tr>
+                                                <td><input type="text" class="form-control" placeholder="skill"></td>
+                                                <td>
+                                                        <select class="form-control">
+                                                        <option value="INTEREST">관심있음</option>
+                                                        <option value="HELLO_WORLD">Hello Word</option>
+                                                        <option value="BASIC">기본 공부</option>
+                                                        <option value="TOY_PROJECT">Toy Pjt. 개발 </option> 
+                                                        <option value="JOB_BEGINNER">업무 기본 사용</option>
+                                                        <option value="JOB_PROFESSIAL">업무 많이 사용</option> 
+                                                        </select>
+                                                </td>
+                                                <td><button type="button" class="btn btn-block btn-success btn-sm">+</button></td>
+                                                </tr>
+                                            </tbody>
+                                            </table>
+                                            </div>
+
+                                            </div>
+
+
                                 </div>
                                 <!-- /.tab-pane -->
                             </div>
@@ -130,6 +191,7 @@
                         </div>
                         <!-- /.card-body -->
                     </div>
+                       
                     <!-- /.card -->
                 </div>
                 <!-- /.col -->
@@ -171,9 +233,10 @@ import UserService from "../services/user.service";
                  this.nickname = user.nickname;
                  this.email = user.email;
                  this.roles= user.roles[0];
+
+                this.getUserInfo();
             }
-            this.getUserInfo();
-            this.getUserSkill();
+         
         },
          methods: {
             getUserInfo() {
@@ -187,21 +250,6 @@ import UserService from "../services/user.service";
                             this.homepage  = response.data.data.homepage ;
                             this.profileImageLink  = response.data.data.profileImageLink ;
                         }
-                    },
-                    (error) => {
-                        console.log(
-                        (error.response &&
-                            error.response.data &&
-                            error.response.data.message) ||
-                        error.message ||
-                        error.toString());
-                    }
-                    );
-            },
-            getUserSkill() {
-                UserService.getUserInfo().then(
-                    (response) => {
-                            console.log(response);
                     },
                     (error) => {
                         console.log(

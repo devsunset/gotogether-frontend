@@ -6,7 +6,7 @@
             data-toggle="dropdown"
         >
             <img
-                src="https://avatars.githubusercontent.com/u/9853358?v=4"
+                src="../assets/img/devsunset.jpg"
                 class="user-image img-circle elevation-2"
                 alt="User Image"
             />
@@ -18,7 +18,7 @@
             <!-- User image -->
             <li class="user-header bg-primary">
                 <img
-                    src="https://avatars.githubusercontent.com/u/9853358?v=4"
+                    src="../assets/img/devsunset.jpg"
                     class="img-circle elevation-2"
                     alt="User Image"
                 />
