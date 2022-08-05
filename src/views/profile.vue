@@ -96,7 +96,8 @@
                                     >
                                 </li>
                                 <li>
-                                    <button type="submit" class="btn btn-danger" style="margin-left:45px" @click="setUserInfoSave()" >Submit</button>
+                                    <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
+                                    <button type="submit" class="btn btn-danger" style="margin-left:45px" @click="setUserInfoSave()" v-show='!loading' >Submit</button>
                                 </li>
                             </ul>
                             
@@ -184,17 +185,23 @@
             </div>
             <!-- /.row -->
         </div>
+        
         <!-- /.container-fluid -->
     </section>`
+
 </template>
 
 <script>
 import UserService from "../services/user.service";
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 
     export default {
         name: "profile",
         data() {
             return {
+                loading : false,
+                color: '#007bff',
+                size: '30px',
                 userid : "",
                 nickname : "",
                 email : "",
@@ -209,6 +216,9 @@ import UserService from "../services/user.service";
                                     ,{"item" : "react", "level" : "TOY_PROJECT"}
                                 ] 
             };
+        },
+        components: {
+            'PulseLoader': PulseLoader 
         },
         computed: {
             currentUser() {
@@ -241,11 +251,18 @@ import UserService from "../services/user.service";
                     skill  = skill.substring(0,skill.length -1)
                 }
 
+                this.loading = true;
                  UserService.setUserInfoSave({"introduce": this.introduce, "note" : this.note, "github" : this.github, "homepage" : this.homepage, "skill" : skill} ).then(
                     (response) => {
-                        alert('result'+response)
+                        this.loading = false;
+                        if(response.data.result =="S"){
+                            this.$toast.success(`Success.`);
+                        }else{
+                              this.$toast.error(`Fail.`);
+                        }
                     },
                     (error) => {
+                        this.loading = false;
                         console.log(
                         (error.response &&
                             error.response.data &&
