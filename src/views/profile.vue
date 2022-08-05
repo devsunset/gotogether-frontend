@@ -149,33 +149,19 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                <td><input type="text" class="form-control" placeholder="skill"></td>
-                                                <td>
-                                                        <select class="form-control">
-                                                        <option value="INTEREST">관심있음</option>
-                                                        <option value="HELLO_WORLD">Hello Word</option>
-                                                        <option value="BASIC">기본 공부</option>
-                                                        <option value="TOY_PROJECT">Toy Pjt. 개발 </option> 
-                                                        <option value="JOB_BEGINNER">업무 기본 사용</option>
-                                                        <option value="JOB_PROFESSIAL">업무 많이 사용</option> 
+                                                <tr :key="index" v-for="(item,index) in items">
+                                                    <td><input type="text" name="skill_item" class="form-control" placeholder="skill을 입력해주세요" v-model="item.item"></td>
+                                                    <td>
+                                                         <select class="form-control" v-model="item.level" name="skill_level"> 
+                                                            <option value="INTEREST">관심있음</option>
+                                                            <option value="HELLO_WORLD">Hello Word</option>
+                                                            <option value="BASIC">기본 공부</option>
+                                                            <option value="TOY_PROJECT">Toy Pjt. 개발 </option> 
+                                                            <option value="JOB_BEGINNER">업무 기본 사용</option>
+                                                            <option value="JOB_PROFESSIAL">업무 많이 사용</option> 
                                                         </select>
-                                                </td>
-                                                <td><button type="button" class="btn btn-block btn-warning btn-sm">-</button></td>
-                                                </tr>
-                                                      <tr>
-                                                <td><input type="text" class="form-control" placeholder="skill"></td>
-                                                <td>
-                                                        <select class="form-control">
-                                                        <option value="INTEREST">관심있음</option>
-                                                        <option value="HELLO_WORLD">Hello Word</option>
-                                                        <option value="BASIC">기본 공부</option>
-                                                        <option value="TOY_PROJECT">Toy Pjt. 개발 </option> 
-                                                        <option value="JOB_BEGINNER">업무 기본 사용</option>
-                                                        <option value="JOB_PROFESSIAL">업무 많이 사용</option> 
-                                                        </select>
-                                                </td>
-                                                <td><button type="button" class="btn btn-block btn-success btn-sm">+</button></td>
+                                                    </td>
+                                                    <td><button type="button" class="btn btn-block btn-success btn-sm" v-if="index != items.length - 1">-</button><button type="button" class="btn btn-block btn-warning btn-sm" v-if="index == items.length - 1">+</button></td>
                                                 </tr>
                                             </tbody>
                                             </table>
@@ -219,6 +205,10 @@ import UserService from "../services/user.service";
                 github : "",
                 homepage : "",
                 profileImageLink : "",
+                items : [
+                                    {"item" : "vue", "level" : "BASIC"}
+                                    ,{"item" : "react", "level" : "TOY_PROJECT"}
+                                ] 
             };
         },
         computed: {
@@ -248,10 +238,27 @@ import UserService from "../services/user.service";
                             this.note = response.data.data.note;
                             this.github = response.data.data.github;
                             this.homepage  = response.data.data.homepage ;
-                            this.profileImageLink  = response.data.data.profileImageLink ;
+
+                            if(response.data.data.skill === "" || response.data.data.skill === undefined || response.data.data.skill == null){
+                                 this.items = [
+                                    {"item" : "", "level" : "INTEREST"}
+                                ] ;
+                            }else{
+                                this.items = [] ;
+                                var data = response.data.data.skill.split("|");
+                                var skills = [] ;
+                                data.forEach(function(d){
+                                    var datasub = d.split('^');
+                                    skills.push({ item:datasub[0], level:datasub[1] });
+                                })
+                                this.items = skills; 
+                            }
                         }
                     },
                     (error) => {
+                          this.items = [
+                                    {"item" : "", "level" : "INTEREST"}
+                                ] ;
                         console.log(
                         (error.response &&
                             error.response.data &&
