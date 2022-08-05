@@ -96,7 +96,7 @@
                                     >
                                 </li>
                                 <li>
-                                    <button type="submit" class="btn btn-danger" style="margin-left:45px">Submit</button>
+                                    <button type="submit" class="btn btn-danger" style="margin-left:45px" @click="setUserInfoSave()" >Submit</button>
                                 </li>
                             </ul>
                             
@@ -108,25 +108,25 @@
                                         <div class="form-group row">
                                         <label for="inputName" class="col-sm-2 col-form-label"><i class="far fa-file-alt mr-1"></i>Introduce</label>
                                         <div class="col-sm-10">
-                                        <input type="text" class="form-control"  placeholder="한줄 소개" v-model="introduce">
+                                        <input type="text" class="form-control"  placeholder="한줄 소개" v-model="introduce" maxlength="255">
                                         </div>
                                         </div>
                                         <div class="form-group row">
                                         <label for="inputExperience" class="col-sm-2 col-form-label"><i class="far fa-file-alt mr-1"></i>Note</label>
                                         <div class="col-sm-10">
-                                        <textarea class="form-control"  placeholder="자기 소개" v-model="note"></textarea>
+                                        <textarea class="form-control"  placeholder="자기 소개" v-model="note" maxlength="1000"></textarea>
                                         </div>
                                         </div>
                                          <div class="form-group row">
                                         <label for="inputEmail" class="col-sm-2 col-form-label"><i class="far fa-file-alt mr-1"></i>Github</label>
                                         <div class="col-sm-10">
-                                        <input type="text" class="form-control" placeholder="Github" v-model="github">
+                                        <input type="text" class="form-control" placeholder="Github" v-model="github" maxlength="500">
                                         </div>
                                         </div>
                                          <div class="form-group row">
                                         <label for="inputName2" class="col-sm-2 col-form-label"><i class="far fa-file-alt mr-1"></i>Homepage</label>
                                         <div class="col-sm-10">
-                                        <input type="text" class="form-control" placeholder="Homepage" v-model="homepage">
+                                        <input type="text" class="form-control" placeholder="Homepage" v-model="homepage" maxlength="500">
                                         </div>
                                         </div>
                                 </div>
@@ -150,7 +150,7 @@
                                             </thead>
                                             <tbody>
                                                 <tr :key="index" v-for="(item,index) in items">
-                                                    <td><input type="text" name="skill_item" class="form-control" placeholder="skill을 입력해주세요" v-model="item.item"></td>
+                                                    <td><input type="text" name="skill_item" class="form-control" placeholder="skill을 입력해주세요" v-model="item.item" maxlength="100"></td>
                                                     <td>
                                                          <select class="form-control" v-model="item.level" name="skill_level"> 
                                                             <option value="INTEREST">관심있음</option>
@@ -158,10 +158,10 @@
                                                             <option value="BASIC">기본 공부</option>
                                                             <option value="TOY_PROJECT">Toy Pjt. 개발 </option> 
                                                             <option value="JOB_BEGINNER">업무 기본 사용</option>
-                                                            <option value="JOB_PROFESSIAL">업무 많이 사용</option> 
+                                                            <option value="JOB_PROFESSIONAL">업무 많이 사용</option> 
                                                         </select>
                                                     </td>
-                                                    <td><button type="button" class="btn btn-block btn-success btn-sm" v-if="index != items.length - 1">-</button><button type="button" class="btn btn-block btn-warning btn-sm" v-if="index == items.length - 1">+</button></td>
+                                                    <td><button type="button" @click="setMinusSkill(index)" class="btn btn-block btn-success btn-sm" v-if="index != items.length - 1">-</button><button type="button" @click="setAddSkill()" class="btn btn-block btn-warning btn-sm" v-if="index == items.length - 1">+</button></td>
                                                 </tr>
                                             </tbody>
                                             </table>
@@ -204,7 +204,6 @@ import UserService from "../services/user.service";
                 note : "",
                 github : "",
                 homepage : "",
-                profileImageLink : "",
                 items : [
                                     {"item" : "vue", "level" : "BASIC"}
                                     ,{"item" : "react", "level" : "TOY_PROJECT"}
@@ -229,6 +228,39 @@ import UserService from "../services/user.service";
          
         },
          methods: {
+              setUserInfoSave() {
+
+                var skill = "";
+                this.items.forEach(function(d){
+                    if(d.item !='' ){
+                        skill +=d.item+'^'+d.level+"|"
+                    }
+                })
+
+                if(skill !=''){
+                    skill  = skill.substring(0,skill.length -1)
+                }
+
+                 UserService.setUserInfoSave({"introduce": this.introduce, "note" : this.note, "github" : this.github, "homepage" : this.homepage, "skill" : skill} ).then(
+                    (response) => {
+                        alert('result'+response)
+                    },
+                    (error) => {
+                        console.log(
+                        (error.response &&
+                            error.response.data &&
+                            error.response.data.message) ||
+                        error.message ||
+                        error.toString());
+                    }
+               );
+             },
+             setAddSkill() {
+                this.items.push({ item:"", level:"INTEREST"});
+             },
+             setMinusSkill(idx) {
+                  this.items.splice(idx, 1)
+             },
             getUserInfo() {
                 UserService.getUserInfo().then(
                     (response) => {
@@ -266,7 +298,7 @@ import UserService from "../services/user.service";
                         error.message ||
                         error.toString());
                     }
-                    );
+               );
             },
         },
     };
