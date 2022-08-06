@@ -151,15 +151,13 @@
                                             </thead>
                                             <tbody>
                                                 <tr :key="index" v-for="(item,index) in items">
-                                                    <td><input type="text" name="skill_item" class="form-control" placeholder="skill을 입력해주세요" v-model="item.item" maxlength="100"></td>
+                                                    <td><input type="text" name="skill_item" class="form-control" @change='checkvalue' placeholder="skill을 입력해주세요" v-model="item.item" maxlength="100"></td>
                                                     <td>
                                                          <select class="form-control" v-model="item.level" name="skill_level"> 
-                                                            <option value="INTEREST">관심있음</option>
-                                                            <option value="HELLO_WORLD">Hello Word</option>
-                                                            <option value="BASIC">기본 공부</option>
-                                                            <option value="TOY_PROJECT">Toy Pjt. 개발 </option> 
-                                                            <option value="JOB_BEGINNER">업무 기본 사용</option>
-                                                            <option value="JOB_PROFESSIONAL">업무 많이 사용</option> 
+                                                            <option value="BASIC">기본 학습</option>
+                                                            <option value="JOB_BEGINNER">업무 사용</option>
+                                                            <option value="INTEREST">관심 있음</option>
+                                                            <option value="TOY_PROJECT">Toy Pjt. 개발 사용 </option> 
                                                         </select>
                                                     </td>
                                                     <td><button type="button" @click="setMinusSkill(index)" class="btn btn-block btn-success btn-sm" v-if="index != items.length - 1">-</button><button type="button" @click="setAddSkill()" class="btn btn-block btn-warning btn-sm" v-if="index == items.length - 1">+</button></td>
