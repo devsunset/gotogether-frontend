@@ -155,7 +155,7 @@
                                                     <td>
                                                          <select class="form-control" v-model="item.level" name="skill_level"> 
                                                             <option value="BASIC">기본 학습</option>
-                                                            <option value="JOB_BEGINNER">업무 사용</option>
+                                                            <option value="JOB">업무 사용</option>
                                                             <option value="INTEREST">관심 있음</option>
                                                             <option value="TOY_PROJECT">Toy Pjt. 개발 사용 </option> 
                                                         </select>
