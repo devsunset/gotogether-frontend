@@ -236,10 +236,9 @@ import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
         },
          methods: {
               setUserInfoSave() {
-
                 var skill = "";
                 this.items.forEach(function(d){
-                    let tmp = d.item.trim().replace("|",'').replace("^",'');
+                    let tmp = d.item.trim().replace(/\|/g,'').replace(/\^/g,'');
                     if(tmp !='' ){
                         skill +=tmp+'^'+d.level+"|"
                     } 
@@ -255,12 +254,14 @@ import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
                         this.loading = false;
                         if(response.data.result =="S"){
                             this.$toast.success(`Success.`);
+                            this.getUserInfo();
                         }else{
                               this.$toast.error(`Fail.`);
                         }
                     },
                     (error) => {
                         this.loading = false;
+                        this.$toast.error(`Fail.`);
                         console.log(
                         (error.response &&
                             error.response.data &&
