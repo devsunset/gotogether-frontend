@@ -7,14 +7,6 @@
                 <h1 class="m-0">Member</h1>
             </div>
             <!-- /.col -->
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item">
-                        <router-link to="/">Home</router-link>
-                    </li>
-                    <li class="breadcrumb-item active">Member</li>
-                </ol>
-            </div>
             <!-- /.col -->
         </div>
         <!-- /.row -->
@@ -42,73 +34,60 @@
                             </div>
                     </div>
 
+                    <p/>
 
-                    <div class="card-body">
-
-
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th style="width: 10%">Nickname</th>
-                                    <th style="width: 25%">Introduce</th>
-                                    <th>Skill</th>
-                                    <th style="width: 10%">Date</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>devsunset</td>
-                                    <td>하루에 한가지씩 배우기</td>
-                                    <td><span class="badge bg-warning">Backend</span> <span class="badge bg-success">Frontend</span> <span class="badge bg-danger">DB</span> <span class="badge bg-primary">CI/CD</span></td>
-                                    <td>22-06-29 11:00</td>
-                                </tr>                                
-                            </tbody>
-                        </table>
-
-
-                    <table class="table table-bordered table-hover">
-                    <thead>
-                    <tr>
-                    <th>#</th>
-                    <th>User</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                    <th>Reason</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr data-widget="expandable-table" aria-expanded="false">
-                    <td>183</td>
-                    <td>John Doe</td>
-                    <td>11-7-2014</td>
-                    <td>Approved</td>
-                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                    </tr>
-                    <tr class="expandable-body d-none">
-                    <td colspan="5">
-                    <p style="display: none;">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                    </p>
-                    </td>
-                    </tr>
-                    <tr data-widget="expandable-table" aria-expanded="false">
-                    <td>219</td>
-                    <td>Alexander Pierce</td>
-                    <td>11-7-2014</td>
-                    <td>Pending</td>
-                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                    </tr>
-                    <tr class="expandable-body d-none">
-                    <td colspan="5">
-                    <p style="display: none;">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                    </p>
-                    </td>
-                    </tr>
-                    </tbody>
-                    </table>
-
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title"><i class="nav-icon fas fa-edit"></i>devsunset</h3>
+                                <div class="card-tools">
+                                        2022-07-22
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <td width="10%"><b>Introduce</b></td>
+                                            <td>
+                                                한줄소개
+                                            </td>
+                                        </tr>
+                                         <tr>
+                                            <td><b>Note</b></td>
+                                            <td>
+                                                한줄소개222222
+                                            </td>
+                                        </tr>
+                                         <tr>
+                                            <td><b>Github</b></td>
+                                            <td>
+                                                한줄소개222222
+                                            </td>
+                                        </tr>
+                                         <tr>
+                                            <td><b>Homepage</b></td>
+                                            <td>
+                                                한줄소개222222
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Skill</b></td>
+                                            <td>
+                                                <span class="badge bg-warning m3"  style="margin-right:3px">Backend</span>
+                                                <span class="badge bg-success"  style="margin-right:3px">Frontend</span>
+                                                <span class="badge bg-danger"  style="margin-right:3px">DB</span>
+                                                <span class="badge bg-primary"  style="margin-right:3px">CI/CD</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
+
+                    
+
 
                     <div class="card-footer clearfix">
                         <ul class="pagination pagination-sm m-0 float-right">
