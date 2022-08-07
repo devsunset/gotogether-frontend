@@ -105,15 +105,54 @@
 </template>
 
 <script>
+import UserService from "../services/user.service";
+
 export default {
   name: "member",
-  data() {
-    return {
-      content: "",
-      width: 0,
-      height: 0
-    };
-  },
+        data() {
+            return {
+                loading : false,
+                color: '#007bff',
+                size: '30px',
+                items : [ ] 
+            };
+        },
+        computed: {
+            currentUser() {
+                return this.$store.state.auth.user;
+            }
+        },
+        mounted(){
+            if(this.currentUser){
+                const user = JSON.parse(localStorage.getItem('user'));
+                 this.userid = user.username;
+                 this.nickname = user.nickname;
+                 this.email = user.email;
+                 this.roles= user.roles[0];
+
+                this.getUserSeach();
+            }
+         
+        },
+          methods: {
+            getUserSeach() {
+                UserService.getUserInfo().then(
+                    (response) => {
+                        if(response.data.data !=null){
+                            alert('a')
+                        }
+                    },
+                    (error) => {
+                        console.log(
+                        (error.response &&
+                            error.response.data &&
+                            error.response.data.message) ||
+                        error.message ||
+                        error.toString());
+                    }
+               );
+            },
+        },
 };
 </script>
 
