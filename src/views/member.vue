@@ -33,9 +33,9 @@
                             </span>
                             <div class="card-tools">
                                 <div class="input-group input-group-sm" style="width: 300px;">
-                                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search" @keyup.enter="getUserInfoList">
                                     <div class="input-group-append">
-                                        <button type="submit" class="btn btn-default">
+                                        <button type="submit" class="btn btn-default" @click="getUserInfoList">
                                             <i class="fas fa-search"></i>
                                         </button>
                                     </div>
@@ -50,7 +50,7 @@
                     <div class="col-12" :key="index" v-for="(member,index) in members">
                         <div class="card">
                             <div class="card-header" v-on:click="displayBody(index)">
-                                <h3 class="card-title"><i class="nav-icon fas fa-edit"></i>&nbsp;{{member.nickname}}</h3>
+                                <h3 class="card-title"><i class="nav-icon fas fa-user"></i>&nbsp;{{member.nickname}}</h3>
                                 <div class="card-tools">
                                         {{member.modifiedDate.substring(2,10)}}
                                 </div>
@@ -101,6 +101,13 @@
                                                 </span>
                                             </td>
                                         </tr>
+                                        <tr v-if="currentUser && userid !=member.username">
+                                            <td><i class="nav-icon fas fa-edit"></i>&nbsp;<b>메모전송</b><br>   <button type="submit" class="btn btn-success" style="width:85px" @click="sendNote()">전송</button></td>
+                                            <td>
+                                                <textarea class="form-control"  placeholder="메모 전송해 보세요" v-model="notesend" maxlength="1000"></textarea>
+                                            </td>
+                                        </tr>
+                                        
                                     </tbody>
                                 </table>
                             </div>
