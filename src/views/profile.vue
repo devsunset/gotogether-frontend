@@ -277,7 +277,7 @@ import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
                             this.github = response.data.data.github;
                             this.homepage  = response.data.data.homepage ;
 
-                            if(response.data.data.skill === "" || response.data.data.skill === undefined || response.data.data.skill == null){
+                            if(response.data.data.skill === undefined || response.data.data.skill == null || response.data.data.skill === ""){
                                  this.items = [
                                     {"item" : "", "level" : "INTEREST"}
                                 ] ;
@@ -291,6 +291,10 @@ import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
                                 })
                                 this.items = skills; 
                             }
+                        }else{
+                            this.items = [
+                                {"item" : "", "level" : "INTEREST"}
+                            ] ;
                         }
                     },
                     (error) => {

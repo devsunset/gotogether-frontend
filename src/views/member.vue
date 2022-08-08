@@ -26,6 +26,10 @@
                                     <span class="badge bg-danger"  style="margin-right:3px">업무 사용</span>
                                     <span class="badge bg-warning"  style="margin-right:3px">관심 있음</span>
                                     <span class="badge bg-primary"  style="margin-right:3px">Toy Pjt.</span>
+                                    &nbsp;
+                                    <span class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="userDetailView" v-model="memberDetailView" @change="detailVisible($event)"><label class="form-check-label" for="userDetail">Member Detail View</label>
+                                    </span>
                             </span>
                             <div class="card-tools">
                                 <div class="input-group input-group-sm" style="width: 300px;">
@@ -45,13 +49,13 @@
 
                     <div class="col-12" :key="index" v-for="(member,index) in members">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header" v-on:click="displayBody(index)">
                                 <h3 class="card-title"><i class="nav-icon fas fa-edit"></i>&nbsp;{{member.nickname}}</h3>
                                 <div class="card-tools">
                                         {{member.modifiedDate.substring(2,10)}}
                                 </div>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body" v-show="membersBodyDisplay[index]">
                                 <table class="table table-bordered">
                                     <tbody>
                                         <tr>
@@ -133,7 +137,9 @@ export default {
                 loading : false,
                 color: '#007bff',
                 size: '30px',
-                members : [ ] 
+                memberDetailView : true,                
+                members : [ ], 
+                membersBodyDisplay : [ ] 
             };
         },
         computed: {
@@ -159,9 +165,14 @@ export default {
                 UserService.getUserInfoList(0,4,{"category": "", "keyword" : keyword}).then(
                     (response) => {
                        this.members = response.data.data.content;
+                       this.membersBodyDisplay = []
+                       response.data.data.content.forEach(() => {
+                           this.membersBodyDisplay.push(this.memberDetailView)
+                       });
                     },
                     (error) => {
-                        this.members = [ ] ;
+                        this.members = [] 
+                        this.membersBodyDisplay = []
                         console.log(
                         (error.response &&
                             error.response.data &&
@@ -171,10 +182,19 @@ export default {
                     }
                );
             },
-            skillLevel(level){
-                alert(level)
-                return "badge bg-success"
-            },
+            displayBody: function(index) {
+                if(this.membersBodyDisplay[index]){
+                    this.membersBodyDisplay[index] = false;
+                }else{
+                    this.membersBodyDisplay[index] = true;
+                }
+             },
+             detailVisible : function(){
+                let i = 0;
+                this.membersBodyDisplay.forEach(() => {
+                    this.membersBodyDisplay[i++] = this.memberDetailView
+                });
+             }
         },
 };
 </script>
