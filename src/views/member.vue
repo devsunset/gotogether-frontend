@@ -21,9 +21,14 @@
         <div>
                 <div class="card">
                    <div class="card-header">
-                            <h3 class="card-title"></h3>
+                            <span class="card-title">
+                                    <span class="badge bg-success"  style="margin-right:3px">기본 학습</span>
+                                    <span class="badge bg-danger"  style="margin-right:3px">업무 사용</span>
+                                    <span class="badge bg-warning"  style="margin-right:3px">관심 있음</span>
+                                    <span class="badge bg-primary"  style="margin-right:3px">Toy Pjt.</span>
+                            </span>
                             <div class="card-tools">
-                                <div class="input-group input-group-sm" style="width: 270px;">
+                                <div class="input-group input-group-sm" style="width: 300px;">
                                     <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
                                     <div class="input-group-append">
                                         <button type="submit" class="btn btn-default">
@@ -36,12 +41,14 @@
 
                     <p/>
 
-                    <div class="col-12">
+
+
+                    <div class="col-12" :key="index" v-for="(member,index) in members">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title"><i class="nav-icon fas fa-edit"></i>devsunset</h3>
+                                <h3 class="card-title"><i class="nav-icon fas fa-edit"></i>&nbsp;{{member.nickname}}</h3>
                                 <div class="card-tools">
-                                        2022-07-22
+                                        {{member.modifiedDate.substring(2,10)}}
                                 </div>
                             </div>
                             <div class="card-body">
@@ -50,34 +57,44 @@
                                         <tr>
                                             <td width="10%"><b>Introduce</b></td>
                                             <td>
-                                                한줄소개
+                                                {{member.introduce}}
                                             </td>
                                         </tr>
                                          <tr>
                                             <td><b>Note</b></td>
                                             <td>
-                                                한줄소개222222
+                                                {{member.note}}
                                             </td>
                                         </tr>
                                          <tr>
                                             <td><b>Github</b></td>
                                             <td>
-                                                한줄소개222222
+                                                {{member.github}}
                                             </td>
                                         </tr>
                                          <tr>
                                             <td><b>Homepage</b></td>
                                             <td>
-                                                한줄소개222222
+                                                {{member.homepage}}
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><b>Skill</b></td>
+                                            <td><b>Skills</b></td>
                                             <td>
-                                                <span class="badge bg-warning m3"  style="margin-right:3px">Backend</span>
-                                                <span class="badge bg-success"  style="margin-right:3px">Frontend</span>
-                                                <span class="badge bg-danger"  style="margin-right:3px">DB</span>
-                                                <span class="badge bg-primary"  style="margin-right:3px">CI/CD</span>
+                                                <span :key="idx" v-for="(skill,idx) in ((member.skill !== null && member.skill !== undefined) ? member.skill.split('|') : [])">
+                                                        <span v-if="skill.split('^')[1] === 'BASIC'" class="badge bg-success"  style="margin-right:3px">
+                                                           {{skill.split('^')[0]}}
+                                                        </span>
+                                                        <span v-else-if="skill.split('^')[1] === 'JOB'" class="badge bg-danger"  style="margin-right:3px">
+                                                            {{skill.split('^')[0]}}
+                                                        </span>
+                                                        <span v-else-if="skill.split('^')[1] === 'TOY_PROJECT'" class="badge bg-primary"  style="margin-right:3px">
+                                                            {{skill.split('^')[0]}}
+                                                        </span>
+                                                        <span v-else class="badge bg-warning"  style="margin-right:3px">
+                                                            {{skill.split('^')[0]}}
+                                                        </span>
+                                                </span>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -96,6 +113,8 @@
                             <li class="page-item"><a class="page-link" href="#">»</a></li>
                         </ul>
                     </div>
+
+
                 </div>
         </div>
     </div>
@@ -114,7 +133,7 @@ export default {
                 loading : false,
                 color: '#007bff',
                 size: '30px',
-                items : [ ] 
+                members : [ ] 
             };
         },
         computed: {
@@ -130,19 +149,19 @@ export default {
                  this.email = user.email;
                  this.roles= user.roles[0];
 
-                this.getUserSeach();
+                this.getUserInfoList();
             }
          
         },
           methods: {
-            getUserSeach() {
-                UserService.getUserInfo().then(
+            getUserInfoList() {
+                var keyword = "";
+                UserService.getUserInfoList(0,4,{"category": "", "keyword" : keyword}).then(
                     (response) => {
-                        if(response.data.data !=null){
-                            alert('a')
-                        }
+                       this.members = response.data.data.content;
                     },
                     (error) => {
+                        this.members = [ ] ;
                         console.log(
                         (error.response &&
                             error.response.data &&
@@ -151,6 +170,10 @@ export default {
                         error.toString());
                     }
                );
+            },
+            skillLevel(level){
+                alert(level)
+                return "badge bg-success"
             },
         },
 };

@@ -149,7 +149,7 @@
                                                             <option value="BASIC">기본 학습</option>
                                                             <option value="JOB">업무 사용</option>
                                                             <option value="INTEREST">관심 있음</option>
-                                                            <option value="TOY_PROJECT">Toy Pjt. 개발 사용 </option> 
+                                                            <option value="TOY_PROJECT">Toy Pjt.</option> 
                                                         </select>
                                                     </td>
                                                     <td><button type="button" @click="setMinusSkill(index)" class="btn btn-block btn-success btn-sm" v-if="index != items.length - 1">-</button><button type="button" @click="setAddSkill()" class="btn btn-block btn-warning btn-sm" v-if="index == items.length - 1">+</button></td>

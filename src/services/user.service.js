@@ -9,6 +9,10 @@ class UserService {
     return api.post("/userinfo/",reqData );
   }
 
+  getUserInfoList(page,size,reqData) {
+    return api.post("/userinfo/list?page="+page+"&size="+size,reqData );
+  }
+
 }
 
 export default new UserService();
