@@ -192,12 +192,12 @@ export default {
                 var keyword = "";
                 UserService.getUserInfoList(0,4,{"category": "", "keyword" : keyword}).then(
                     (response) => {
+                         this.spinnerShow = false;
                        this.members = response.data.data.content;
                        this.membersBodyDisplay = []
                        response.data.data.content.forEach(() => {
                            this.membersBodyDisplay.push(this.memberDetailView)
                        });
-                        this.spinnerShow = false;
                     },
                     (error) => {
                         this.spinnerShow = false;
