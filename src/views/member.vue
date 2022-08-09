@@ -114,7 +114,6 @@
                         </div>
                     </div>
 
-                    
 
 
                     <div class="card-footer clearfix">
@@ -132,16 +131,15 @@
     <!-- /.container-fluid -->
 </section>
 
-
-      <VueElementLoading
+    <VueElementLoading
         :spinner="spinnerKind"
         :size="spinnerSize"
         :duration="spinnerDuration"
         :color="spinnerColor"
         :active=" spinnerShow"
         :text="spinnerText"
-        :is-full-screen="spinnerFullScreen"
-      />
+        backgroundColor="transparent"
+      /> 
 
 <!-- /.content -->
 </template>
@@ -159,10 +157,9 @@ export default {
                 membersBodyDisplay : [ ] ,
                 spinnerText: 'Loading ...  ',
                 spinnerShow: false,
-                spinnerFullScreen: false,
                 spinnerKind: 'bar-fade-scale',
                 spinnerColor: '#28a745',
-                spinnerSize: '56',
+                spinnerSize: '60',
                 spinnerDuration: '0.6'
             };
         },
@@ -181,10 +178,9 @@ export default {
                  this.nickname = user.nickname;
                  this.email = user.email;
                  this.roles= user.roles[0];
-
-                this.getUserInfoList();
             }
-         
+
+            this.getUserInfoList();
         },
           methods: {
             getUserInfoList() {
@@ -192,12 +188,12 @@ export default {
                 var keyword = "";
                 UserService.getUserInfoList(0,4,{"category": "", "keyword" : keyword}).then(
                     (response) => {
-                         this.spinnerShow = false;
                        this.members = response.data.data.content;
                        this.membersBodyDisplay = []
                        response.data.data.content.forEach(() => {
                            this.membersBodyDisplay.push(this.memberDetailView)
                        });
+                         this.spinnerShow = false;
                     },
                     (error) => {
                         this.spinnerShow = false;
@@ -228,7 +224,3 @@ export default {
         },
 };
 </script>
-
-<style>
-
-</style>
