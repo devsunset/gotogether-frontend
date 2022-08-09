@@ -26,6 +26,7 @@
     "vee-validate": "^4.4.7",
     "vue": "^3.0.0",
     "vue-class-component": "^8.0.0-0",
+    "vue-element-loading": "^3.0.1",
     "vue-router": "^4.0.10",
     "vue-spinner": "^1.0.4",
     "vuex": "^4.0.2",

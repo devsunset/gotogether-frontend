@@ -131,23 +131,43 @@
     </div>
     <!-- /.container-fluid -->
 </section>
+
+
+      <VueElementLoading
+        :spinner="spinnerKind"
+        :size="spinnerSize"
+        :duration="spinnerDuration"
+        :color="spinnerColor"
+        :active=" spinnerShow"
+        :text="spinnerText"
+        :is-full-screen="spinnerFullScreen"
+      />
+
 <!-- /.content -->
 </template>
 
 <script>
 import UserService from "../services/user.service";
+import VueElementLoading from "vue-element-loading";
 
 export default {
   name: "member",
         data() {
             return {
-                loading : false,
-                color: '#007bff',
-                size: '30px',
                 memberDetailView : true,                
                 members : [ ], 
-                membersBodyDisplay : [ ] 
+                membersBodyDisplay : [ ] ,
+                spinnerText: 'Loading ...  ',
+                spinnerShow: false,
+                spinnerFullScreen: false,
+                spinnerKind: 'bar-fade-scale',
+                spinnerColor: '#28a745',
+                spinnerSize: '56',
+                spinnerDuration: '0.6'
             };
+        },
+        components: {
+            VueElementLoading
         },
         computed: {
             currentUser() {
@@ -168,6 +188,7 @@ export default {
         },
           methods: {
             getUserInfoList() {
+                this.spinnerShow = true;
                 var keyword = "";
                 UserService.getUserInfoList(0,4,{"category": "", "keyword" : keyword}).then(
                     (response) => {
@@ -176,8 +197,10 @@ export default {
                        response.data.data.content.forEach(() => {
                            this.membersBodyDisplay.push(this.memberDetailView)
                        });
+                        this.spinnerShow = false;
                     },
                     (error) => {
+                        this.spinnerShow = false;
                         this.members = [] 
                         this.membersBodyDisplay = []
                         console.log(
