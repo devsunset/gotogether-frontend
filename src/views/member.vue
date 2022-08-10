@@ -33,9 +33,9 @@
                             </span>
                             <div class="card-tools">
                                 <div class="input-group input-group-sm" style="width: 300px;">
-                                    <input type="text" name="keyword" class="form-control float-right" v-model="keyword" placeholder="Search" @keyup.enter="getUserInfoList">
+                                    <input type="text" name="keyword" class="form-control float-right" v-model="keyword" placeholder="Search" @keyup.enter="getUserInfoList('INIT')">
                                     <div class="input-group-append">
-                                        <button type="submit" class="btn btn-default" @click="getUserInfoList">
+                                        <button type="submit" class="btn btn-default" @click="getUserInfoList('INIT')">
                                             <i class="fas fa-search"></i>
                                         </button>
                                     </div>
@@ -185,10 +185,16 @@ export default {
                  this.roles= user.roles[0];
             }
 
-            this.getUserInfoList();
+            this.getUserInfoList('INIT');
         },
           methods: {
-            getUserInfoList() {
+            getUserInfoList(flag) {
+                if(flag == 'INIT'){
+                    this.page = 1;
+                    this.totalPages = 0;
+                    this.rangeSize  = 0;
+                }
+
                 this.spinnerShow = true;
                 UserService.getUserInfoList(this.page-1,2,{"category": "", "keyword" : this.keyword}).then(
                     (response) => {
