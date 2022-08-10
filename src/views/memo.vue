@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Note</h1>
+                <h1 class="m-0">Memo</h1>
             </div>
             <!-- /.col -->
             <!-- /.col -->
@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  name: "note",
+  name: "memo",
   data() {
     return {
       content: "",

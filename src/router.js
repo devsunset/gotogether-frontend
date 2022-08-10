@@ -11,7 +11,7 @@ import Member from '@/views/member.vue';
 import Talk from '@/views/talk.vue';
 import Qa from '@/views/qa.vue';
 import Profile from '@/views/profile.vue';
-import Note from '@/views/note.vue';
+import Memo from '@/views/memo.vue';
 
 const routes = [
   {
@@ -50,9 +50,9 @@ const routes = [
               component: Profile
           },
           {
-            path: 'note',
-            name: 'Note',
-            component: Note
+            path: 'memo',
+            name: 'Memo',
+            component: Memo
         }
       ]
   },

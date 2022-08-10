@@ -11,7 +11,7 @@
         >
             <span @click="goNote"  class="dropdown-item dropdown-header">{{note}} New Note</span>
             <div class="dropdown-divider"></div>
-            <a href="#"  @click="goNote" class="dropdown-item dropdown-footer"
+            <a href="#"  @click="goMemo" class="dropdown-item dropdown-footer"
                 >See All Note</a
             >
         </div>
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import NoteService from "../services/note.service";
+import MemoService from "../services/memo.service";
 
 export default {
   name: "notifications",
@@ -35,7 +35,7 @@ export default {
   },
   mounted() {
     if(this.$store.state.auth.user){
-        NoteService.getNewReceiveNote().then(
+        MemoService.getNewReceiveMemo().then(
         (response) => {
             this.together = response.data.data.NOTE;
         },
@@ -50,8 +50,8 @@ export default {
     }
   },
     methods: {
-    goNote() {
-     this.$router.push('/note');
+    goMemo() {
+     this.$router.push('/memo');
     },
   },
 };

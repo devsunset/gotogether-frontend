@@ -33,7 +33,7 @@
                             </span>
                             <div class="card-tools">
                                 <div class="input-group input-group-sm" style="width: 300px;">
-                                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search" @keyup.enter="getUserInfoList">
+                                    <input type="text" name="keyword" class="form-control float-right" v-model="keyword" placeholder="Search" @keyup.enter="getUserInfoList">
                                     <div class="input-group-append">
                                         <button type="submit" class="btn btn-default" @click="getUserInfoList">
                                             <i class="fas fa-search"></i>
@@ -66,9 +66,7 @@
                                         </tr>
                                          <tr>
                                             <td><b>Note</b></td>
-                                            <td>
-                                                {{member.note}}
-                                            </td>
+                                            <td><pre>{{member.note}}</pre></td>
                                         </tr>
                                          <tr>
                                             <td><b>Github</b></td>
@@ -102,9 +100,9 @@
                                             </td>
                                         </tr>
                                         <tr v-if="currentUser && userid !=member.username">
-                                            <td><i class="nav-icon fas fa-edit"></i>&nbsp;<b>메모전송</b><br>   <button type="submit" class="btn btn-success" style="width:85px" @click="sendNote()">전송</button></td>
+                                            <td><i class="nav-icon fas fa-edit"></i>&nbsp;<b>쪽지전송</b><br>   <button type="submit" class="btn btn-success" style="width:85px" @click="sendNote()">전송</button></td>
                                             <td>
-                                                <textarea class="form-control"  placeholder="메모 전송해 보세요" v-model="notesend" maxlength="1000"></textarea>
+                                                <textarea class="form-control"  placeholder="쪽지 내용을 입력 하세요." v-model="notesend" maxlength="1000"></textarea>
                                             </td>
                                         </tr>
                                         
@@ -114,16 +112,49 @@
                         </div>
                     </div>
 
-
-
                     <div class="card-footer clearfix">
-                        <ul class="pagination pagination-sm m-0 float-right">
-                            <li class="page-item"><a class="page-link" href="#">«</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">»</a></li>
-                        </ul>
+                            <div class="float-right">
+                             <v-pagination
+                                    v-model="page"
+                                    :pages="3"
+                                    :range-size="2"
+                                    active-color="#DCEDFF"
+                                    @update:modelValue="getUserInfoList"
+                                />
+                             </div>
                     </div>
+<!-- 
 
+    {
+
+	"data": {
+		"pageable": {
+			"sort": {
+				"unsorted": false,
+				"sorted": true,
+				"empty": false
+			},
+			"offset": 0,
+			"pageNumber": 0,
+			"pageSize": 4,
+			"paged": true,
+			"unpaged": false
+		},
+		"totalPages": 1,
+		"totalElements": 4,
+		"last": true,
+		"number": 0,
+		"size": 4,
+		"numberOfElements": 4,
+		"first": true,
+		"empty": false
+	}
+}
+                    pages 	Number 		Total number of pages
+                    rangeSize 	Number 	1 	Number of page around the current page
+                    activeColor 	String 	#DCEDFF 	Background color of the current page
+                    hideFirstButton 	Boolean 	false 	Hide the button to go to the first page
+                    hideLastButton 	Boolean 	false 	Hide the button to go to the last page -->
 
                 </div>
         </div>
@@ -147,6 +178,8 @@
 <script>
 import UserService from "../services/user.service";
 import VueElementLoading from "vue-element-loading";
+import VPagination from "@hennge/vue3-pagination";
+import "@hennge/vue3-pagination/dist/vue3-pagination.css";
 
 export default {
   name: "member",
@@ -160,11 +193,13 @@ export default {
                 spinnerKind: 'bar-fade-scale',
                 spinnerColor: '#28a745',
                 spinnerSize: '60',
-                spinnerDuration: '0.6'
+                spinnerDuration: '0.6',
+                keyword : ""
             };
         },
         components: {
             VueElementLoading
+            ,VPagination
         },
         computed: {
             currentUser() {
@@ -185,8 +220,7 @@ export default {
           methods: {
             getUserInfoList() {
                 this.spinnerShow = true;
-                var keyword = "";
-                UserService.getUserInfoList(0,4,{"category": "", "keyword" : keyword}).then(
+                UserService.getUserInfoList(0,10,{"category": "", "keyword" : this.keyword}).then(
                     (response) => {
                        this.members = response.data.data.content;
                        this.membersBodyDisplay = []

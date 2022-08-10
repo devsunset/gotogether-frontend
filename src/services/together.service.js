@@ -2,7 +2,7 @@ import api from './api';
 
 class TogetherService {
   getRecentTogether() {
-    return api.get('/note/newreceivenote');
+    return api.get('/memo/newreceive');
   }
 }
 
