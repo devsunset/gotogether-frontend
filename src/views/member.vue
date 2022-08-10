@@ -116,46 +116,13 @@
                             <div class="float-right">
                              <v-pagination
                                     v-model="page"
-                                    :pages="3"
-                                    :range-size="2"
-                                    active-color="#DCEDFF"
+                                    :pages="totalPages"
+                                    :range-size="rangeSize "
+                                    active-color="#007bff"
                                     @update:modelValue="getUserInfoList"
                                 />
                              </div>
                     </div>
-<!-- 
-
-    {
-
-	"data": {
-		"pageable": {
-			"sort": {
-				"unsorted": false,
-				"sorted": true,
-				"empty": false
-			},
-			"offset": 0,
-			"pageNumber": 0,
-			"pageSize": 4,
-			"paged": true,
-			"unpaged": false
-		},
-		"totalPages": 1,
-		"totalElements": 4,
-		"last": true,
-		"number": 0,
-		"size": 4,
-		"numberOfElements": 4,
-		"first": true,
-		"empty": false
-	}
-}
-                    pages 	Number 		Total number of pages
-                    rangeSize 	Number 	1 	Number of page around the current page
-                    activeColor 	String 	#DCEDFF 	Background color of the current page
-                    hideFirstButton 	Boolean 	false 	Hide the button to go to the first page
-                    hideLastButton 	Boolean 	false 	Hide the button to go to the last page -->
-
                 </div>
         </div>
     </div>
@@ -194,7 +161,10 @@ export default {
                 spinnerColor: '#28a745',
                 spinnerSize: '60',
                 spinnerDuration: '0.6',
-                keyword : ""
+                keyword : "",
+                page: 1,
+                totalPages : 0,
+                rangeSize  : 0,
             };
         },
         components: {
@@ -220,8 +190,11 @@ export default {
           methods: {
             getUserInfoList() {
                 this.spinnerShow = true;
-                UserService.getUserInfoList(0,10,{"category": "", "keyword" : this.keyword}).then(
+                UserService.getUserInfoList(this.page-1,2,{"category": "", "keyword" : this.keyword}).then(
                     (response) => {
+                       this.page = response.data.data.number+1;
+                       this.totalPages = response.data.data.totalPages;
+                       this.rangeSize  = response.data.data.number;
                        this.members = response.data.data.content;
                        this.membersBodyDisplay = []
                        response.data.data.content.forEach(() => {
@@ -230,6 +203,9 @@ export default {
                          this.spinnerShow = false;
                     },
                     (error) => {
+                        this.page = 1;
+                        this.totalPages = 0;
+                        this.rangeSize  = 0;
                         this.spinnerShow = false;
                         this.members = [] 
                         this.membersBodyDisplay = []
