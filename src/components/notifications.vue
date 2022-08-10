@@ -9,7 +9,7 @@
             class="dropdown-menu dropdown-menu-lg dropdown-menu-right"
             :class="{'show':isDropdownOpened}"
         >
-            <span @click="goNote"  class="dropdown-item dropdown-header">{{note}} New Note</span>
+            <span @click="goNote"  class="dropdown-item dropdown-header">{{memo}} New Memo</span>
             <div class="dropdown-divider"></div>
             <a href="#"  @click="goMemo" class="dropdown-item dropdown-footer"
                 >See All Note</a
@@ -37,7 +37,7 @@ export default {
     if(this.$store.state.auth.user){
         MemoService.getNewReceiveMemo().then(
         (response) => {
-            this.together = response.data.data.NOTE;
+            this.together = response.data.data.MEMO;
         },
         (error) => {
             console.log((error.response &&

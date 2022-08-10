@@ -85,12 +85,12 @@
                     </li>
                      <li class="nav-item"    v-if="currentUser">
                         <router-link
-                            to="/note"
+                            to="/memo"
                             class="nav-link"
                             active-class="active"
                         >
                             <i class="nav-icon fas fa-edit"></i>
-                            <p>Note</p>
+                            <p>Memo</p>
                         </router-link>
                     </li>
                 </ul>
