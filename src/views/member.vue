@@ -27,8 +27,9 @@
                                     <span class="badge bg-warning"  style="margin-right:3px">관심 있음</span>
                                     <span class="badge bg-primary"  style="margin-right:3px">Toy Pjt.</span>
                                     &nbsp;
-                                    <span class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="userDetailView" v-model="memberDetailView" @change="detailVisible($event)"><label class="form-check-label" for="userDetail">Member Detail View</label>
+                                    <span class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="userDetailView"  v-model="memberDetailView" @change="detailVisible($event)">
+                                    <label class="custom-control-label" for="userDetailView">Detail</label>
                                     </span>
                             </span>
                             <div class="card-tools">
@@ -233,7 +234,7 @@ export default {
             },
             sendMemo(refmemo, refreceiver) {
                 if(this.$refs[refmemo].value.trim() == ""){
-                   this.$toast.error(`메모 내용을 입력해 주세요.`);
+                   this.$toast.warning(`메모 내용을 입력해 주세요.`);
                    this.$refs[refmemo].focus();
                     return
                 }

@@ -22,9 +22,10 @@
                 <div class="card">
                    <div class="card-header">
                             <span class="card-title">
-                                    <span class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="userDetailView" v-model="detailView" @change="detailVisible($event)"><label class="form-check-label" for="userDetail">Detail View</label>
-                                    </span>
+                              <span class="custom-control custom-switch">
+                              <input type="checkbox" class="custom-control-input" id="memoDetailView"  v-model="detailView" @change="detailVisible($event)">
+                              <label class="custom-control-label" for="memoDetailView">Detail</label>
+                              </span>
                             </span>
                             <div class="card-tools">
                                 <div class="input-group input-group-sm" style="width: 300px;">
@@ -41,7 +42,7 @@
                     <div class="col-12" :key="index" v-for="(memo,index) in memos">
                         <div class="card">
                             <div class="card-header" v-on:click="displayBody(index)">
-                                <h3 class="card-title"><i class="nav-icon fas fa-envelope"></i>&nbsp; <span v-if="memoFlag == 'R'">{{memo.senderNickname}}</span><span v-if="memoFlag == 'S'">{{memo.receiverNickname}}</span></h3>
+                                <h3 class="card-title"><i class="nav-icon fas fa-envelope"></i>&nbsp; <span v-if="memoFlag == 'R'">{{memo.senderNickname}}</span><span v-else-if="memoFlag == 'S'">{{memo.receiverNickname}}</span></h3>
                                 <div class="card-tools">
                                         {{memo.createdDate.substring(2,10)}}
                                 </div>
@@ -54,10 +55,11 @@
                                             <td><pre>{{memo.memo}}</pre></td>
                                         </tr>
                                         <tr>
-                                            <td><i class="nav-icon fas fa-edit"></i>&nbsp;<b>답장전송</b><br> <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader><button type="submit" v-show="!loading" class="btn btn-success" style="width:85px" @click="sendMemo('memo_' + index, 'receiver_'+index)">전송</button></td>
+                                            <td><i class="nav-icon fas fa-edit"></i>&nbsp;<b v-if="memoFlag == 'R'">답장전송</b><b v-else-if="memoFlag == 'S'">다시전송</b><br><pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader><button type="submit" v-if="memoFlag == 'R'" v-show="!loading" class="btn btn-success" style="width:85px" @click="sendMemo('memo_' + index, 'receiver_'+index)">전송</button><button type="submit" v-else-if="memoFlag == 'S'" v-show="!loading" class="btn btn-warning" style="width:85px" @click="sendMemo('memo_' + index, 'receiver_'+index)">전송</button></td>
                                             <td>
-                                                <textarea class="form-control"  placeholder="답장을 남겨 보세요." maxlength="1000" :ref="'memo_' + index"></textarea>
-                                                <input type="hidden" :ref="'receiver_' + index" v-model="memo.username">
+                                                <textarea class="form-control"  placeholder="메모를 남겨 보세요." maxlength="1000" :ref="'memo_' + index"></textarea>
+                                                <input v-if="memoFlag == 'R'" type="hidden" :ref="'receiver_' + index" v-model="memo.senderUsername">
+                                                <input v-else-if="memoFlag == 'S'" type="hidden" :ref="'receiver_' + index" v-model="memo.receiverUsername">
                                             </td>
                                         </tr>
                                     </tbody>
@@ -222,7 +224,7 @@ export default {
             },
             sendMemo(refmemo, refreceiver) {
                 if(this.$refs[refmemo].value.trim() == ""){
-                   this.$toast.error(`메모 내용을 입력해 주세요.`);
+                   this.$toast.warning(`메모 내용을 입력해 주세요.`);
                    this.$refs[refmemo].focus();
                     return
                 }
@@ -235,6 +237,7 @@ export default {
                          if(response.data.result =="S"){
                             this.$refs[refmemo].value = "";
                             this.$toast.success(`Success.`);
+                            this.getMemoList('INIT');
                         }else{
                               this.$toast.error(`Fail.`);
                         }
