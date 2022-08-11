@@ -2,7 +2,7 @@
     <li class="nav-item dropdown" ref="dropdown" v-if="currentUser">
         <button class="nav-link" data-toggle="dropdown" @click="toggleDropdown" aria-expanded="true">
             <i class="far fa-bell"></i>
-            <span class="badge badge-warning navbar-badge">{{note}}</span>
+            <span class="badge badge-warning navbar-badge">{{memo}}</span>
             <i class="far fa-bell"></i>
         </button>
         <div
@@ -12,7 +12,7 @@
             <span @click="goNote"  class="dropdown-item dropdown-header">{{memo}} New Memo</span>
             <div class="dropdown-divider"></div>
             <a href="#"  @click="goMemo" class="dropdown-item dropdown-footer"
-                >See All Note</a
+                >See All Memo</a
             >
         </div>
     </li>
@@ -25,7 +25,7 @@ export default {
   name: "notifications",
   data() {
     return {
-      note: 0,
+      memo: 0,
     };
   },
   computed: {
@@ -37,9 +37,14 @@ export default {
     if(this.$store.state.auth.user){
         MemoService.getNewReceiveMemo().then(
         (response) => {
-            this.together = response.data.data.MEMO;
+               if(response.data.result =="S"){
+                     this.memo = response.data.data.MEMO;
+                  }else{
+                     this.memo = 0;
+                  }
         },
         (error) => {
+          this.memo = 0;
             console.log((error.response &&
                 error.response.data &&
                 error.response.data.message) ||

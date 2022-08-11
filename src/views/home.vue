@@ -163,7 +163,7 @@
 
 <script>
 import CommonService from "../services/common.service";
-import TogetherService from "../services/together.service";
+// import TogetherService from "../services/together.service";
 
 export default {
   name: "dashboard",
@@ -202,19 +202,20 @@ export default {
             );
     },
      getRecentTogether() {
-         TogetherService.getRecentTogether().then(
-            (response) => {
-                    console.log(response)//alert(JSON.stringify(response));
-            },
-            (error) => {
-                this.notice =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
-            }
-            );
+         console.log('to-do')
+        //  TogetherService.getRecentTogether().then(
+        //     (response) => {
+        //             console.log(response)//alert(JSON.stringify(response));
+        //     },
+        //     (error) => {
+        //         this.notice =
+        //         (error.response &&
+        //             error.response.data &&
+        //             error.response.data.message) ||
+        //         error.message ||
+        //         error.toString();
+        //     }
+        //     );
     },
   },
 };

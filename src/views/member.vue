@@ -100,9 +100,10 @@
                                             </td>
                                         </tr>
                                         <tr v-if="currentUser && userid !=member.username">
-                                            <td><i class="nav-icon fas fa-edit"></i>&nbsp;<b>쪽지전송</b><br>   <button type="submit" class="btn btn-success" style="width:85px" @click="sendNote()">전송</button></td>
+                                            <td><i class="nav-icon fas fa-edit"></i>&nbsp;<b>메모전송</b><br> <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader><button type="submit" v-show="!loading" class="btn btn-success" style="width:85px" @click="sendMemo('memo_' + index, 'receiver_'+index)">전송</button></td>
                                             <td>
-                                                <textarea class="form-control"  placeholder="쪽지 내용을 입력 하세요." v-model="notesend" maxlength="1000"></textarea>
+                                                <textarea class="form-control"  placeholder="메모를 남겨 보세요." maxlength="1000" :ref="'memo_' + index"></textarea>
+                                                <input type="hidden" :ref="'receiver_' + index" v-model="member.username">
                                             </td>
                                         </tr>
                                         
@@ -118,7 +119,7 @@
                                     v-model="page"
                                     :pages="totalPages"
                                     :range-size="rangeSize "
-                                    active-color="#007bff"
+                                    active-color="#29b3ed"
                                     @update:modelValue="getUserInfoList"
                                 />
                              </div>
@@ -144,9 +145,11 @@
 
 <script>
 import UserService from "../services/user.service";
+import MemoService from "../services/memo.service";
 import VueElementLoading from "vue-element-loading";
 import VPagination from "@hennge/vue3-pagination";
 import "@hennge/vue3-pagination/dist/vue3-pagination.css";
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 
 export default {
   name: "member",
@@ -165,11 +168,15 @@ export default {
                 page: 1,
                 totalPages : 0,
                 rangeSize  : 0,
+                loading : false,
+                color: '#007bff',
+                size: '22px',
             };
         },
         components: {
             VueElementLoading
             ,VPagination
+            , 'PulseLoader': PulseLoader 
         },
         computed: {
             currentUser() {
@@ -196,7 +203,7 @@ export default {
                 }
 
                 this.spinnerShow = true;
-                UserService.getUserInfoList(this.page-1,2,{"category": "", "keyword" : this.keyword}).then(
+                UserService.getUserInfoList(this.page-1,5,{"category": "", "keyword" : this.keyword}).then(
                     (response) => {
                        this.page = response.data.data.number+1;
                        this.totalPages = response.data.data.totalPages;
@@ -215,6 +222,37 @@ export default {
                         this.spinnerShow = false;
                         this.members = [] 
                         this.membersBodyDisplay = []
+                        console.log(
+                        (error.response &&
+                            error.response.data &&
+                            error.response.data.message) ||
+                        error.message ||
+                        error.toString());
+                    }
+               );
+            },
+            sendMemo(refmemo, refreceiver) {
+                if(this.$refs[refmemo].value.trim() == ""){
+                   this.$toast.error(`메모 내용을 입력해 주세요.`);
+                   this.$refs[refmemo].focus();
+                    return
+                }
+
+                this.loading = true;
+                
+                MemoService.sendMemo({"memo": this.$refs[refmemo].value, "receiver" : this.$refs[refreceiver].value} ).then(
+                    (response) => {
+                        this.loading = false;
+                         if(response.data.result =="S"){
+                            this.$refs[refmemo].value = "";
+                            this.$toast.success(`Success.`);
+                        }else{
+                              this.$toast.error(`Fail.`);
+                        }
+                    },
+                    (error) => {
+                        this.loading = false;
+                        this.$toast.error(`Fail.`);
                         console.log(
                         (error.response &&
                             error.response.data &&
