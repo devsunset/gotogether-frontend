@@ -173,9 +173,8 @@ export default {
                             this.rangeSize  = response.data.data.number;
                             this.memos = response.data.data.content;
                             this.memoBodyDisplay = []
-                            response.data.data.content.forEach((data) => {
+                            response.data.data.content.forEach(() => {
                                 this.memoBodyDisplay.push(this.detailView)
-                                alert(data.readflag)
                             });
 
                               this.spinnerShow = false;
@@ -266,32 +265,41 @@ export default {
                     this.memoBodyDisplay[index] = false;
                 }else{
                     this.memoBodyDisplay[index] = true;
+                     if(this.memoFlag === 'R'){
+                        this.getReadMemo(index);
+                     }
                 }
              },
              detailVisible : function(){
                 let i = 0;
                 this.memoBodyDisplay.forEach(() => {
-                    this.memoBodyDisplay[i++] = this.detailView
+                     if(this.detailView && this.memoFlag === 'R'){
+                        this.getReadMemo(i);
+                     }
+                     this.memoBodyDisplay[i++] = this.detailView
                 });
+             }, getReadMemo : function (idx){
+                if(this.memoFlag === 'R'){
+                  // alert('call->'+ this.memos[idx].memoId +" : "+this.memos[idx].readflag);
+                  if(this.memos[idx].readflag == 'N'){
+                        MemoService.getReadMemo(this.memos[idx].memoId  ).then(
+                            (response) => {
+                                if(response.data.result == 'S'){
+                                      this.memos[idx].readflag = 'Y';
+                                }
+                            },
+                            (error) => {
+                                console.log(
+                                (error.response &&
+                                    error.response.data &&
+                                    error.response.data.message) ||
+                                error.message ||
+                                error.toString());
+                            }
+                      );
+                  }
+                }
              }
         },
 };
-
-/*
-{
-	"0": {
-		"memoId": 4,
-		"memo": "go together",
-		"createdDate": "2022.08.11 10:06:47",
-		"modifiedDate": "2022.08.11 10:06:47",
-		"readflag": "N",
-		"sdelete": "N",
-		"rdelete": "N",
-		"senderUsername": "test2",
-		"senderNickname": "test2nickname",
-		"receiverUsername": "dev",
-		"receiverNickname": "devsunset"
-	}
-}
-*/
 </script>

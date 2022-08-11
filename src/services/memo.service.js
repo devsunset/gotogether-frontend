@@ -17,6 +17,10 @@ class MemoService {
     return api.get("/memo/sendlist?page="+page+"&size="+size);
   }
 
+  getReadMemo(memoId){
+    return api.get("/memo/"+memoId);
+  }
+
 }
 
 export default new MemoService();
