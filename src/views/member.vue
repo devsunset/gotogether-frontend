@@ -235,6 +235,13 @@ export default {
             sendMemo(refmemo, refreceiver) {
                 if(this.$refs[refmemo].value.trim() == ""){
                    this.$toast.warning(`메모 내용을 입력해 주세요.`);
+                    const normalClass = 'form-control'
+                   const invalidClass = 'form-control is-invalid'
+                   this.$refs[refmemo].classList.value = [invalidClass]
+                   setTimeout(() => {
+                        this.$refs[refmemo].classList.value = [normalClass]
+                    }, 1000);
+
                    this.$refs[refmemo].focus();
                     return
                 }

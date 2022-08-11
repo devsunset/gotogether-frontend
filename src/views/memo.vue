@@ -60,7 +60,7 @@
                                         <tr>
                                             <td><i class="nav-icon fas fa-edit"></i>&nbsp;<b v-if="memoFlag == 'R'">답장전송</b><b v-else-if="memoFlag == 'S'">다시전송</b><br><pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader><button type="submit" v-if="memoFlag == 'R'" v-show="!loading" class="btn btn-success" style="width:85px" @click="sendMemo('memo_' + index, 'receiver_'+index)">전송</button><button type="submit" v-else-if="memoFlag == 'S'" v-show="!loading" class="btn btn-warning" style="width:85px" @click="sendMemo('memo_' + index, 'receiver_'+index)">전송</button></td>
                                             <td>
-                                                <textarea class="form-control"  placeholder="메모를 남겨 보세요." maxlength="1000" :ref="'memo_' + index"></textarea>
+                                                <textarea class="form-control "  placeholder="메모를 남겨 보세요." maxlength="1000" :ref="'memo_' + index"></textarea>
                                                 <input v-if="memoFlag == 'R'" type="hidden" :ref="'receiver_' + index" v-model="memo.senderUsername">
                                                 <input v-else-if="memoFlag == 'S'" type="hidden" :ref="'receiver_' + index" v-model="memo.receiverUsername">
                                             </td>
@@ -231,6 +231,14 @@ export default {
             sendMemo(refmemo, refreceiver) {
                 if(this.$refs[refmemo].value.trim() == ""){
                    this.$toast.warning(`메모 내용을 입력해 주세요.`);
+
+                   const normalClass = 'form-control'
+                   const invalidClass = 'form-control is-invalid'
+                   this.$refs[refmemo].classList.value = [invalidClass]
+                   setTimeout(() => {
+                        this.$refs[refmemo].classList.value = [normalClass]
+                    }, 1000);
+
                    this.$refs[refmemo].focus();
                     return
                 }
