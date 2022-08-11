@@ -42,7 +42,7 @@
                     <div class="col-12" :key="index" v-for="(memo,index) in memos">
                         <div class="card">
                             <div class="card-header" v-on:click="displayBody(index)">
-                                <h3 class="card-title"><i class="nav-icon fas fa-envelope"></i>&nbsp; <span v-if="memoFlag == 'R'">{{memo.senderNickname}}</span><span v-else-if="memoFlag == 'S'">{{memo.receiverNickname}}</span></h3>
+                                <h3 class="card-title"><i class="nav-icon fas fa-envelope"></i>&nbsp; <span v-if="memoFlag == 'R' && memo.readflag === 'N' " class="right badge badge-danger">New</span> &nbsp;<span v-if="memoFlag == 'R'">{{memo.senderNickname}}</span><span v-else-if="memoFlag == 'S'">{{memo.receiverNickname}}</span></h3>
                                 <div class="card-tools">
                                         {{memo.createdDate.substring(2,10)}}
                                 </div>
@@ -51,7 +51,10 @@
                                 <table class="table table-bordered">
                                     <tbody>
                                          <tr>
-                                            <td><b>Memo</b></td>
+                                            <td><b>Memo</b><br>
+                                            <span v-if="memoFlag == 'S' && memo.readflag === 'Y' " class="right badge badge-success">Receive</span><br>
+                                            <span v-if="memoFlag == 'S' && memo.readflag === 'Y' " >{{memo.modifiedDate.substring(5,16)}}</span>
+                                            </td>
                                             <td><pre>{{memo.memo}}</pre></td>
                                         </tr>
                                         <tr>
@@ -109,7 +112,7 @@ export default {
   name: "memo",
         data() {
             return {
-                detailView : true,         
+                detailView : false,         
                 memoFlag : "R",       
                 memos : [ ], 
                 memoBodyDisplay : [ ] ,
@@ -158,6 +161,8 @@ export default {
                     this.rangeSize  = 0;
                 }
 
+                this.detailView = false;    
+
                 this.spinnerShow = true;
 
               if (this.memoFlag  == 'R'){
@@ -168,9 +173,11 @@ export default {
                             this.rangeSize  = response.data.data.number;
                             this.memos = response.data.data.content;
                             this.memoBodyDisplay = []
-                            response.data.data.content.forEach(() => {
+                            response.data.data.content.forEach((data) => {
                                 this.memoBodyDisplay.push(this.detailView)
+                                alert(data.readflag)
                             });
+
                               this.spinnerShow = false;
                           },
                           (error) => {

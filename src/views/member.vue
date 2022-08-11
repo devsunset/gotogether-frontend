@@ -156,7 +156,7 @@ export default {
   name: "member",
         data() {
             return {
-                memberDetailView : true,                
+                memberDetailView : false,                
                 members : [ ], 
                 membersBodyDisplay : [ ] ,
                 spinnerText: 'Loading ...  ',
