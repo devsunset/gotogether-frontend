@@ -280,7 +280,6 @@ export default {
                 });
              }, getReadMemo : function (idx){
                 if(this.memoFlag === 'R'){
-                  // alert('call->'+ this.memos[idx].memoId +" : "+this.memos[idx].readflag);
                   if(this.memos[idx].readflag == 'N'){
                         MemoService.getReadMemo(this.memos[idx].memoId  ).then(
                             (response) => {
