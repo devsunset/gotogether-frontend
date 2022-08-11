@@ -9,6 +9,14 @@ class MemoService {
     return api.post("/memo/",reqData );
   }
 
+  getReceiveMemo(page,size){
+    return api.get("/memo/receivelist?page="+page+"&size="+size);
+  }
+
+  getSendMemo(page,size){
+    return api.get("/memo/sendlist?page="+page+"&size="+size);
+  }
+
 }
 
 export default new MemoService();
