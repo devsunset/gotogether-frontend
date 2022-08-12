@@ -6,7 +6,7 @@
             <div class="col-sm-6">
                 <h1 class="m-0">Memo</h1>
             </div>
-            <!-- /.col -->
+            <!-- /.col -->                               
             <!-- /.col -->
         </div>
         <!-- /.row -->
@@ -22,16 +22,25 @@
                 <div class="card">
                    <div class="card-header">
                             <span class="card-title">
-                              <span class="custom-control custom-switch">
-                              <input type="checkbox" class="custom-control-input" id="memoDetailView"  v-model="detailView" @change="detailVisible($event)">
-                              <label class="custom-control-label" for="memoDetailView">Detail</label>
-                              </span>
+                                 <span class="form-group clearfix" style="margin-left:15px"> 
+                                    <div class="icheck-primary d-inline">
+                                    <input type="checkbox" id="delete_all_check" v-model="allCheck" @change="checkAll($event)" >
+                                        <label for="delete_all_check">
+                                        <button type="button" style="height:22px;width:60px; padding: 0px;" class="btn btn-block btn-danger btn-xs"  @click="setMemoDelete()" >삭제</button>
+                                        </label>
+                                    </div>
+                                </span>
                             </span>
                             <div class="card-tools">
-                                <div class="input-group input-group-sm" style="width: 300px;">
+                                <span class="custom-control custom-switch" style="margin-bottom:5px">
+                                        <input type="checkbox" class="custom-control-input" id="memoDetailView"  v-model="detailView" @change="detailVisible($event)">
+                                        <label class="custom-control-label" for="memoDetailView">Detail Display
+                                        </label> 
+                                </span>
+                                <div class="input-group input-group-sm" style="width:300px"> 
                                   <select class="form-control" v-model="memoFlag" @change="getMemoList('INIT')"> 
                                       <option value="R">받은 메모함</option>
-                                      <option value="S">보낸 메모함</option>
+                                      <option value="S">보낸 메모함</option> 
                                   </select>
                                 </div>
                             </div>
@@ -42,7 +51,13 @@
                     <div class="col-12" :key="index" v-for="(memo,index) in memos">
                         <div class="card">
                             <div class="card-header" v-on:click="displayBody(index)">
-                                <h3 class="card-title"><i class="nav-icon fas fa-envelope"></i>&nbsp; <span v-if="memoFlag == 'R' && memo.readflag === 'N' " class="right badge badge-danger">New</span> &nbsp;<span v-if="memoFlag == 'R'">{{memo.senderNickname}}</span><span v-else-if="memoFlag == 'S'">{{memo.receiverNickname}}</span></h3>
+                                <h3 class="card-title">
+                                     <span class="icheck-primary d-inline">
+                                        <input type="checkbox" :id="'check_delete' + index">
+                                        <label :for="'check_delete' + index" >
+                                        </label>
+                                    </span>
+                                    <i class="nav-icon fas fa-envelope"></i>&nbsp; <span v-if="memoFlag == 'R' && memo.readflag === 'N' " class="right badge badge-danger">New</span> &nbsp;<span v-if="memoFlag == 'R'">{{memo.senderNickname}}</span><span v-else-if="memoFlag == 'S'">{{memo.receiverNickname}}</span></h3>
                                 <div class="card-tools">
                                         {{memo.createdDate.substring(2,10)}}
                                 </div>
@@ -52,7 +67,7 @@
                                     <tbody>
                                          <tr>
                                             <td><b>Memo</b><br>
-                                            <span v-if="memoFlag == 'S' && memo.readflag === 'Y' " class="right badge badge-success">Receive</span><br>
+                                            <span v-if="memoFlag == 'S' && memo.readflag === 'Y' " class="right badge badge-success">수신일시</span><br>
                                             <span v-if="memoFlag == 'S' && memo.readflag === 'Y' " >{{memo.modifiedDate.substring(5,16)}}</span>
                                             </td>
                                             <td><pre>{{memo.memo}}</pre></td>
@@ -129,6 +144,7 @@ export default {
                 loading : false,
                 color: '#007bff',
                 size: '22px',
+                allCheck: false,
             };
         },
         components: {
@@ -153,7 +169,6 @@ export default {
             this.getMemoList('INIT');
         },
           methods: {
-
             getMemoList(flag) {
                 if(flag == 'INIT'){
                     this.page = 1;
@@ -162,6 +177,7 @@ export default {
                 }
 
                 this.detailView = false;    
+                this.allCheck = false;
 
                 this.spinnerShow = true;
 
@@ -223,10 +239,6 @@ export default {
                           }
                     );
               }
-
-                
-
-
             },
             sendMemo(refmemo, refreceiver) {
                 if(this.$refs[refmemo].value.trim() == ""){
@@ -286,7 +298,8 @@ export default {
                      }
                      this.memoBodyDisplay[i++] = this.detailView
                 });
-             }, getReadMemo : function (idx){
+             }, 
+             getReadMemo : function (idx){
                 if(this.memoFlag === 'R'){
                   if(this.memos[idx].readflag == 'N'){
                         MemoService.getReadMemo(this.memos[idx].memoId  ).then(
@@ -306,7 +319,27 @@ export default {
                       );
                   }
                 }
-             }
+             },
+              checkAll : function(){
+                  alert(this.allCheck)
+                // let i = 0;
+                // this.memoBodyDisplay.forEach(() => {
+                //      if(this.detailView && this.memoFlag === 'R'){
+                //         this.getReadMemo(i);
+                //      }
+                //      this.memoBodyDisplay[i++] = this.detailView
+                // });
+             }, 
+            setMemoDelete : function(){
+                  alert('delete')
+                // let i = 0;
+                // this.memoBodyDisplay.forEach(() => {
+                //      if(this.detailView && this.memoFlag === 'R'){
+                //         this.getReadMemo(i);
+                //      }
+                //      this.memoBodyDisplay[i++] = this.detailView
+                // });
+             }, 
         },
 };
 </script>

@@ -26,13 +26,12 @@
                                     <span class="badge bg-danger"  style="margin-right:3px">업무 사용</span>
                                     <span class="badge bg-warning"  style="margin-right:3px">관심 있음</span>
                                     <span class="badge bg-primary"  style="margin-right:3px">Toy Pjt.</span>
-                                    &nbsp;
-                                    <span class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="userDetailView"  v-model="memberDetailView" @change="detailVisible($event)">
-                                    <label class="custom-control-label" for="userDetailView">Detail</label>
-                                    </span>
                             </span>
                             <div class="card-tools">
+                                  <span class="custom-control custom-switch" style="margin-bottom:5px">
+                                    <input type="checkbox" class="custom-control-input" id="userDetailView"  v-model="memberDetailView" @change="detailVisible($event)">
+                                    <label class="custom-control-label" for="userDetailView">Detail Display</label>
+                                </span>
                                 <div class="input-group input-group-sm" style="width: 300px;">
                                     <input type="text" name="keyword" class="form-control float-right" v-model="keyword" placeholder="Search" @keyup.enter="getUserInfoList('INIT')">
                                     <div class="input-group-append">
