@@ -64,7 +64,7 @@
                     <div class="icon">
                         <i class="far fa-keyboard"></i>
                     </div>
-                    <router-link to="/talk" class="small-box-footer"
+                    <router-link  :to="{name: 'Post', query: {category: 'TALK'}}" class="small-box-footer"
                         >More info <i class="fas fa-arrow-circle-right"></i
                     ></router-link>
                 </div>
@@ -81,7 +81,7 @@
                     <div class="icon">
                         <i class="fas fa-question"></i>
                     </div>
-                    <router-link to="/qa" class="small-box-footer"
+                    <router-link  :to="{name: 'Post', query: {category: 'QA'}}" class="small-box-footer"
                         >More info <i class="fas fa-arrow-circle-right"></i
                     ></router-link>
                 </div>

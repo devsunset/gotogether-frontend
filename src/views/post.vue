@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Talk</h1>
+                <h1 class="m-0">Post</h1>
             </div>
             <!-- /.col -->
            
@@ -27,6 +27,10 @@
                             </span>
                             <div class="card-tools">
                                 <div class="input-group input-group-sm" style="width: 300px;">
+                                     <select class="form-control" v-model="category" @change="getPostList('INIT')"> 
+                                      <option value="TALK">Talk</option>
+                                      <option value="QA">Q&A</option> 
+                                  </select>
                                     <input type="text" name="keyword" class="form-control float-right" v-model="keyword" placeholder="Search" @keyup.enter="getPostList('INIT')">
                                     <div class="input-group-append">
                                         <button type="submit" class="btn btn-default" @click="getPostList('INIT')">
@@ -41,7 +45,8 @@
                             <table class="table table-hover text-nowrap">
                                 <thead>
                                     <tr>
-                                        <th>Talk</th>
+                                        <th v-if="category == 'TALK'">Talk</th>
+                                        <th v-else-if="category == 'QA'">Q&A</th>
                                         <th style="width: 5%">Reply</th>
                                         <th style="width: 5%">View</th>
                                         <th style="width: 5%">Nickname</th>
@@ -97,9 +102,10 @@ import VPagination from "@hennge/vue3-pagination";
 import "@hennge/vue3-pagination/dist/vue3-pagination.css";
 
 export default {
-  name: "talk",
+  name: "post",
         data() {
             return {
+                category : "TALK",
                 posts : [ ], 
                 spinnerText: 'Loading ...  ',
                 spinnerShow: false,
@@ -115,6 +121,9 @@ export default {
                 color: '#007bff',
                 size: '22px',
             };
+        },
+        created() {
+            this.category = this.$route.query.category;
         },
         components: {
             VueElementLoading
@@ -133,14 +142,13 @@ export default {
                  this.email = user.email;
                  this.roles= user.roles[0];
             }
-
             this.getPostList('INIT');
         },
           methods: {
             goPostNew() {
              this.$router.push({
                     name: "PostEdit",
-                    query: { category: "Query 프로그래밍 방식" },
+                    query: { category: this.category },
                 });
             },
             getPostList(flag) {
@@ -151,7 +159,8 @@ export default {
                 }
 
                 this.spinnerShow = true;
-                PostService.getPostList(this.page-1,10,{"category": "TALK", "keyword" : this.keyword}).then(
+                // alert(this.category)
+                PostService.getPostList(this.page-1,10,{"category": this.category, "keyword" : this.keyword}).then(
                     (response) => {
                        this.page = response.data.data.number+1;
                        this.totalPages = response.data.data.totalPages;

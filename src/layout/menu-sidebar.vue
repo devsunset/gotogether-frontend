@@ -52,32 +52,13 @@
                         </router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link
-                            to="/talk"
-                            class="nav-link"
-                            exact
-                            exact-active-class="active"
-                        >
-<!-- 
                           <router-link
-                            :to="{
-                                name: 'Params',
-                                params: { name: 'Params 선언적 방식', age: 1 },
-                            }"
-                        > -->
-                            <i class="nav-icon far fa-keyboard"></i>
-                            <p>Talk</p>
-                        </router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link
-                            to="/qa"
+                            :to="{name: 'Post', query: {category: 'TALK'}}"
                             class="nav-link"
                             exact
-                            exact-active-class="active"
-                        >
-                            <i class="nav-icon fas fa-question"></i>
-                            <p>Q&A</p>
+                            exact-active-class="active">
+                            <i class="nav-icon far fa-keyboard"></i>
+                            <p>Post</p>
                         </router-link>
                     </li>
                     <li class="nav-item"    v-if="currentUser">
