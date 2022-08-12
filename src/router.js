@@ -8,8 +8,8 @@ import ForgotPassword from '@/components/forgot-password.vue';
 import Home from '@/views/home.vue';
 import Together from '@/views/together.vue';
 import Member from '@/views/member.vue';
-import Talk from '@/views/talk.vue';
-import Qa from '@/views/qa.vue';
+import Post from '@/views/post.vue';
+import PostEdit from '@/views/postedit.vue';
 import Profile from '@/views/profile.vue';
 import Memo from '@/views/memo.vue';
 
@@ -35,14 +35,14 @@ const routes = [
             component: Member
           },
           {
-            path: 'talk',
-            name: 'Talk',
-            component: Talk
-          },
+            path: 'post',
+            name: 'Post',
+            component: Post
+          },  
           {
-            path: 'qa',
-            name: 'Qa',
-            component: Qa
+            path: 'postedit',
+            name: 'PostEdit',
+            component: PostEdit
           },
           {
               path: 'profile',
@@ -78,6 +78,7 @@ const router = createRouter({
   routes,
 });
 
+//  삭제 금지 ( example )
 // router.beforeEach((to, from, next) => {
 //   const publicPages = ['/login', '/register', '/home'];
 //   const authRequired = !publicPages.includes(to.path);

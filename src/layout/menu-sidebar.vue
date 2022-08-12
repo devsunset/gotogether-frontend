@@ -58,6 +58,13 @@
                             exact
                             exact-active-class="active"
                         >
+<!-- 
+                          <router-link
+                            :to="{
+                                name: 'Params',
+                                params: { name: 'Params 선언적 방식', age: 1 },
+                            }"
+                        > -->
                             <i class="nav-icon far fa-keyboard"></i>
                             <p>Talk</p>
                         </router-link>

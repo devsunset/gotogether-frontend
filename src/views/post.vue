@@ -1,0 +1,179 @@
+<template>
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Talk</h1>
+            </div>
+            <!-- /.col -->
+           
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div>
+                <div class="card">
+                   <div class="card-header">
+                            <span class="card-title">
+                                <button type="button" class="btn btn-block btn-success" style="width:100px;padding:0px;margin:0px" @click="goPostNew()"> New</button>
+                            </span>
+                            <div class="card-tools">
+                                <div class="input-group input-group-sm" style="width: 300px;">
+                                    <input type="text" name="keyword" class="form-control float-right" v-model="keyword" placeholder="Search" @keyup.enter="getPostList('INIT')">
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-default" @click="getPostList('INIT')">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-hover text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>Talk</th>
+                                        <th style="width: 5%">Reply</th>
+                                        <th style="width: 5%">View</th>
+                                        <th style="width: 5%">Nickname</th>
+                                        <th style="width: 5%">Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr :key="index" v-for="(post,index) in posts">
+                                        <td>{{post.title}}</td>
+                                        <td>{{post.comment_count}}</td>
+                                        <td>{{post.hit}}</td>
+                                        <td>{{post.nickname}}</td>
+                                        <td> {{post.createdDate.substring(2,16)}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    <div class="card-footer clearfix">
+                            <div class="float-right">
+                             <v-pagination
+                                    v-model="page"
+                                    :pages="totalPages"
+                                    :range-size="rangeSize "
+                                    active-color="#29b3ed"
+                                    @update:modelValue="getPostList"
+                                />
+                             </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+</section>
+
+    <VueElementLoading
+        :spinner="spinnerKind"
+        :size="spinnerSize"
+        :duration="spinnerDuration"
+        :color="spinnerColor"
+        :active=" spinnerShow"
+        :text="spinnerText"
+        backgroundColor="transparent"
+      /> 
+
+<!-- /.content -->
+</template>
+
+<script>
+import PostService from "../services/post.service";
+import VueElementLoading from "vue-element-loading";
+import VPagination from "@hennge/vue3-pagination";
+import "@hennge/vue3-pagination/dist/vue3-pagination.css";
+
+export default {
+  name: "talk",
+        data() {
+            return {
+                posts : [ ], 
+                spinnerText: 'Loading ...  ',
+                spinnerShow: false,
+                spinnerKind: 'bar-fade-scale',
+                spinnerColor: '#28a745',
+                spinnerSize: '60',
+                spinnerDuration: '0.6',
+                keyword : "",
+                page: 1,
+                totalPages : 0,
+                rangeSize  : 0,
+                loading : false,
+                color: '#007bff',
+                size: '22px',
+            };
+        },
+        components: {
+            VueElementLoading
+            ,VPagination
+        },
+        computed: {
+            currentUser() {
+                return this.$store.state.auth.user;
+            }
+        },
+        mounted(){
+            if(this.currentUser){
+                const user = JSON.parse(localStorage.getItem('user'));
+                 this.userid = user.username;
+                 this.nickname = user.nickname;
+                 this.email = user.email;
+                 this.roles= user.roles[0];
+            }
+
+            this.getPostList('INIT');
+        },
+          methods: {
+            goPostNew() {
+             this.$router.push({
+                    name: "PostEdit",
+                    query: { category: "Query 프로그래밍 방식" },
+                });
+            },
+            getPostList(flag) {
+                if(flag == 'INIT'){
+                    this.page = 1;
+                    this.totalPages = 0;
+                    this.rangeSize  = 0;
+                }
+
+                this.spinnerShow = true;
+                PostService.getPostList(this.page-1,10,{"category": "TALK", "keyword" : this.keyword}).then(
+                    (response) => {
+                       this.page = response.data.data.number+1;
+                       this.totalPages = response.data.data.totalPages;
+                       this.rangeSize  = response.data.data.number;
+                       this.posts = response.data.data.content;
+                       this.spinnerShow = false;
+                    },
+                    (error) => {
+                        this.page = 1;
+                        this.totalPages = 0;
+                        this.rangeSize  = 0;
+                        this.spinnerShow = false;
+                        this.posts = [] 
+                        console.log(
+                        (error.response &&
+                            error.response.data &&
+                            error.response.data.message) ||
+                        error.message ||
+                        error.toString());
+                    }
+               );
+            },
+        },
+};
+</script>

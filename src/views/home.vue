@@ -110,7 +110,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <!-- <tr>
                     <td>GoTogether Toy Project 함께 공부하며 만들어 가실 분 ^^</td>
                     <td>
                         <div class="progress progress-xs">
@@ -153,7 +153,7 @@
                     <td><span class="badge bg-success">90%</span></td>
                     <td>devsunset</td>
                     <td>22-06-29 10:30</td>
-                </tr>
+                </tr> -->
             </tbody>
         </table>
     </div>
