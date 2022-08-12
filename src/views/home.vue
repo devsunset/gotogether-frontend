@@ -92,7 +92,7 @@
     </div>
     <!-- /.container-fluid -->
 </section>
-<p style="text-align:center">{{ notice }}</p>
+<p style="text-align:center" v-html="notice"></p>
 <div class="card" style="padding:15px;margin:10px">
     <div class="card-header">
         <h3 class="card-title">Recent Project</h3>
@@ -164,6 +164,7 @@
 <script>
 import CommonService from "../services/common.service";
 // import TogetherService from "../services/together.service";
+// this.currentUser['roles'].includes('ROLE_ADMIN');
 
 export default {
   name: "dashboard",

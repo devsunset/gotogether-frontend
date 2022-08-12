@@ -34,29 +34,38 @@ export default {
     },
   },
   mounted() {
-    if(this.$store.state.auth.user){
-        MemoService.getNewReceiveMemo().then(
-        (response) => {
-               if(response.data.result =="S"){
-                     this.memo = response.data.data.MEMO;
-                  }else{
-                     this.memo = 0;
-                  }
-        },
-        (error) => {
-          this.memo = 0;
-            console.log((error.response &&
-                error.response.data &&
-                error.response.data.message) ||
-            error.message ||
-            error.toString()); 
-        }
-        );
-    }
+    this.getMemo();
+    // Memo 에서 갱신이 되면 호출
+    this.emitter.on('notificationRefresh',()=>{
+         setTimeout(() => {
+                 this.getMemo();
+            }, 1000);
+    })
   },
     methods: {
     goMemo() {
-     this.$router.push('/memo');
+      this.$router.push('/memo');
+    },
+     getMemo() {
+          if(this.$store.state.auth.user){
+              MemoService.getNewReceiveMemo().then(
+              (response) => {
+                    if(response.data.result =="S"){
+                          this.memo = response.data.data.MEMO;
+                        }else{
+                          this.memo = 0;
+                        }
+              },
+              (error) => {
+                this.memo = 0;
+                  console.log((error.response &&
+                      error.response.data &&
+                      error.response.data.message) ||
+                  error.message ||
+                  error.toString()); 
+              }
+              );
+          }
     },
   },
 };

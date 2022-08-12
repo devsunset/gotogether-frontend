@@ -292,6 +292,7 @@ export default {
                     this.memoBodyDisplay[index] = true;
                      if(this.memoFlag === 'R'){
                         this.setReadMemo(index);
+                        this.emitter.emit('notificationRefresh');
                      }
                 }
              },
@@ -303,6 +304,10 @@ export default {
                      }
                      this.memoBodyDisplay[i++] = this.detailView
                 });
+
+                if(this.detailView && this.memoFlag === 'R'){
+                    this.emitter.emit('notificationRefresh');
+                }
              }, 
              setReadMemo : function (idx){
                 if(this.memoFlag === 'R'){
@@ -365,6 +370,7 @@ export default {
                                 if(response.data.result == 'S'){
                                       this.$toast.success(`Success.`);
                                       this.getMemoList('INIT');
+                                      this.emitter.emit('notificationRefresh');
                                 }
                             },
                             (error) => {

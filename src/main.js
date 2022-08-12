@@ -8,6 +8,10 @@ import { FontAwesomeIcon } from './plugins/font-awesome'
 import setupInterceptors from './services/setupInterceptors';
 import Toaster from '@meforma/vue-toaster';
 
+import mitt from 'mitt';
+
+let emitter = mitt();
+
 
 setupInterceptors(store);
 
@@ -16,4 +20,9 @@ createApp(App)
 .use(store)
 .use(Toaster)
 .component("font-awesome-icon", FontAwesomeIcon)
+.use({
+    install(app) {
+      app.config.globalProperties.emitter = emitter;
+    }
+  })
 .mount("#app");
