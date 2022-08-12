@@ -53,8 +53,8 @@
                             <div class="card-header" v-on:click="displayBody(index)">
                                 <h3 class="card-title">
                                      <span class="icheck-primary d-inline">
-                                        <input type="checkbox" :id="'check_delete' + index">
-                                        <label :for="'check_delete' + index" >
+                                        <input type="checkbox" :ref="'check_delete_' + index"  :id="'check_delete_' + index" :value="memo.memoId">
+                                        <label :for="'check_delete_' + index" >
                                         </label>
                                     </span>
                                     <i class="nav-icon fas fa-envelope"></i>&nbsp; <span v-if="memoFlag == 'R' && memo.readflag === 'N' " class="right badge badge-danger">New</span> &nbsp;<span v-if="memoFlag == 'R'">{{memo.senderNickname}}</span><span v-else-if="memoFlag == 'S'">{{memo.receiverNickname}}</span></h3>
@@ -145,6 +145,7 @@ export default {
                 color: '#007bff',
                 size: '22px',
                 allCheck: false,
+                chekedMemoId: [ ] , 
             };
         },
         components: {
@@ -194,8 +195,10 @@ export default {
                             });
 
                               this.spinnerShow = false;
+                              this.checkAll();
                           },
                           (error) => {
+                              this.checkAll();
                               this.page = 1;
                               this.totalPages = 0;
                               this.rangeSize  = 0;
@@ -222,8 +225,10 @@ export default {
                                 this.memoBodyDisplay.push(this.detailView)
                             });
                               this.spinnerShow = false;
+                              this.checkAll();
                           },
                           (error) => {
+                              this.checkAll();
                               this.page = 1;
                               this.totalPages = 0;
                               this.rangeSize  = 0;
@@ -286,7 +291,7 @@ export default {
                 }else{
                     this.memoBodyDisplay[index] = true;
                      if(this.memoFlag === 'R'){
-                        this.getReadMemo(index);
+                        this.setReadMemo(index);
                      }
                 }
              },
@@ -294,15 +299,15 @@ export default {
                 let i = 0;
                 this.memoBodyDisplay.forEach(() => {
                      if(this.detailView && this.memoFlag === 'R'){
-                        this.getReadMemo(i);
+                        this.setReadMemo(i);
                      }
                      this.memoBodyDisplay[i++] = this.detailView
                 });
              }, 
-             getReadMemo : function (idx){
+             setReadMemo : function (idx){
                 if(this.memoFlag === 'R'){
                   if(this.memos[idx].readflag == 'N'){
-                        MemoService.getReadMemo(this.memos[idx].memoId  ).then(
+                        MemoService.setReadMemo(this.memos[idx].memoId  ).then(
                             (response) => {
                                 if(response.data.result == 'S'){
                                       this.memos[idx].readflag = 'Y';
@@ -321,24 +326,76 @@ export default {
                 }
              },
               checkAll : function(){
-                  alert(this.allCheck)
-                // let i = 0;
-                // this.memoBodyDisplay.forEach(() => {
-                //      if(this.detailView && this.memoFlag === 'R'){
-                //         this.getReadMemo(i);
-                //      }
-                //      this.memoBodyDisplay[i++] = this.detailView
-                // });
+                let i = 0;
+                this.memoBodyDisplay.forEach(() => {
+                    var cbx = 'check_delete_' + i;
+                    if(this.allCheck){
+                        this.$refs[cbx].checked = true;
+                    }else{
+                        if(this.$refs[cbx] !=null && this.$refs[cbx] !== undefined){
+                                this.$refs[cbx].checked = false;
+                        }
+                    }
+                    i++;
+                });
              }, 
             setMemoDelete : function(){
-                  alert('delete')
-                // let i = 0;
-                // this.memoBodyDisplay.forEach(() => {
-                //      if(this.detailView && this.memoFlag === 'R'){
-                //         this.getReadMemo(i);
-                //      }
-                //      this.memoBodyDisplay[i++] = this.detailView
-                // });
+                let i = 0;
+                var checkedValue  = "";
+                this.memoBodyDisplay.forEach(() => {
+                    var cbx = 'check_delete_' + i;
+                     if(this.$refs[cbx].checked){
+                        checkedValue += this.$refs[cbx].value +",";
+                     }
+                     i++;
+                });
+
+                if(checkedValue !==""){
+                    checkedValue = checkedValue.substring(0,checkedValue.length -1);
+                }
+
+                if(checkedValue == ""){
+                      this.$toast.warning(`삭제할 메모를 선택해 주세요.`);
+                      return;
+                }
+
+                if(this.memoFlag === 'R'){
+                        MemoService.setDeleteReceiveMemo(checkedValue).then(
+                            (response) => {
+                                if(response.data.result == 'S'){
+                                      this.$toast.success(`Success.`);
+                                      this.getMemoList('INIT');
+                                }
+                            },
+                            (error) => {
+                                this.$toast.error(`Fail.`);
+                                console.log(
+                                (error.response &&
+                                    error.response.data &&
+                                    error.response.data.message) ||
+                                error.message ||
+                                error.toString());
+                            }
+                      );
+                }else{
+                    MemoService.setDeleteSendMemo(checkedValue).then(
+                            (response) => {
+                                if(response.data.result == 'S'){
+                                      this.$toast.success(`Success.`);
+                                      this.getMemoList('INIT');
+                                }
+                            },
+                            (error) => {
+                                this.$toast.error(`Fail.`);
+                                console.log(
+                                (error.response &&
+                                    error.response.data &&
+                                    error.response.data.message) ||
+                                error.message ||
+                                error.toString());
+                            }
+                      );
+                }
              }, 
         },
 };

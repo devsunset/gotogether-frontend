@@ -17,8 +17,24 @@ class MemoService {
     return api.get("/memo/sendlist?page="+page+"&size="+size);
   }
 
-  getReadMemo(memoId){
-    return api.get("/memo/"+memoId);
+  setReadMemo(memoId){
+    return api.post("/memo/updateread/"+memoId);
+  }
+
+  setDeleteReceiveMemo(reqData) {
+    return api.delete("/memo/deletereceive", {
+      data: { 
+        idSeparatorValues: reqData
+      }
+    });
+  }
+
+  setDeleteSendMemo(reqData) {
+    return api.delete("/memo/deletesend", {
+      data: { 
+        idSeparatorValues: reqData
+      }
+    });
   }
 
 }
