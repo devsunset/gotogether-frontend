@@ -130,6 +130,10 @@ export default {
                             (response) => {
                                 if(response.data.result == 'S'){
                                     this.$toast.success(`Success.`);
+                                    this.$router.push({
+                                        name: "Post",
+                                        query: { category: this.category },
+                                    });
                                 }else{
                                         this.$toast.error(`Fail.`);
                                 }
