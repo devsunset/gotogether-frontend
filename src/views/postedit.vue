@@ -35,7 +35,7 @@
                                   </select>
                         </div>
                         <div class="form-group">
-                        <input class="form-control" placeholder="Title" v-model="title">
+                        <input class="form-control" placeholder="Title" v-model="title" ref="title">
                         </div>
                         <div class="form-group"> 
                             <QuillEditor theme="snow" toolbar="full"  content-type="html" v-model:content="content"/>
@@ -69,7 +69,7 @@
 </template>
 
 <script>
-// import PostService from "../services/post.service";
+import PostService from "../services/post.service";
 import VueElementLoading from "vue-element-loading";
 
 export default {
@@ -115,10 +115,9 @@ export default {
         },
           methods: {
             setPost() {
-
-                alert(this.title.trim() )
                 if( this.title.trim() == ''){
                     this.$toast.warning(`제목을 입력해 주세요.`);
+                    this.$refs.title.focus();
                     return;
                 }
 
@@ -126,10 +125,26 @@ export default {
                     this.$toast.warning(`내용을 입력해 주세요.`);
                     return;
                 }
-                 
-                  
 
-                alert(this.content)
+                PostService.setPost({"category": this.category, "title" : this.title, "content" : this.content }).then(
+                    (response) => {
+                        if(response.data.result == 'S'){
+                            this.$toast.success(`Success.`);
+                        }else{
+                                this.$toast.error(`Fail.`);
+                        }
+                    },
+                    (error) => {
+                        this.$toast.error(`Fail.`);
+                        console.log(
+                        (error.response &&
+                            error.response.data &&
+                            error.response.data.message) ||
+                        error.message ||
+                        error.toString());
+                    }
+               );
+
             },
         },
 };

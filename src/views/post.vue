@@ -160,7 +160,6 @@ export default {
                 }
 
                 this.spinnerShow = true;
-                // alert(this.category)
                 PostService.getPostList(this.page-1,10,{"category": this.category, "keyword" : this.keyword}).then(
                     (response) => {
                        this.page = response.data.data.number+1;

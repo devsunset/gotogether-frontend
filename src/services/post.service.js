@@ -5,6 +5,11 @@ class PostService {
     return api.post("/post/list?page="+page+"&size="+size,reqData );
   }
 
+  setPost(reqData) {
+    return api.post("/post/",reqData );
+  }
+
+
 }
 
 export default new PostService();
