@@ -35,7 +35,7 @@
                         <input class="form-control" placeholder="Title">
                         </div>
                         <div class="form-group"> 
-                            abc
+                            <QuillEditor theme="snow" toolbar="full"  content-type="html" v-model:content="content"/>
                         </div>
                         </div>
 
@@ -73,7 +73,7 @@ export default {
   name: "postedit",
         data() {
             return {
-                content : '',
+                content : 'kang',
                 posts : [ ], 
                 spinnerText: 'Loading ...  ',
                 spinnerShow: false,
@@ -109,8 +109,14 @@ export default {
         },
           methods: {
             setPost() {
-                alert('save')
+                alert(this.content)
             },
         },
 };
 </script>
+
+<style>
+.ql-editor{
+    min-height:200px;
+}
+</style>

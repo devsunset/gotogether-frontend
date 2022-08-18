@@ -8,7 +8,8 @@ import { FontAwesomeIcon } from './plugins/font-awesome'
 import setupInterceptors from './services/setupInterceptors';
 import Toaster from '@meforma/vue-toaster';
 import VueSimpleAlert from "vue3-simple-alert-next";
-
+import { QuillEditor } from '@vueup/vue-quill'
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
 import mitt from 'mitt';
 let emitter = mitt();
@@ -21,6 +22,7 @@ createApp(App)
 .use(Toaster)
 .use(VueSimpleAlert )
 .component("font-awesome-icon", FontAwesomeIcon)
+.component('QuillEditor', QuillEditor)
 .use({
     install(app) {
       app.config.globalProperties.emitter = emitter;
