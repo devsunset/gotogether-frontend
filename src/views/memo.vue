@@ -410,7 +410,7 @@ export default {
                                     }
                             );
                         }
-                });
+                }).catch(() => console.log('no selected'));
              }, 
         },
 };
