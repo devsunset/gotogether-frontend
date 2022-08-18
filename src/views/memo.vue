@@ -26,7 +26,7 @@
                                     <div class="icheck-primary d-inline">
                                     <input type="checkbox" id="delete_all_check" v-model="allCheck" @change="checkAll($event)" >
                                         <label for="delete_all_check">
-                                        <button type="button" style="height:22px;width:60px; padding: 0px;" class="btn btn-block btn-danger btn-xs"  @click="setMemoDelete()" >삭제</button>
+                                        <button type="button" style="height:22px;width:60px; padding: 0px;" class="btn btn-block btn-danger btn-xs"  @click="setMemoDelete()" >Delete</button>
                                         </label>
                                     </div>
                                 </span>
