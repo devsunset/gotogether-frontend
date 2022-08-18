@@ -125,26 +125,26 @@ export default {
                     this.$toast.warning(`내용을 입력해 주세요.`);
                     return;
                 }
-
-                PostService.setPost({"category": this.category, "title" : this.title, "content" : this.content }).then(
-                    (response) => {
-                        if(response.data.result == 'S'){
-                            this.$toast.success(`Success.`);
-                        }else{
+                this.$confirm("저장 하시겠습니까?").then(() => {
+                    PostService.setPost({"category": this.category, "title" : this.title, "content" : this.content }).then(
+                            (response) => {
+                                if(response.data.result == 'S'){
+                                    this.$toast.success(`Success.`);
+                                }else{
+                                        this.$toast.error(`Fail.`);
+                                }
+                            },
+                            (error) => {
                                 this.$toast.error(`Fail.`);
-                        }
-                    },
-                    (error) => {
-                        this.$toast.error(`Fail.`);
-                        console.log(
-                        (error.response &&
-                            error.response.data &&
-                            error.response.data.message) ||
-                        error.message ||
-                        error.toString());
-                    }
-               );
-
+                                console.log(
+                                (error.response &&
+                                    error.response.data &&
+                                    error.response.data.message) ||
+                                error.message ||
+                                error.toString());
+                            }
+                    );
+                 }).catch(() => console.log('no selected'));
             },
         },
 };

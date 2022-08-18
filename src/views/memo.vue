@@ -73,7 +73,7 @@
                                             <td><pre>{{memo.memo}}</pre></td>
                                         </tr>
                                         <tr>
-                                            <td><i class="nav-icon fas fa-edit"></i>&nbsp;<b v-if="memoFlag == 'R'">답장전송</b><b v-else-if="memoFlag == 'S'">다시전송</b><br><pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader><button type="submit" v-if="memoFlag == 'R'" v-show="!loading" class="btn btn-success" style="width:85px" @click="sendMemo('memo_' + index, 'receiver_'+index)">전송</button><button type="submit" v-else-if="memoFlag == 'S'" v-show="!loading" class="btn btn-warning" style="width:85px" @click="sendMemo('memo_' + index, 'receiver_'+index)">전송</button></td>
+                                            <td><i class="nav-icon fas fa-edit"></i>&nbsp;<b v-if="memoFlag == 'R'">답장전송</b><b v-else-if="memoFlag == 'S'">다시전송</b><br><pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader><button type="submit" v-if="memoFlag == 'R'" v-show="!loading" class="btn btn-success" style="width:85px" @click="sendMemo('memo_' + index, 'receiver_'+index)">Send</button><button type="submit" v-else-if="memoFlag == 'S'" v-show="!loading" class="btn btn-warning" style="width:85px" @click="sendMemo('memo_' + index, 'receiver_'+index)">Send</button></td>
                                             <td>
                                                 <textarea class="form-control "  placeholder="메모를 남겨 보세요." maxlength="1000" :ref="'memo_' + index"></textarea>
                                                 <input v-if="memoFlag == 'R'" type="hidden" :ref="'receiver_' + index" v-model="memo.senderUsername">

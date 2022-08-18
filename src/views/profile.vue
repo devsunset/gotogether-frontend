@@ -238,6 +238,7 @@ import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
                     skill  = skill.substring(0,skill.length -1)
                 }
 
+                this.$confirm("저장 하시겠습니까?").then(() => {
                 this.loading = true;
                  UserService.setUserInfoSave({"introduce": this.introduce, "note" : this.note, "github" : this.github, "homepage" : this.homepage, "skill" : skill} ).then(
                     (response) => {
@@ -259,7 +260,8 @@ import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
                         error.message ||
                         error.toString());
                     }
-               );
+                );
+                 }).catch(() => console.log('no selected'));
              },
              setAddSkill() {
                 this.items.push({ item:"", level:"INTEREST"});

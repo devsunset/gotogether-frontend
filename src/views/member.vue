@@ -100,7 +100,7 @@
                                             </td>
                                         </tr>
                                         <tr v-if="currentUser && userid !=member.username">
-                                            <td><i class="nav-icon fas fa-edit"></i>&nbsp;<b>메모전송</b><br> <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader><button type="submit" v-show="!loading" class="btn btn-success" style="width:85px" @click="sendMemo('memo_' + index, 'receiver_'+index)">전송</button></td>
+                                            <td><i class="nav-icon fas fa-edit"></i>&nbsp;<b>메모전송</b><br> <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader><button type="submit" v-show="!loading" class="btn btn-success" style="width:85px" @click="sendMemo('memo_' + index, 'receiver_'+index)">Send</button></td>
                                             <td>
                                                 <textarea class="form-control"  placeholder="메모를 남겨 보세요." maxlength="1000" :ref="'memo_' + index"></textarea>
                                                 <input type="hidden" :ref="'receiver_' + index" v-model="member.username">

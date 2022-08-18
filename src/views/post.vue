@@ -24,7 +24,7 @@
                 <div class="card">
                    <div class="card-header">
                             <span class="card-title">
-                                <button type="button" class="btn btn-block btn-success" style="width:100px;padding:0px;margin:0px" @click="goPostNew()"> New</button>
+                                <button type="button" class="btn btn-block btn-success" style="width:100px;padding:0px;margin:0px" @click="goPostNew()" v-if="currentUser"> New</button>
                             </span>
                             <div class="card-tools">
                                 <div class="input-group input-group-sm" style="width: 300px;">
