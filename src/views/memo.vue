@@ -359,49 +359,54 @@ export default {
                     checkedValue = checkedValue.substring(0,checkedValue.length -1);
                 }
 
+                if(i == 0) {
+                    return;
+                }
                 if(checkedValue == ""){
                       this.$toast.warning(`삭제할 메모를 선택해 주세요.`);
                       return;
                 }
 
-                if(this.memoFlag === 'R'){
-                        MemoService.setDeleteReceiveMemo(checkedValue).then(
-                            (response) => {
-                                if(response.data.result == 'S'){
-                                      this.$toast.success(`Success.`);
-                                      this.getMemoList('INIT');
-                                      this.emitter.emit('notificationRefresh');
-                                }
-                            },
-                            (error) => {
-                                this.$toast.error(`Fail.`);
-                                console.log(
-                                (error.response &&
-                                    error.response.data &&
-                                    error.response.data.message) ||
-                                error.message ||
-                                error.toString());
-                            }
-                      );
-                }else{
-                    MemoService.setDeleteSendMemo(checkedValue).then(
-                            (response) => {
-                                if(response.data.result == 'S'){
-                                      this.$toast.success(`Success.`);
-                                      this.getMemoList('INIT');
-                                }
-                            },
-                            (error) => {
-                                this.$toast.error(`Fail.`);
-                                console.log(
-                                (error.response &&
-                                    error.response.data &&
-                                    error.response.data.message) ||
-                                error.message ||
-                                error.toString());
-                            }
-                      );
-                }
+                this.$confirm("삭제 하시겠습니까?").then(() => {
+                    if(this.memoFlag === 'R'){
+                                MemoService.setDeleteReceiveMemo(checkedValue).then(
+                                    (response) => {
+                                        if(response.data.result == 'S'){
+                                            this.$toast.success(`Success.`);
+                                            this.getMemoList('INIT');
+                                            this.emitter.emit('notificationRefresh');
+                                        }
+                                    },
+                                    (error) => {
+                                        this.$toast.error(`Fail.`);
+                                        console.log(
+                                        (error.response &&
+                                            error.response.data &&
+                                            error.response.data.message) ||
+                                        error.message ||
+                                        error.toString());
+                                    }
+                            );
+                        }else{
+                            MemoService.setDeleteSendMemo(checkedValue).then(
+                                    (response) => {
+                                        if(response.data.result == 'S'){
+                                            this.$toast.success(`Success.`);
+                                            this.getMemoList('INIT');
+                                        }
+                                    },
+                                    (error) => {
+                                        this.$toast.error(`Fail.`);
+                                        console.log(
+                                        (error.response &&
+                                            error.response.data &&
+                                            error.response.data.message) ||
+                                        error.message ||
+                                        error.toString());
+                                    }
+                            );
+                        }
+                });
              }, 
         },
 };
