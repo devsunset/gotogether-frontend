@@ -375,6 +375,8 @@ export default {
                                             this.$toast.success(`Success.`);
                                             this.getMemoList('INIT');
                                             this.emitter.emit('notificationRefresh');
+                                        }else{
+                                             this.$toast.error(`Fail.`);
                                         }
                                     },
                                     (error) => {
@@ -393,6 +395,8 @@ export default {
                                         if(response.data.result == 'S'){
                                             this.$toast.success(`Success.`);
                                             this.getMemoList('INIT');
+                                        }else{
+                                             this.$toast.error(`Fail.`);
                                         }
                                     },
                                     (error) => {
