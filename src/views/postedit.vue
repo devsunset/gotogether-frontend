@@ -29,10 +29,13 @@
 
                         <div class="card-body">
                         <div class="form-group">
-                        <input class="form-control" placeholder="Category">
+                                <select class="form-control" v-model="category" disabled> 
+                                      <option value="TALK">Talk</option>
+                                      <option value="QA">Q&A</option> 
+                                  </select>
                         </div>
                         <div class="form-group">
-                        <input class="form-control" placeholder="Title">
+                        <input class="form-control" placeholder="Title" v-model="title">
                         </div>
                         <div class="form-group"> 
                             <QuillEditor theme="snow" toolbar="full"  content-type="html" v-model:content="content"/>
@@ -73,7 +76,9 @@ export default {
   name: "postedit",
         data() {
             return {
-                content : 'kang',
+                category : 'TALK',
+                title : '',
+                content : '',
                 posts : [ ], 
                 spinnerText: 'Loading ...  ',
                 spinnerShow: false,
@@ -89,6 +94,7 @@ export default {
         },
         created() {
             console.log(this.$route.query.category);
+            this.category =  this.$route.query.category;
         },
         components: {
             VueElementLoading
@@ -109,6 +115,20 @@ export default {
         },
           methods: {
             setPost() {
+
+                alert(this.title.trim() )
+                if( this.title.trim() == ''){
+                    this.$toast.warning(`제목을 입력해 주세요.`);
+                    return;
+                }
+
+                 if( this.content.trim() == ''){
+                    this.$toast.warning(`내용을 입력해 주세요.`);
+                    return;
+                }
+                 
+                  
+
                 alert(this.content)
             },
         },
@@ -118,5 +138,13 @@ export default {
 <style>
 .ql-editor{
     min-height:200px;
+}
+
+.ql-script{
+   display: none  !important;
+}
+
+.ql-clean{
+      display: none  !important;
 }
 </style>
