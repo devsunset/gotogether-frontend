@@ -9,6 +9,7 @@ import setupInterceptors from './services/setupInterceptors';
 import Toaster from '@meforma/vue-toaster';
 import VueSimpleAlert from "vue3-simple-alert-next";
 
+
 import mitt from 'mitt';
 let emitter = mitt();
 

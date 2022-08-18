@@ -4,7 +4,8 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Post Edit</h1>
+                <h1 class="m-0" v-if="this.$route.query.category == 'TALK'">Post Edit Talk</h1>
+                <h1 class="m-0" v-else-if="this.$route.query.category == 'QA'">Post Edit Q&A</h1>
             </div>
             <!-- /.col -->
            
@@ -34,13 +35,13 @@
                         <input class="form-control" placeholder="Title">
                         </div>
                         <div class="form-group"> 
-                            body
+                            abc
                         </div>
                         </div>
 
                         <div class="card-footer">
                         <div class="float-right">
-                        <button type="submit" class="btn btn-danger" style="margin-left: 45px;">Submit</button>
+                        <button type="submit" class="btn btn-danger" style="margin-left: 45px;" @click="setPost">Submit</button>
                         </div>
                         </div>
 
@@ -67,12 +68,12 @@
 <script>
 // import PostService from "../services/post.service";
 import VueElementLoading from "vue-element-loading";
-import "@hennge/vue3-pagination/dist/vue3-pagination.css";
 
 export default {
   name: "postedit",
         data() {
             return {
+                content : '',
                 posts : [ ], 
                 spinnerText: 'Loading ...  ',
                 spinnerShow: false,
@@ -87,7 +88,7 @@ export default {
             };
         },
         created() {
-            alert(this.$route.query.category);
+            console.log(this.$route.query.category);
         },
         components: {
             VueElementLoading
@@ -107,8 +108,8 @@ export default {
             }
         },
           methods: {
-            getPostList() {
-                this.spinnerShow = true;
+            setPost() {
+                alert('save')
             },
         },
 };
