@@ -24,8 +24,7 @@
                        <!-- ////////////////////////////////////////////////// -->
                         <div class="card card-primary card-outline">
                         <div class="card-header">
-                        <h3 class="card-title">New Post
-                        </h3></div>
+                        <h3 class="card-title">New Post</h3></div>
 
                         <div class="card-body">
                         <div class="form-group">
@@ -93,8 +92,30 @@ export default {
             };
         },
         created() {
-            console.log(this.$route.query.category);
-            this.category =  this.$route.query.category;
+            if(this.$route.query.postId !== undefined && this.$route.query.postId !=""){
+                 PostService.getPost(this.$route.query.postId).then(
+                            (response) => {
+                                if(response.data.result == 'S'){
+                                    this.category = response.data.data.category;
+                                    this.title = response.data.data.title;
+                                    this.content = response.data.data.content;
+                                }else{
+                                    this.$toast.error(`Fail.`);
+                                }
+                            },
+                            (error) => {
+                                this.$toast.error(`Fail.`);
+                                console.log(
+                                (error.response &&
+                                    error.response.data &&
+                                    error.response.data.message) ||
+                                error.message ||
+                                error.toString());
+                            }
+                    );
+            }else{
+                 this.category =  this.$route.query.category;
+            }
         },
         components: {
             VueElementLoading

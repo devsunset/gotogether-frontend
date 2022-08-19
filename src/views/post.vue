@@ -55,7 +55,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr :key="index" v-for="(post,index) in posts">
+                                    <tr :key="index" v-for="(post,index) in posts" @click="goPostDetail(post.postId)">
                                         <td>{{post.title}}</td>
                                         <td>{{post.comment_count}}</td>
                                         <td>{{post.hit}}</td>
@@ -150,6 +150,12 @@ export default {
              this.$router.push({
                     name: "PostEdit",
                     query: { category: this.category },
+                });
+            },
+            goPostDetail(postId) {
+                this.$router.push({
+                    name: "PostDetail",
+                    query: { "postId": postId },
                 });
             },
             getPostList(flag) {

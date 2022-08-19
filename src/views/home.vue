@@ -92,7 +92,12 @@
     </div>
     <!-- /.container-fluid -->
 </section>
-<p style="text-align:center" v-html="notice"></p>
+
+<div class="callout callout-info" style="margin:10px">
+<h5><i class="fas fa-info"></i> Notice</h5>
+    <p style="text-align:center" v-html="notice"></p>
+</div>
+
 <div class="card" style="padding:15px;margin:10px">
     <div class="card-header">
         <h3 class="card-title">Recent Project</h3>

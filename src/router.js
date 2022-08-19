@@ -9,6 +9,7 @@ import Home from '@/views/home.vue';
 import Together from '@/views/together.vue';
 import Member from '@/views/member.vue';
 import Post from '@/views/post.vue';
+import PostDetail from '@/views/postdetail.vue';
 import PostEdit from '@/views/postedit.vue';
 import Profile from '@/views/profile.vue';
 import Memo from '@/views/memo.vue';
@@ -39,6 +40,11 @@ const routes = [
             name: 'Post',
             component: Post
           },  
+          {
+            path: 'postdetail',
+            name: 'PostDetail',
+            component: PostDetail
+          },
           {
             path: 'postedit',
             name: 'PostEdit',
