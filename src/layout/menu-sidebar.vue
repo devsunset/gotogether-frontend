@@ -61,16 +61,6 @@
                             <p>Post</p>
                         </router-link>
                     </li>
-                    <li class="nav-item"    v-if="currentUser">
-                        <router-link
-                            to="/profile"
-                            class="nav-link"
-                            active-class="active"
-                        >
-                            <i class="nav-icon fas fa-user"></i>
-                            <p>Profile</p>
-                        </router-link>
-                    </li>
                      <li class="nav-item"    v-if="currentUser">
                         <router-link
                             to="/memo"
@@ -79,6 +69,16 @@
                         >
                             <i class="nav-icon fas fa-edit"></i>
                             <p>Memo</p>
+                        </router-link>
+                    </li>
+                    <li class="nav-item"    v-if="currentUser">
+                        <router-link
+                            to="/profile"
+                            class="nav-link"
+                            active-class="active"
+                        >
+                            <i class="nav-icon fas fa-user"></i>
+                            <p>Profile</p>
                         </router-link>
                     </li>
                 </ul>
