@@ -1,6 +1,7 @@
 import api from './api';
 
 class PostService {
+  // Post
   getPostList(page,size,reqData) {
     return api.post("/post/list?page="+page+"&size="+size,reqData );
   }
@@ -13,6 +14,10 @@ class PostService {
     return api.post("/post/",reqData );
   }
 
+  putPost(postId,reqData) {
+    return api.put("/post/"+postId,reqData );
+  }
+
   deletePost(postId) {
     return api.delete("/post/"+postId );
   }
@@ -21,8 +26,17 @@ class PostService {
     return api.put("/post/changecategory/"+postId );
   }
 
-  putPost(postId,reqData) {
-    return api.put("/post/"+postId,reqData );
+  // PostComment
+  getPostCommentList(postId) {
+    return api.get("/postcomment/list/"+postId);
+  }
+
+  deletePostComment(postCommentId) {
+    return api.delete("/postcomment/"+postCommentId );
+  }
+
+  setPostComment(reqData) {
+    return api.post("/postcomment/",reqData );
   }
 
 }

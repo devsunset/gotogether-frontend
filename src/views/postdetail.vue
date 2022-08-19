@@ -26,7 +26,7 @@
                         <div class="card-header">
                         <h3 class="card-title"><i class="nav-icon fas fa-user"></i> &nbsp;{{writerNickname}}<br><i class="nav-icon fas fa-edit"></i>&nbsp;{{modifiedDate}}</h3>
                         <div style="float:right">
-                        <i class="fas fa-eye fa-fw" style="color: var(--fa-navy);"></i>&nbsp;{{hit}} 
+                        <i class="fas fa-eye fa-fw" style="color: var(--fa-navy);"></i>&nbsp;{{hit}} <br> <i class="fas fa-comment-dots fa-fw" style="color: var(--fa-navy);"></i>&nbsp; {{comment_count}}
                         </div>
                         </div>
 
@@ -66,6 +66,41 @@
 
                         </div>
                         <!-- ////////////////////////////////////////////////// -->
+                            <div class="col-12"  :key="index" v-for="(comment,index) in postComments">
+                                <div class="card">
+                                <div class="card-header">
+                                <h3 class="card-title"><i class="nav-icon fas fa-user"></i> &nbsp;{{comment.nickname}} &nbsp;<i class="nav-icon fas fa-edit"></i>&nbsp;{{comment.modifiedDate}}</h3>
+                                <div class="card-tools">
+                                <button  v-if="userid == comment.username || roles == 'ROLE_ADMIN'"  type="button" class="btn btn-tool" data-card-widget="remove" title="Remove" @click="deleteComment(comment.postCommentId)">
+                                <i class="fas fa-times"></i>
+                                </button>
+                                </div>
+                                </div>
+                                <div class="card-body">
+                                    <pre>{{comment.content}}</pre>
+                                </div>
+                                </div>
+                            </div>
+                    <!-- ////////////////////////////////////////////////// -->
+
+                    <div v-if="currentUser" class="card card-success" style="margin:15px">
+                            <div class="card-header">
+                            <h3 class="card-title">Reply</h3>
+                            </div>
+                            <div class="card-body">
+                                    <textarea rows="5" class="form-control"  placeholder="Comment를 남겨 보세요." maxlength="1000" v-model="comment" ref="comment"></textarea>
+                                    <br>
+                                    <div style="float:right"><button  type="submit" class="btn btn-danger" style="margin-left: 15px;" @click="setComment">Submit</button></div>
+                            </div>
+                    </div>
+
+
+                    <div v-else-if="!currentUser" class="callout callout-info" style="margin:10px">
+                    <h5><i class="fas fa-info"></i> Notice</h5>
+                        <p style="text-align:center">로그인을 하시면 댓글 작성이 가능합니다.</p>
+                    </div>
+
+
         </div>
     </div>
     <!-- /.container-fluid -->
@@ -86,20 +121,12 @@ export default {
                 title : '',
                 content : '',
                 hit : 0,
+                comment_count: 0,
+                comment : '' , 
                 writerNickname : "",
                 writerUsername : "",
                 modifiedDate : "",
-                posts : [ ], 
-                spinnerText: 'Loading ...  ',
-                spinnerShow: false,
-                spinnerKind: 'bar-fade-scale',
-                spinnerColor: '#28a745',
-                spinnerSize: '60',
-                spinnerDuration: '0.6',
-                keyword : "",
-                loading : false,
-                color: '#007bff',
-                size: '22px',
+                postComments : [],
             };
         },
         created() {
@@ -127,6 +154,8 @@ export default {
                         error.toString());
                     }
             );
+
+            this.getPostCommentList();
         },
         computed: {
             currentUser() {
@@ -197,6 +226,87 @@ export default {
                                     }
                                 },
                                 (error) => {
+                                    this.$toast.error(`Fail.`);
+                                    console.log(
+                                    (error.response &&
+                                        error.response.data &&
+                                        error.response.data.message) ||
+                                    error.message ||
+                                    error.toString());
+                                }
+                        );
+                    
+                 }).catch(() => console.log('no selected'));
+            },
+            getPostCommentList(){
+                PostService.getPostCommentList(this.$route.query.postId).then(
+                    (response) => {
+                        if(response.data.result == 'S'){
+                             this.postComments = response.data.data; 
+                             this.comment_count= this.postComments.length;
+                        }else{
+                             this.postComments = [];
+                             this.comment_count= 0;
+                             this.$toast.error(`Fail.`);
+                        }
+                    },
+                    (error) => {
+                         this.comment_count= 0;
+                        this.postComments = [] ;
+                        this.$toast.error(`Fail.`);
+                        console.log(
+                        (error.response &&
+                            error.response.data &&
+                            error.response.data.message) ||
+                        error.message ||
+                        error.toString());
+                    }
+               );
+            },
+            deleteComment(postCommentId) {
+                    this.$confirm("삭제 하시겠습니까?").then(() => {
+                            PostService.deletePostComment(postCommentId).then(
+                                (response) => {
+                                    if(response.data.result == 'S'){
+                                        this.getPostCommentList();
+                                        this.$toast.success(`Success.`);
+                                    }else{
+                                        this.$toast.error(`Fail.`);
+                                    }
+                                },
+                                (error) => {
+                                    this.$toast.error(`Fail.`);
+                                    console.log(
+                                    (error.response &&
+                                        error.response.data &&
+                                        error.response.data.message) ||
+                                    error.message ||
+                                    error.toString());
+                                }
+                        );
+                    
+                 }).catch(() => console.log('no selected'));
+            },
+            setComment() {
+                 if( this.comment.trim() == ''){
+                    this.$toast.warning(`Comment 내용을 입력해 주세요.`);
+                    this.$refs.comment.focus();
+                    return;
+                }
+
+                    this.$confirm("저장 하시겠습니까?").then(() => {
+                            PostService.setPostComment({postId : this.$route.query.postId, content : this.comment}).then(
+                                (response) => {
+                                    this.comment = '';
+                                    if(response.data.result == 'S'){
+                                        this.getPostCommentList();
+                                        this.$toast.success(`Success.`);
+                                    }else{
+                                        this.$toast.error(`Fail.`);
+                                    }
+                                },
+                                (error) => {
+                                    this.comment = '';
                                     this.$toast.error(`Fail.`);
                                     console.log(
                                     (error.response &&
