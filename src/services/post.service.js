@@ -17,6 +17,10 @@ class PostService {
     return api.delete("/post/"+postId );
   }
 
+  changePostCategory(postId) {
+    return api.put("/post/changecategory/"+postId );
+  }
+
   putPost(postId,reqData) {
     return api.put("/post/"+postId,reqData );
   }

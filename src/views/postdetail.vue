@@ -57,8 +57,9 @@
                         </div>
                         <div class="card-footer">
                         <div class="float-right">
-                        <button v-if="userid == writerUsername" type="submit" class="btn btn-danger" style="margin-left: 15px;" @click="setDelete">Delete</button>
-                        <button v-if="userid == writerUsername" type="submit" class="btn btn-primary" style="margin-left: 15px;" @click="goEdit">Edit</button>
+                        <button v-if="roles == 'ROLE_ADMIN'" type="submit" class="btn btn-warning" style="margin-left: 15px;" @click="setUpdate">Change Category</button>    
+                        <button v-if="userid == writerUsername || roles == 'ROLE_ADMIN'" type="submit" class="btn btn-danger" style="margin-left: 15px;" @click="setDelete">Delete</button>
+                        <button v-if="userid == writerUsername || roles == 'ROLE_ADMIN'" type="submit" class="btn btn-primary" style="margin-left: 15px;" @click="goEdit">Edit</button>
                         <button type="submit" class="btn btn-info" style="margin-left: 15px;" @click="goPost">List</button>
                         </div>
                         </div>
@@ -163,6 +164,33 @@ export default {
                                         this.$router.push({
                                             name: "Post",
                                             query: { category: this.category },
+                                        });
+                                    }else{
+                                            this.$toast.error(`Fail.`);
+                                    }
+                                },
+                                (error) => {
+                                    this.$toast.error(`Fail.`);
+                                    console.log(
+                                    (error.response &&
+                                        error.response.data &&
+                                        error.response.data.message) ||
+                                    error.message ||
+                                    error.toString());
+                                }
+                        );
+                    
+                 }).catch(() => console.log('no selected'));
+            },
+             setUpdate() {
+                    this.$confirm("Category를 변경 하시겠습니까?").then(() => {
+                            PostService.changePostCategory(this.$route.query.postId).then(
+                                (response) => {
+                                    if(response.data.result == 'S'){
+                                        this.$toast.success(`Success.`);
+                                        this.$router.push({
+                                            name: "Post",
+                                            query: { category: response.data.data },
                                         });
                                     }else{
                                             this.$toast.error(`Fail.`);
