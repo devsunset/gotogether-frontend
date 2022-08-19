@@ -53,7 +53,7 @@
                             <div class="card-header" v-on:click="displayBody(index)">
                                 <h3 class="card-title">
                                      <span class="icheck-primary d-inline">
-                                        <input type="checkbox" :ref="'check_delete_' + index"  :id="'check_delete_' + index" :value="memo.memoId">
+                                        <input type="checkbox"   :id="'check_delete_' + index" :value="memoData[index].memoId" v-model="memoData[index].check">
                                         <label :for="'check_delete_' + index" >
                                         </label>
                                     </span>
@@ -73,11 +73,9 @@
                                             <td><pre>{{memo.memo}}</pre></td>
                                         </tr>
                                         <tr>
-                                            <td><i class="nav-icon fas fa-edit"></i>&nbsp;<b v-if="memoFlag == 'R'">답장전송</b><b v-else-if="memoFlag == 'S'">다시전송</b><br><pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader><button type="submit" v-if="memoFlag == 'R'" v-show="!loading" class="btn btn-success" style="width:85px" @click="sendMemo('memo_' + index, 'receiver_'+index)">Send</button><button type="submit" v-else-if="memoFlag == 'S'" v-show="!loading" class="btn btn-warning" style="width:85px" @click="sendMemo('memo_' + index, 'receiver_'+index)">Send</button></td>
+                                            <td><i class="nav-icon fas fa-edit"></i>&nbsp;<b v-if="memoFlag == 'R'">답장전송</b><b v-else-if="memoFlag == 'S'">다시전송</b><br><pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader><button type="submit" v-if="memoFlag == 'R'" v-show="!loading" class="btn btn-success" style="width:85px" @click="sendMemo(index)">Send</button><button type="submit" v-else-if="memoFlag == 'S'" v-show="!loading" class="btn btn-warning" style="width:85px" @click="sendMemo(index)">Send</button></td>
                                             <td>
-                                                <textarea class="form-control "  placeholder="메모를 남겨 보세요." maxlength="1000" :ref="'memo_' + index"></textarea>
-                                                <input v-if="memoFlag == 'R'" type="hidden" :ref="'receiver_' + index" v-model="memo.senderUsername">
-                                                <input v-else-if="memoFlag == 'S'" type="hidden" :ref="'receiver_' + index" v-model="memo.receiverUsername">
+                                                <textarea class="form-control "  placeholder="메모를 남겨 보세요." maxlength="1000" v-model="memoData[index].memo"></textarea>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -130,6 +128,7 @@ export default {
                 detailView : false,         
                 memoFlag : "R",       
                 memos : [ ], 
+                memoData : [ ],
                 memoBodyDisplay : [ ] ,
                 spinnerText: 'Loading ...  ',
                 spinnerShow: false,
@@ -189,8 +188,10 @@ export default {
                             this.totalPages = response.data.data.totalPages;
                             this.rangeSize  = response.data.data.number;
                             this.memos = response.data.data.content;
+                            this.memoData = []
                             this.memoBodyDisplay = []
-                            response.data.data.content.forEach(() => {
+                            response.data.data.content.forEach((data) => {
+                                this.memoData.push({"check":false, "memo": '' , "memoId": data.memoId, "senderUsername": data.senderUsername, "receiverUsername": data.receiverUsername })
                                 this.memoBodyDisplay.push(this.detailView)
                             });
 
@@ -204,6 +205,7 @@ export default {
                               this.rangeSize  = 0;
                               this.spinnerShow = false;
                               this.memos = [] 
+                              this.memoData = [] 
                               this.memoBodyDisplay = []
                               console.log(
                               (error.response &&
@@ -220,8 +222,10 @@ export default {
                             this.totalPages = response.data.data.totalPages;
                             this.rangeSize  = response.data.data.number;
                             this.memos = response.data.data.content;
+                            this.memoData = []
                             this.memoBodyDisplay = []
-                            response.data.data.content.forEach(() => {
+                            response.data.data.content.forEach((data) => {
+                                this.memoData.push({"check":false, "memo": '' , "memoId": data.memoId, "senderUsername": data.senderUsername, "receiverUsername": data.receiverUsername })
                                 this.memoBodyDisplay.push(this.detailView)
                             });
                               this.spinnerShow = false;
@@ -234,6 +238,7 @@ export default {
                               this.rangeSize  = 0;
                               this.spinnerShow = false;
                               this.memos = [] 
+                              this.memoData = []
                               this.memoBodyDisplay = []
                               console.log(
                               (error.response &&
@@ -245,28 +250,27 @@ export default {
                     );
               }
             },
-            sendMemo(refmemo, refreceiver) {
-                if(this.$refs[refmemo].value.trim() == ""){
+            sendMemo(index) {
+                if(this.memoData[index].memo.trim() == ""){
                    this.$toast.warning(`메모 내용을 입력해 주세요.`);
-
-                   const normalClass = 'form-control'
-                   const invalidClass = 'form-control is-invalid'
-                   this.$refs[refmemo].classList.value = [invalidClass]
-                   setTimeout(() => {
-                        this.$refs[refmemo].classList.value = [normalClass]
-                    }, 1000);
-
-                   this.$refs[refmemo].focus();
                     return
                 }
 
                 this.loading = true;
-                
-                MemoService.sendMemo({"memo": this.$refs[refmemo].value, "receiver" : this.$refs[refreceiver].value} ).then(
+
+                let receiverTarget = '';
+
+                if(this.memoFlag == "R"){
+                    receiverTarget  = this.memoData[index].senderUsername;
+                }else{
+                    receiverTarget  = this.memoData[index].receiverUsername;
+                }
+
+                MemoService.sendMemo({"memo": this.memoData[index].memo, "receiver" : receiverTarget } ).then(
                     (response) => {
                         this.loading = false;
                          if(response.data.result =="S"){
-                            this.$refs[refmemo].value = "";
+                            this.memoData[index].memo = "";
                             this.$toast.success(`Success.`);
                             this.getMemoList('INIT');
                         }else{
@@ -332,14 +336,11 @@ export default {
              },
               checkAll : function(){
                 let i = 0;
-                this.memoBodyDisplay.forEach(() => {
-                    var cbx = 'check_delete_' + i;
+                this.memoData.forEach(() => {
                     if(this.allCheck){
-                        this.$refs[cbx].checked = true;
+                        this.memoData[i].check = true;
                     }else{
-                        if(this.$refs[cbx] !=null && this.$refs[cbx] !== undefined){
-                                this.$refs[cbx].checked = false;
-                        }
+                       this.memoData[i].check = false;
                     }
                     i++;
                 });
@@ -347,10 +348,9 @@ export default {
             setMemoDelete : function(){
                 let i = 0;
                 var checkedValue  = "";
-                this.memoBodyDisplay.forEach(() => {
-                    var cbx = 'check_delete_' + i;
-                     if(this.$refs[cbx].checked){
-                        checkedValue += this.$refs[cbx].value +",";
+                this.memoData.forEach((data) => {
+                     if(data.check){
+                        checkedValue += data.memoId +",";
                      }
                      i++;
                 });
@@ -362,6 +362,7 @@ export default {
                 if(i == 0) {
                     return;
                 }
+           
                 if(checkedValue == ""){
                       this.$toast.warning(`삭제할 메모를 선택해 주세요.`);
                       return;
