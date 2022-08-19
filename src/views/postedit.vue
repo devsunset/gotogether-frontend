@@ -24,7 +24,9 @@
                        <!-- ////////////////////////////////////////////////// -->
                         <div class="card card-primary card-outline">
                         <div class="card-header">
-                        <h3 class="card-title">New Post</h3></div>
+                        <h3 class="card-title" v-if="this.$route.query.postId">Edit Post</h3>
+                         <h3 class="card-title" v-else>New Post</h3>
+                        </div>
 
                         <div class="card-body">
                         <div class="form-group">
@@ -37,7 +39,7 @@
                         <input class="form-control" placeholder="Title" v-model="title" ref="title">
                         </div>
                         <div class="form-group"> 
-                            <QuillEditor theme="snow" toolbar="full"  content-type="html" v-model:content="content"/>
+                            <QuillEditor theme="snow" toolbar="full"  content-type="html" v-model:content="content" ref="myEditor"/>
                         </div>
                         </div>
 
@@ -99,6 +101,7 @@ export default {
                                     this.category = response.data.data.category;
                                     this.title = response.data.data.title;
                                     this.content = response.data.data.content;
+                                    this.$refs.myEditor.setHTML(this.content)
                                 }else{
                                     this.$toast.error(`Fail.`);
                                 }
@@ -142,12 +145,37 @@ export default {
                     return;
                 }
 
-                 if( this.content.trim() == ''){
+                 if(this.$refs.myEditor.getText().trim()== ''){
                     this.$toast.warning(`내용을 입력해 주세요.`);
                     return;
                 }
                 this.$confirm("저장 하시겠습니까?").then(() => {
-                    PostService.setPost({"category": this.category, "title" : this.title, "content" : this.content }).then(
+
+                    if(this.$route.query.postId){
+                            PostService.putPost(this.$route.query.postId,{"category": this.category, "title" : this.title, "content" : this.content }).then(
+                                (response) => {
+                                    if(response.data.result == 'S'){
+                                        this.$toast.success(`Success.`);
+                                        this.$router.push({
+                                            name: "Post",
+                                            query: { category: this.category },
+                                        });
+                                    }else{
+                                            this.$toast.error(`Fail.`);
+                                    }
+                                },
+                                (error) => {
+                                    this.$toast.error(`Fail.`);
+                                    console.log(
+                                    (error.response &&
+                                        error.response.data &&
+                                        error.response.data.message) ||
+                                    error.message ||
+                                    error.toString());
+                                }
+                        );
+                    }else{
+                        PostService.setPost({"category": this.category, "title" : this.title, "content" : this.content }).then(
                             (response) => {
                                 if(response.data.result == 'S'){
                                     this.$toast.success(`Success.`);
@@ -168,7 +196,8 @@ export default {
                                 error.message ||
                                 error.toString());
                             }
-                    );
+                         );
+                    }
                  }).catch(() => console.log('no selected'));
             },
         },

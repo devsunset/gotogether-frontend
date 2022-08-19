@@ -13,6 +13,10 @@ class PostService {
     return api.post("/post/",reqData );
   }
 
+  putPost(postId,reqData) {
+    return api.put("/post/"+postId,reqData );
+  }
+
 }
 
 export default new PostService();
