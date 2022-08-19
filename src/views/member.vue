@@ -100,13 +100,11 @@
                                             </td>
                                         </tr>
                                         <tr v-if="currentUser && userid !=member.username">
-                                            <td><i class="nav-icon fas fa-edit"></i>&nbsp;<b>메모전송</b><br> <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader><button type="submit" v-show="!loading" class="btn btn-success" style="width:85px" @click="sendMemo('memo_' + index, 'receiver_'+index)">Send</button></td>
+                                            <td><i class="nav-icon fas fa-edit"></i>&nbsp;<b>메모전송</b><br> <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader><button type="submit" v-show="!loading" class="btn btn-success" style="width:85px" @click="sendMemo(index)">Send</button></td>
                                             <td>
-                                                <textarea class="form-control"  placeholder="메모를 남겨 보세요." maxlength="1000" :ref="'memo_' + index"></textarea>
-                                                <input type="hidden" :ref="'receiver_' + index" v-model="member.username">
+                                                <textarea class="form-control"  placeholder="메모를 남겨 보세요." maxlength="1000" v-model="memo[index].memo"></textarea>
                                             </td>
                                         </tr>
-                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -157,6 +155,7 @@ export default {
             return {
                 memberDetailView : false,                
                 members : [ ], 
+                memo : [ ], 
                 membersBodyDisplay : [ ] ,
                 spinnerText: 'Loading ...  ',
                 spinnerShow: false,
@@ -209,19 +208,22 @@ export default {
                        this.totalPages = response.data.data.totalPages;
                        this.rangeSize  = response.data.data.number;
                        this.members = response.data.data.content;
+                       this.memo = [];
                        this.membersBodyDisplay = []
-                       response.data.data.content.forEach(() => {
+                       response.data.data.content.forEach((data) => {
+                           this.memo.push({"memo": '' , 'username': data.username})
                            this.membersBodyDisplay.push(this.memberDetailView)
                        });
-                         this.spinnerShow = false;
+                       this.spinnerShow = false;
                     },
                     (error) => {
                         this.page = 1;
                         this.totalPages = 0;
                         this.rangeSize  = 0;
                         this.spinnerShow = false;
-                        this.members = [] 
-                        this.membersBodyDisplay = []
+                        this.members = [];
+                        this.memo = [];
+                        this.membersBodyDisplay = [];
                         console.log(
                         (error.response &&
                             error.response.data &&
@@ -231,27 +233,19 @@ export default {
                     }
                );
             },
-            sendMemo(refmemo, refreceiver) {
-                if(this.$refs[refmemo].value.trim() == ""){
+            sendMemo(index) {
+              
+                if(this.memo[index].memo.trim() == ""){
                    this.$toast.warning(`메모 내용을 입력해 주세요.`);
-                    const normalClass = 'form-control'
-                   const invalidClass = 'form-control is-invalid'
-                   this.$refs[refmemo].classList.value = [invalidClass]
-                   setTimeout(() => {
-                        this.$refs[refmemo].classList.value = [normalClass]
-                    }, 1000);
-
-                   this.$refs[refmemo].focus();
                     return
                 }
-
                 this.loading = true;
                 
-                MemoService.sendMemo({"memo": this.$refs[refmemo].value, "receiver" : this.$refs[refreceiver].value} ).then(
+                MemoService.sendMemo({"memo": this.memo[index].memo.trim() , "receiver" : this.memo[index].username} ).then(
                     (response) => {
                         this.loading = false;
                          if(response.data.result =="S"){
-                            this.$refs[refmemo].value = "";
+                            this.memo[index].memo = "";
                             this.$toast.success(`Success.`);
                         }else{
                               this.$toast.error(`Fail.`);
