@@ -13,6 +13,10 @@ class PostService {
     return api.post("/post/",reqData );
   }
 
+  deletePost(postId) {
+    return api.delete("/post/"+postId );
+  }
+
   putPost(postId,reqData) {
     return api.put("/post/"+postId,reqData );
   }

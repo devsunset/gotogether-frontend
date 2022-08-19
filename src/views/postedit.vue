@@ -46,6 +46,7 @@
                         <div class="card-footer">
                         <div class="float-right">
                         <button type="submit" class="btn btn-danger" style="margin-left: 45px;" @click="setPost">Submit</button>
+                        <button type="submit" class="btn btn-info" style="margin-left: 15px;" @click="goPost">List</button>
                         </div>
                         </div>
 
@@ -138,6 +139,12 @@ export default {
             }
         },
           methods: {
+            goPost() {
+                this.$router.push({
+                    name: "Post",
+                    query: { category: this.category },
+                });
+            },
             setPost() {
                 if( this.title.trim() == ''){
                     this.$toast.warning(`제목을 입력해 주세요.`);
