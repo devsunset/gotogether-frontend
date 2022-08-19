@@ -45,7 +45,10 @@
 
                     <p/>
 
-
+                    <div v-if="members.length == 0" class="callout callout-info" style="margin:10px">
+                    <h5><i class="fas fa-info"></i> No Data.</h5>
+                        <p style="text-align:center"> 검색된 멤버가 없습니다.</p>
+                    </div>
 
                     <div class="col-12" :key="index" v-for="(member,index) in members">
                         <div class="card">

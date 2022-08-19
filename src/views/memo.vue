@@ -39,14 +39,24 @@
                                 </span>
                                 <div class="input-group input-group-sm" style="width:300px"> 
                                   <select class="form-control" v-model="memoFlag" @change="getMemoList('INIT')"> 
-                                      <option value="R">받은 메모함</option>
-                                      <option value="S">보낸 메모함</option> 
+                                      <option value="R">수신 메모함</option>
+                                      <option value="S">발신 메모함</option> 
                                   </select>
                                 </div>
                             </div>
                     </div>
 
                     <p/>
+
+                    <div v-if="memos.length == 0 && memoFlag == 'R'" class="callout callout-info" style="margin:10px">
+                    <h5><i class="fas fa-info"></i> No Data.</h5>
+                        <p style="text-align:center"> 수신 메모함 데이타가 없습니다.</p>
+                    </div>
+
+                    <div v-if="memos.length == 0 && memoFlag == 'S'" class="callout callout-info" style="margin:10px">
+                    <h5><i class="fas fa-info"></i> No Data.</h5>
+                        <p style="text-align:center"> 발신 메모함 데이타가  없습니다.</p>
+                    </div>
 
                     <div class="col-12" :key="index" v-for="(memo,index) in memos">
                         <div class="card">

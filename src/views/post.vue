@@ -62,6 +62,9 @@
                                         <td>{{post.nickname}}</td>
                                         <td> {{post.createdDate.substring(2,16)}}</td>
                                     </tr>
+                                    <tr v-if="posts.length == 0">
+                                        <td colspan="5" style="text-align:center">No Data.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
