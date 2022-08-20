@@ -395,7 +395,7 @@ export default {
                 try {
                  mapContainer.style.height = (this.height-200)+'px'; 
                 } catch (err) {
-                    console.log('map style error skip')
+                   mapContainer.style.height = 300+'px'; 
                 }
             },
             initMap() {
@@ -403,7 +403,14 @@ export default {
 
             this.width = window.innerWidth;
             this.height = window.innerHeight;
-            container.style.height = (this.height-200)+'px'; 
+
+            try {
+                container.style.height = (this.height-200)+'px'; 
+            } catch (err) {
+                 container.style.height = 300+'px'; 
+            }
+
+
 
             var options = {
                 center: new kakao.maps.LatLng(this.latitude, this.longitude), 
