@@ -69,7 +69,7 @@
                             <div class="col-12"  :key="index" v-for="(comment,index) in postComments">
                                 <div class="card">
                                 <div class="card-header">
-                                <h3 class="card-title"><i class="nav-icon fas fa-user"></i> &nbsp;{{comment.nickname}} &nbsp;<i class="nav-icon fas fa-edit"></i>&nbsp;{{comment.modifiedDate}}</h3>
+                                <h3 class="card-title"><i class="nav-icon fas fa-user"></i> &nbsp;{{comment.nickname}}<br/><i class="nav-icon fas fa-edit"></i>&nbsp;{{comment.modifiedDate}}</h3>
                                 <div class="card-tools">
                                 <button  v-if="userid == comment.username || roles == 'ROLE_ADMIN'"  type="button" class="btn btn-tool" data-card-widget="remove" title="Remove" @click="deleteComment(comment.postCommentId)">
                                 <i class="fas fa-times"></i>

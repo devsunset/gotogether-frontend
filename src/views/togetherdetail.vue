@@ -132,7 +132,7 @@
                             <div class="col-12"  :key="index" v-for="(comment,index) in togetherComments">
                                 <div class="card">
                                 <div class="card-header">
-                                <h3 class="card-title"><i class="nav-icon fas fa-user"></i> &nbsp;{{comment.nickname}} &nbsp;<i class="nav-icon fas fa-edit"></i>&nbsp;{{comment.modifiedDate}}</h3>
+                                <h3 class="card-title"><i class="nav-icon fas fa-user"></i> &nbsp;{{comment.nickname}}<br/><i class="nav-icon fas fa-edit"></i>&nbsp;{{comment.modifiedDate}}</h3>
                                 <div class="card-tools">
                                 <button  v-if="userid == comment.username || roles == 'ROLE_ADMIN'"  type="button" class="btn btn-tool" data-card-widget="remove" title="Remove" @click="deleteComment(comment.togetherCommentId)">
                                 <i class="fas fa-times"></i>
@@ -390,7 +390,11 @@ export default {
                 this.width = window.innerWidth;
                 this.height = window.innerHeight;
                 var mapContainer = document.getElementById('map');
-                mapContainer.style.height = (this.height-200)+'px'; 
+                try {
+                 mapContainer.style.height = (this.height-200)+'px'; 
+                } catch (err) {
+                    console.log('map style error skip')
+                }
             },
             initMap() {
             var container = document.getElementById("map"); 
@@ -404,7 +408,7 @@ export default {
                 level: 4 
             };
             var map = new kakao.maps.Map(container, options); 
-            console.log(map)
+            // console.log(map) 
 
             ///////////////////////////////////////////////////////////////////
                 var positions = [

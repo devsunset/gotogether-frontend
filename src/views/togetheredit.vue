@@ -44,13 +44,13 @@
                                   </select>
                         </div>
                          <div class="form-group">
-                             <i class="nav-icon far fa-plus-square"></i>&nbsp;&nbsp;&nbsp;최대 모집 인원 (최대 인원 10명으로 제한)
+                             <i class="nav-icon far fa-plus-square"></i>&nbsp;&nbsp;&nbsp;최대 모집 인원
                             <select class="form-control" v-model="maxMember"> 
                                 <option :value="data+1"  :key="index" v-for="(data,index) in 9">{{data+1}}</option>
                             </select>
                         </div>
                          <div class="form-group">
-                             <i class="nav-icon far fa-plus-square"></i>&nbsp;&nbsp;&nbsp;현재 참여 인원 (참여 인원 모집시 수정해 주시면  Progress 값이 올라 갑니다. ^^)
+                             <i class="nav-icon far fa-plus-square"></i>&nbsp;&nbsp;&nbsp;현재 참여 인원
                             <select class="form-control" v-model="currentMember"> 
                                 <option :value="data"  :key="index" v-for="(data,index) in 10">{{data}}</option>
                             </select>
