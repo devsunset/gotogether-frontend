@@ -178,7 +178,10 @@ export default {
             );
     },
     goTogetherDetail(togetherId){
-       console.log('To-Do : '+togetherId)
+       console.log('Together Detail Link Skip  : '+togetherId)
+         this.$router.push({
+            name: "Together",
+        });
     },
   },
 };
