@@ -4,8 +4,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0" v-if="this.$route.query.category == 'TALK'">Together Edit Talk</h1>
-                <h1 class="m-0" v-else-if="this.$route.query.category == 'QA'">Together Edit Q&A</h1>
+                <h1 class="m-0">Together Edit</h1>
             </div>
             <!-- /.col -->
            
@@ -27,19 +26,77 @@
                         <h3 class="card-title" v-if="this.$route.query.togetherId">Edit Together</h3>
                          <h3 class="card-title" v-else>New Together</h3>
                         </div>
-
                         <div class="card-body">
                         <div class="form-group">
-                                <select class="form-control" v-model="category" disabled> 
-                                      <option value="TALK">Talk</option>
-                                      <option value="QA">Q&A</option> 
-                                  </select>
+                        <input class="form-control" placeholder="Together 제목을 입력 하세요" v-model="title" ref="title">
                         </div>
                         <div class="form-group">
-                        <input class="form-control" placeholder="Title" v-model="title" ref="title">
+                                <select class="form-control" v-model="category"> 
+                                      <option value="STUDY">함께 공부해요</option>
+                                      <option value="PORTFOLIO">포트폴리오 준비</option> 
+                                      <option value="HACKATHON">해커톤 참가</option> 
+                                      <option value="CONTEST">공모전 참가</option> 
+                                      <option value="TOY_PROJECT">토이 프로젝트 구축</option> 
+                                      <option value="PROJECT">프로젝트 구축</option> 
+                                      <option value="ETC">기타</option> 
+                                  </select>
+                        </div>
+                         <div class="form-group">
+                             &nbsp;&nbsp;&nbsp;최대 모집 인원 (최대 인원 10명으로 제한)
+                            <select class="form-control" v-model="maxMember"> 
+                                <option :value="data+1"  :key="index" v-for="(data,index) in 9">{{data+1}}</option>
+                            </select>
+                        </div>
+                         <div class="form-group">
+                             &nbsp;&nbsp;&nbsp;현재 참여 인원 (참여 인원 모집시 수정해 주시면  Progress 값이 올라 갑니다. ^^)
+                            <select class="form-control" v-model="currentMember"> 
+                                <option :value="data"  :key="index" v-for="(data,index) in 10">{{data}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                        <input class="form-control" placeholder="Open Kakao Chat Link를  입력 하세요 (옵션)" v-model="openKakaoChat" ref="openKakaoChat">
                         </div>
                         <div class="form-group"> 
-                            <QuillEditor theme="snow" toolbar="full"  content-type="html" v-model:content="content" ref="myEditor"/>
+                            <QuillEditor theme="snow" toolbar="full"  content-type="html" v-model:content="content" ref="myEditor"/> 
+                        </div>
+                        <div class="form-group"> 
+                                            <div class="card">
+                                            <div class="card-header">
+                                            <h3 class="card-title">필요한 Skill 항목을 추가해 보세요.</h3>
+                                            </div>
+                                            <div class="card-body p-0">
+                                            <table class="table table-striped">
+                                            <thead>
+                                            <tr>
+                                            <th>Item</th>
+                                            <th>Level</th>
+                                            <th style="width: 40px"></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr :key="index" v-for="(item,index) in items">
+                                                    <td><input type="text" name="skill_item" class="form-control" @change='checkvalue' placeholder="skill을 입력해주세요" v-model="item.item" maxlength="100"></td>
+                                                    <td>
+                                                         <select class="form-control" v-model="item.level" name="skill_level"> 
+                                                            <option value="BASIC">기본 학습</option>
+                                                            <option value="JOB">업무 사용</option>
+                                                            <option value="INTEREST">관심 있음</option>
+                                                            <option value="TOY_PROJECT">Toy Pjt.</option> 
+                                                        </select>
+                                                    </td>
+                                                    <td><button type="button" @click="setMinusSkill(index)" class="btn btn-block btn-success btn-sm" v-if="index != items.length - 1">-</button><button type="button" @click="setAddSkill()" class="btn btn-block btn-warning btn-sm" v-if="index == items.length - 1">+</button></td>
+                                                </tr>
+                                            </tbody>
+                                            </table>
+                                            </div>
+                                        </div>
+                                 </div>
+                        <div class="form-group">
+                                <select class="form-control" v-model="involveType"> 
+                                     <option value="ONOFFLINE">ON/OFF LINE 참여</option> 
+                                     <option value="OFFLINE">OFF LINE 참여</option> 
+                                      <option value="ONLINE">ON LINE 참여</option>
+                                  </select> 
                         </div>
                         </div>
 
@@ -49,7 +106,6 @@
                         <button type="submit" class="btn btn-info" style="margin-left: 15px;" @click="goTogether">List</button>
                         </div>
                         </div>
-
                         </div>
                         <!-- ////////////////////////////////////////////////// -->
         </div>
@@ -74,13 +130,27 @@
 import TogetherService from "../services/together.service";
 import VueElementLoading from "vue-element-loading";
 
+
+                // latitude : '',
+                // longitude : '', 
+                // maxMember : 2, 
+                // currentMember : 1, 
+                // skill : '', 
+
 export default {
   name: "togetheredit",
         data() {
             return {
-                category : 'TALK',
                 title : '',
+                category : 'STUDY',
                 content : '',
+                involveType : 'ONOFFLINE',
+                openKakaoChat : '',
+                latitude : '',
+                longitude : '', 
+                maxMember : 2, 
+                currentMember : 1, 
+                skill : '', 
                 togethers : [ ], 
                 spinnerText: 'Loading ...  ',
                 spinnerShow: false,
@@ -117,8 +187,6 @@ export default {
                                 error.toString());
                             }
                     );
-            }else{
-                 this.category =  this.$route.query.category;
             }
         },
         components: {
@@ -142,7 +210,6 @@ export default {
             goTogether() {
                 this.$router.push({
                     name: "Together",
-                    query: { category: this.category },
                 });
             },
             setTogether() {
@@ -165,7 +232,6 @@ export default {
                                         this.$toast.success(`Success.`);
                                         this.$router.push({
                                             name: "Together",
-                                            query: { category: this.category },
                                         });
                                     }else{
                                             this.$toast.error(`Fail.`);
@@ -188,7 +254,6 @@ export default {
                                     this.$toast.success(`Success.`);
                                     this.$router.push({
                                         name: "Together",
-                                        query: { category: this.category },
                                     });
                                 }else{
                                         this.$toast.error(`Fail.`);
