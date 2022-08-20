@@ -247,14 +247,12 @@ export default {
                  this.email = user.email;
                  this.roles= user.roles[0];
             }
-
-            setTimeout(() => {
-                window.kakao && window.kakao.maps
-                ? this.initMap()
-                : this.addKakaoMapScript();
-                window.addEventListener('resize', this.handleResize);
-            }, 1000);
-
+            // setTimeout(() => {
+            //     window.kakao && window.kakao.maps
+            //     ? this.initMap()
+            //     : this.addKakaoMapScript();
+            //     window.addEventListener('resize', this.handleResize);
+            // }, 1000);
         },
           methods: {
             goTogether() {
@@ -380,10 +378,8 @@ export default {
                 container.style.height = 300+'px'; 
             }
            
-            this.latitude = 37.479751116607545
-            this.longitud = 126.82286755783196
-
-             alert(this.latitude)
+            // this.latitude = 37.479751116607545
+            // this.longitud = 126.82286755783196
 
             var options = {
                 center: new kakao.maps.LatLng(this.latitude, this.longitude), 
@@ -393,14 +389,13 @@ export default {
             // console.log(map) 
 
             ///////////////////////////////////////////////////////////////////
-                var positions = [
-                    // {
-                    //     id: 1,
-                    //     together: 'OFF LINE 모임 장소',
-                    //     location: '',
-                    //     latlng: new kakao.maps.LatLng(this.latitude, this.longitude),
-                    // },
-                ]
+                var positions = []
+                    positions.push({
+                        id: 1,
+                        together: 'OFF LINE 모임 장소',
+                        location: '',
+                        latlng: new kakao.maps.LatLng(this.latitude, this.longitude),
+                    })
 
                 var imageSrc = require('@/assets/img/marker.png'), 
                 imageSize = new kakao.maps.Size(24, 35), 
