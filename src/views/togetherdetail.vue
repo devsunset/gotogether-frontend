@@ -110,7 +110,7 @@
                                      <option value="ONOFFLINE">ON/OFF LINE 참여</option> 
                                   </select> 
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" v-show="involveType !='ONLINE'">
                                <div id="map" class="map" style="margin-top:20px"></div>
                         </div>
                         </div>
