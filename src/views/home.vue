@@ -141,7 +141,7 @@
 import CommonService from "../services/common.service";
 
 export default {
-  name: "dashboard",
+  name: "home",
   data() {
     return {
       notice: "",

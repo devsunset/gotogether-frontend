@@ -114,7 +114,7 @@
 import PostService from "../services/post.service";
 
 export default {
-  name: "postedit",
+  name: "postdetail",
         data() {
             return {
                 category : 'TALK',
