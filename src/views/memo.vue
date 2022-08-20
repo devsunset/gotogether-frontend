@@ -23,8 +23,8 @@
                    <div class="card-header">
                             <span class="card-title">
                                  <span class="form-group clearfix" style="margin-left:15px"> 
-                                    <div class="icheck-primary d-inline">
-                                    <input type="checkbox" id="delete_all_check" v-model="allCheck" @change="checkAll($event)" >
+                                    <div class="icheck-primary d-inline" v-if="memos.length != 0" >
+                                        <input type="checkbox" id="delete_all_check" v-model="allCheck" @change="checkAll($event)" >
                                         <label for="delete_all_check">
                                         <button type="button" style="height:22px;width:60px; padding: 0px;" class="btn btn-block btn-danger btn-xs"  @click="setMemoDelete()" >Delete</button>
                                         </label>
