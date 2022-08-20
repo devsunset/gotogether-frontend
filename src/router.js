@@ -7,6 +7,8 @@ import ForgotPassword from '@/components/forgot-password.vue';
 
 import Home from '@/views/home.vue';
 import Together from '@/views/together.vue';
+import TogetherDetail from '@/views/togetherdetail.vue';
+import TogetherEdit from '@/views/togetheredit.vue';
 import Member from '@/views/member.vue';
 import Post from '@/views/post.vue';
 import PostDetail from '@/views/postdetail.vue';
@@ -29,6 +31,16 @@ const routes = [
             path: 'together',
             name: 'Together',
             component: Together
+          },
+          {
+            path: 'togetherdetail',
+            name: 'TogetherDetail',
+            component: TogetherDetail
+          },
+          {
+            path: 'togetheredit',
+            name: 'TogetherEdit',
+            component: TogetherEdit
           },
           {
             path: 'member',
