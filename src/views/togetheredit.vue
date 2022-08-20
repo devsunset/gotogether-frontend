@@ -33,7 +33,7 @@
                         <div class="form-group">
                                 <select class="form-control" v-model="category"> 
                                       <option value="STUDY">함께 공부해요</option>
-                                      <option value="PORTFOLIO">포트폴리오 준비</option> 
+                                      <option value="PORTFOLIO">포트폴리오 구축</option> 
                                       <option value="HACKATHON">해커톤 참가</option> 
                                       <option value="CONTEST">공모전 참가</option> 
                                       <option value="TOY_PROJECT">토이 프로젝트 구축</option> 
@@ -93,9 +93,9 @@
                                  </div>
                         <div class="form-group">
                                 <select class="form-control" v-model="involveType"> 
-                                    <option value="ONLINE">ON LINE 참여</option>
-                                     <option value="OFFLINE">OFF LINE 참여</option> 
-                                     <option value="ONOFFLINE">ON/OFF LINE 참여</option> 
+                                    <option value="ONLINE">ON LINE </option>
+                                     <option value="OFFLINE">OFF LINE </option> 
+                                     <option value="ONOFFLINE">ON/OFF LINE </option> 
                                   </select> 
                         </div>
                         </div>

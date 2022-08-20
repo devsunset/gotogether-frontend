@@ -36,7 +36,7 @@
                         <div class="form-group">
                                 <select class="form-control" v-model="category" disabled> 
                                       <option value="STUDY">함께 공부해요</option>
-                                      <option value="PORTFOLIO">포트폴리오 준비</option> 
+                                      <option value="PORTFOLIO">포트폴리오 구축</option> 
                                       <option value="HACKATHON">해커톤 참가</option> 
                                       <option value="CONTEST">공모전 참가</option> 
                                       <option value="TOY_PROJECT">토이 프로젝트 구축</option> 
@@ -56,8 +56,8 @@
                                 <option :value="data"  :key="index" v-for="(data,index) in 10">{{data}}</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                        <input class="form-control" placeholder="Open Kakao Chat Link를  입력 하세요 (옵션)" v-model="openKakaoChat" ref="openKakaoChat" disabled>
+                        <div class="form-group" v-if="openKakaoChat">
+                              <a :href="openKakaoChat" target="_blank"> {{openKakaoChat}}</a>
                         </div>
                         <div class="form-group"> 
                             <div class="col-md" style="padding:0px">
@@ -101,11 +101,7 @@
                                     </span>
                             </div>
                         </div>
-
-                        
                         <p/>
-
-
                         </div>
                         <div class="form-group">
                                 <select class="form-control" v-model="involveType" disabled> 
@@ -143,7 +139,7 @@
                                 </div>
                                 </div>
                             </div>
-                    <!-- ////////////////////////////////////////////////// -->
+                        <!-- ////////////////////////////////////////////////// -->
 
                     <div v-if="currentUser" class="card card-success" style="margin:15px">
                             <div class="card-header">
@@ -409,8 +405,8 @@ export default {
                 var positions = [
                 {
                     id: 1,
-                    together: '항동 모각코',
-                    location: 'Twosome place',
+                    together: 'OFF LINE 모임 장소',
+                    location: '',
                     latlng: new kakao.maps.LatLng(37.479751116607545, 126.82286755783196),
                 },
                 ]
