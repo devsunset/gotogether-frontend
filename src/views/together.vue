@@ -154,6 +154,7 @@ export default {
             goTogetherNew() {
              this.$router.push({
                     name: "TogetherEdit",
+                    query: { "togetherId": '' },
                 });
             },
             goTogetherDetail(togetherId) {
