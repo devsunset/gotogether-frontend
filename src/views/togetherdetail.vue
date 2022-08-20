@@ -219,6 +219,13 @@ export default {
                                     this.writerUsername = response.data.data.username;
                                     this.modifiedDate = response.data.data.modifiedDate;
                                     this.skill = response.data.data.skill;
+
+                                    if(this.involveType !='ONLINE'){
+                                           window.kakao && window.kakao.maps
+                                            ? this.initMap()
+                                            : this.addKakaoMapScript();
+                                            window.addEventListener('resize', this.handleResize);
+                                    }
                                 }else{
                                     this.$toast.error(`Fail.`);
                                 }
@@ -252,11 +259,6 @@ export default {
                  this.email = user.email;
                  this.roles= user.roles[0];
             }
-
-            window.kakao && window.kakao.maps
-            ? this.initMap()
-            : this.addKakaoMapScript();
-            window.addEventListener('resize', this.handleResize);
         },
           methods: {
             goTogether() {
@@ -404,7 +406,7 @@ export default {
             container.style.height = (this.height-200)+'px'; 
 
             var options = {
-                center: new kakao.maps.LatLng(37.479751116607545, 126.82286755783196), 
+                center: new kakao.maps.LatLng(this.latitude, this.longitude), 
                 level: 4 
             };
             var map = new kakao.maps.Map(container, options); 
@@ -416,7 +418,7 @@ export default {
                     id: 1,
                     together: 'OFF LINE 모임 장소',
                     location: '',
-                    latlng: new kakao.maps.LatLng(37.479751116607545, 126.82286755783196),
+                    latlng: new kakao.maps.LatLng(this.latitude, this.longitude),
                 },
                 ]
 
