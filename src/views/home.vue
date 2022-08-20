@@ -93,14 +93,14 @@
     <!-- /.container-fluid -->
 </section>
 
-<div class="callout callout-info" style="margin:10px">
+<div v-if="notice !=''" class="callout callout-info" style="margin:10px">
 <h5><i class="fas fa-info"></i> Notice</h5>
     <p style="text-align:center" v-html="notice"></p>
 </div>
 
 <div class="card" style="padding:15px;margin:10px">
     <div class="card-header">
-        <h3 class="card-title">Recent Project</h3>
+        <h3 class="card-title"><b>Recent Together Top 3</b></h3>
     </div>
 
     <div class="card-body p-0">
@@ -110,55 +110,26 @@
                     <th>Together</th>                                   
                     <th>Progress</th>
                     <th style="width: 40px"></th>
-                    <th>Nickname</th>
+                    <th>Involve</th>
                     <th>Date</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- <tr>
-                    <td>GoTogether Toy Project 함께 공부하며 만들어 가실 분 ^^</td>
+                <tr v-if="recentTogether.length == 0">
+                     <td colspan="5" style="text-align:center">No Data.</td>
+                </tr>
+                <!-- progress 0~25 : danger   26~50 :  warning  51~75 :  primary  76~ 100  :  success-->
+                <tr :key="index" v-for="(data,index) in recentTogether" @click="goTogetherDetail(data.togetherId)">
+                    <td>{{data.title}}</td>
                     <td>
                         <div class="progress progress-xs">
-                            <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                            <div :class="'progress-bar bg-'+data.progressLegend" :style="'width: '+data.progress+'%'"></div>
                         </div>
                     </td>
-                    <td><span class="badge bg-danger">55%</span></td>
-                    <td>devsunset</td>
-                    <td>22-06-29 10:30</td>
+                    <td><span :class="'badge bg-'+data.progressLegend">{{data.progress}}%</span></td>
+                    <td>{{data.involveType}}</td>
+                    <td>{{data.createdDate.substring(2,10)}}</td>
                 </tr>
-                <tr>
-                    <td>FullStack 개발 스터디</td>
-                    <td>
-                        <div class="progress progress-xs">
-                            <div class="progress-bar bg-warning" style="width: 70%"></div>
-                        </div>
-                    </td>
-                    <td><span class="badge bg-warning">70%</span></td>
-                    <td>devsunset</td>
-                    <td>22-06-29 10:30</td>
-                </tr>
-                <tr>
-                    <td>코딩 테스트 준비 모임</td>
-                    <td>
-                        <div class="progress progress-xs progress-striped active">
-                            <div class="progress-bar bg-primary" style="width: 30%"></div>
-                        </div>
-                    </td>
-                    <td><span class="badge bg-primary">30%</span></td>
-                    <td>devsunset</td>
-                    <td>22-06-29 10:30</td>
-                </tr>
-                <tr>
-                    <td>공모전 참가팀 인원 충원</td>
-                    <td>
-                        <div class="progress progress-xs progress-striped active">
-                            <div class="progress-bar bg-success" style="width: 90%"></div>
-                        </div>
-                    </td>
-                    <td><span class="badge bg-success">90%</span></td>
-                    <td>devsunset</td>
-                    <td>22-06-29 10:30</td>
-                </tr> -->
             </tbody>
         </table>
     </div>
@@ -168,8 +139,6 @@
 
 <script>
 import CommonService from "../services/common.service";
-// import TogetherService from "../services/together.service";
-// this.currentUser['roles'].includes('ROLE_ADMIN');
 
 export default {
   name: "dashboard",
@@ -179,12 +148,12 @@ export default {
       together: 0,
       user: 0,
       talk : 0,
-      qa : 0
+      qa : 0,
+      recentTogether : [],
     };
   },
   mounted: function () {
      this.getHome();
-     this.getRecentTogether();
     }
  ,
   methods: {
@@ -196,6 +165,7 @@ export default {
                 this.talk = response.data.data.TALK;
                 this.qa = response.data.data.QA;
                 this.notice = response.data.data.NOTICE;
+                this.recentTogether  = response.data.data.RECENT_TOGETHER;
             },
             (error) => {
                 this.notice =
@@ -207,21 +177,8 @@ export default {
             }
             );
     },
-     getRecentTogether() {
-         console.log('to-do')
-        //  TogetherService.getRecentTogether().then(
-        //     (response) => {
-        //             console.log(response)//alert(JSON.stringify(response));
-        //     },
-        //     (error) => {
-        //         this.notice =
-        //         (error.response &&
-        //             error.response.data &&
-        //             error.response.data.message) ||
-        //         error.message ||
-        //         error.toString();
-        //     }
-        //     );
+    goTogetherDetail(togetherId){
+       console.log('To-Do : '+togetherId)
     },
   },
 };
