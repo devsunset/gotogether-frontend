@@ -108,10 +108,10 @@
             <thead>
                 <tr>
                     <th>Together</th>                                   
-                    <th>Progress</th>
+                    <th style="width: 50px">Progress</th>
                     <th style="width: 40px"></th>
-                    <th>Involve</th>
-                    <th>Date</th>
+                    <th style="width: 50px">Involve</th>
+                    <th style="width: 50px">Date</th>
                 </tr>
             </thead>
             <tbody>

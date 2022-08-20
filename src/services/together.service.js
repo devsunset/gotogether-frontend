@@ -1,8 +1,8 @@
 import api from './api';
 
 class TogetherService {
-  getRecentTogether() {
-    return api.get('/memo/newreceive');
+  getTogetherList(page,size,reqData) {
+    return api.post("/together/list?page="+page+"&size="+size,reqData );
   }
 }
 

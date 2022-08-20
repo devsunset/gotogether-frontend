@@ -23,17 +23,13 @@
                 <div class="card">
                    <div class="card-header">
                             <span class="card-title">
-                                <button type="button" class="btn btn-block btn-success" style="width:100px;padding:0px;margin:0px" @click="goPostNew()" v-if="currentUser"> New</button>
+                                <button type="button" class="btn btn-block btn-success" style="width:100px;padding:0px;margin:0px" @click="goTogetherNew()" v-if="currentUser"> New</button>
                             </span>
                             <div class="card-tools">
                                 <div class="input-group input-group-sm" style="width: 300px;">
-                                     <select class="form-control" v-model="category" @change="getPostList('INIT')"> 
-                                      <option value="TALK">Talk</option>
-                                      <option value="QA">Q&A</option> 
-                                  </select>
-                                    <input type="text" name="keyword" class="form-control float-right" v-model="keyword" placeholder="Search" @keyup.enter="getPostList('INIT')">
+                                    <input type="text" name="keyword" class="form-control float-right" v-model="keyword" placeholder="Search" @keyup.enter="getTogetherList('INIT')">
                                     <div class="input-group-append">
-                                        <button type="submit" class="btn btn-default" @click="getPostList('INIT')">
+                                        <button type="submit" class="btn btn-default" @click="getTogetherList('INIT')">
                                             <i class="fas fa-search"></i>
                                         </button>
                                     </div>
@@ -42,30 +38,40 @@
                     </div>
 
                         <div class="card-body table-responsive p-0">
-                            <table class="table table-hover text-nowrap">
-                                <thead>
-                                    <tr>
-                                        <th v-if="category == 'TALK'">Talk</th>
-                                        <th v-else-if="category == 'QA'">Q&A</th>
-                                        <th style="width: 5%">Reply</th>
-                                        <th style="width: 5%">View</th>
-                                        <th style="width: 5%">Nickname</th>
-                                        <th style="width: 5%">Date</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr :key="index" v-for="(post,index) in posts" @click="goPostDetail(post.postId)">
-                                        <td>{{post.title}}</td>
-                                        <td>{{post.comment_count}}</td>
-                                        <td>{{post.hit}}</td>
-                                        <td>{{post.nickname}}</td>
-                                        <td> {{post.createdDate.substring(2,16)}}</td>
-                                    </tr>
-                                    <tr v-if="posts.length == 0">
-                                        <td colspan="5" style="text-align:center">No Data.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                          <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Together</th>                                   
+                                    <th style="width: 50px">Progress</th>
+                                    <th style="width: 40px"></th>
+                                    <th style="width: 50px">Involve</th>
+                                    <th style="width: 50px">Reply</th>
+                                    <th style="width: 50px">View</th>
+                                    <th style="width: 50px">Nickname</th>
+                                    <th style="width: 150px">Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-if="togethers.length == 0">
+                                    <td colspan="8" style="text-align:center">No Data.</td>
+                                </tr>
+                                <!-- progress 0~25 : danger   26~50 :  warning  51~75 :  primary  76~ 100  :  success-->
+                                <tr :key="index" v-for="(together,index) in togethers" @click="goTogetherDetail(together.togetherId)">
+                                    <td>{{together.title}}</td>
+                                    <td>
+                                        <div class="progress progress-xs">
+                                            <div :class="'progress-bar bg-'+together.progressLegend" :style="'width: '+together.progress+'%'"></div>
+                                        </div>
+                                    </td>
+                                    <td><span :class="'badge bg-'+together.progressLegend">{{together.progress}}%</span></td>
+                                    <td>{{together.involveType}}</td>
+                                    <td>{{together.togetherComment_count}}</td>
+                                    <td>{{together.hit}}</td>
+                                    <td>{{together.nickname}}</td>
+                                    <td> {{together.createdDate.substring(2,16)}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                         </div>
 
                     <div class="card-footer clearfix">
@@ -75,7 +81,7 @@
                                     :pages="totalPages"
                                     :range-size="rangeSize "
                                     active-color="#29b3ed"
-                                    @update:modelValue="getPostList"
+                                    @update:modelValue="getTogetherList"
                                 />
                              </div>
                     </div>
@@ -99,7 +105,7 @@
 </template>
 
 <script>
-import PostService from "../services/post.service";
+import TogetherService from "../services/together.service";
 import VueElementLoading from "vue-element-loading";
 import VPagination from "@hennge/vue3-pagination";
 import "@hennge/vue3-pagination/dist/vue3-pagination.css";
@@ -108,8 +114,8 @@ export default {
   name: "together",
         data() {
             return {
-                category : "TALK",
-                posts : [ ], 
+                category : "",
+                togethers : [ ], 
                 spinnerText: 'Loading ...  ',
                 spinnerShow: false,
                 spinnerKind: 'bar-fade-scale',
@@ -124,9 +130,6 @@ export default {
                 color: '#007bff',
                 size: '22px',
             };
-        },
-        created() {
-            this.category = this.$route.query.category;
         },
         components: {
             VueElementLoading
@@ -145,22 +148,21 @@ export default {
                  this.email = user.email;
                  this.roles= user.roles[0];
             }
-            this.getPostList('INIT');
+            this.getTogetherList('INIT');
         },
           methods: {
-            goPostNew() {
+            goTogetherNew() {
              this.$router.push({
-                    name: "PostEdit",
-                    query: { category: this.category },
+                    name: "TogetherEdit",
                 });
             },
-            goPostDetail(postId) {
+            goTogetherDetail(togetherId) {
                 this.$router.push({
-                    name: "PostDetail",
-                    query: { "postId": postId },
+                    name: "TogetherDetail",
+                    query: { "togetherId": togetherId },
                 });
             },
-            getPostList(flag) {
+            getTogetherList(flag) {
                 if(flag == 'INIT'){
                     this.page = 1;
                     this.totalPages = 0;
@@ -168,12 +170,12 @@ export default {
                 }
 
                 this.spinnerShow = true;
-                PostService.getPostList(this.page-1,10,{"category": this.category, "keyword" : this.keyword}).then(
+                TogetherService.getTogetherList(this.page-1,5,{"category": '', "keyword" : this.keyword}).then(
                     (response) => {
                        this.page = response.data.data.number+1;
                        this.totalPages = response.data.data.totalPages;
                        this.rangeSize  = response.data.data.number;
-                       this.posts = response.data.data.content;
+                       this.togethers = response.data.data.content;
                        this.spinnerShow = false;
                     },
                     (error) => {
@@ -181,7 +183,7 @@ export default {
                         this.totalPages = 0;
                         this.rangeSize  = 0;
                         this.spinnerShow = false;
-                        this.posts = [] 
+                        this.togethers = [] 
                         console.log(
                         (error.response &&
                             error.response.data &&
