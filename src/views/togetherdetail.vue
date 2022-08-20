@@ -4,8 +4,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0" v-if="this.category == 'TALK'">Together Detail Talk</h1>
-                <h1 class="m-0" v-else-if="this.category == 'QA'">Together Detail Q&A</h1>
+                <h1 class="m-0">Together Detail</h1>
             </div>
             <!-- /.col -->
            
@@ -57,7 +56,6 @@
                         </div>
                         <div class="card-footer">
                         <div class="float-right">
-                        <button v-if="roles == 'ROLE_ADMIN'" type="submit" class="btn btn-warning" style="margin-left: 15px;" @click="setUpdate">Change Category</button>    
                         <button v-if="userid == writerUsername || roles == 'ROLE_ADMIN'" type="submit" class="btn btn-danger" style="margin-left: 15px;" @click="setDelete">Delete</button>
                         <button v-if="userid == writerUsername || roles == 'ROLE_ADMIN'" type="submit" class="btn btn-primary" style="margin-left: 15px;" @click="goEdit">Edit</button>
                         <button type="submit" class="btn btn-info" style="margin-left: 15px;" @click="goTogether">List</button>
@@ -117,9 +115,18 @@ export default {
   name: "togetherdetail",
         data() {
             return {
-                category : 'TALK',
                 title : '',
+                category : '',
                 content : '',
+                involveType : '',
+                openKakaoChat : '',
+                latitude : '',
+                longitude : '', 
+                maxMember : 2, 
+                currentMember : 1, 
+                skill : '', 
+                items : [ ] ,
+                togethers : [ ], 
                 hit : 0,
                 comment_count: 0,
                 comment : '' , 
@@ -193,33 +200,6 @@ export default {
                                         this.$router.push({
                                             name: "Together",
                                             query: { category: this.category },
-                                        });
-                                    }else{
-                                            this.$toast.error(`Fail.`);
-                                    }
-                                },
-                                (error) => {
-                                    this.$toast.error(`Fail.`);
-                                    console.log(
-                                    (error.response &&
-                                        error.response.data &&
-                                        error.response.data.message) ||
-                                    error.message ||
-                                    error.toString());
-                                }
-                        );
-                    
-                 }).catch(() => console.log('no selected'));
-            },
-             setUpdate() {
-                    this.$confirm("Category를 변경 하시겠습니까?").then(() => {
-                            TogetherService.changeTogetherCategory(this.$route.query.togetherId).then(
-                                (response) => {
-                                    if(response.data.result == 'S'){
-                                        this.$toast.success(`Success.`);
-                                        this.$router.push({
-                                            name: "Together",
-                                            query: { category: response.data.data },
                                         });
                                     }else{
                                             this.$toast.error(`Fail.`);

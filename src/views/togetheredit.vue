@@ -167,6 +167,12 @@ export default {
                                     this.title = response.data.data.title;
                                     this.content = response.data.data.content;
                                     this.$refs.myEditor.setHTML(this.content);
+                                    this.involveType = response.data.data.involveType;
+                                    this.openKakaoChat = response.data.data.openKakaoChat;
+                                    this.latitude = response.data.data.latitude;
+                                    this.longitude = response.data.data.longitude;
+                                    this.maxMember = response.data.data.maxMember;
+                                    this.currentMember  = response.data.data.currentMember ;
 
                                     if(response.data.data.skill === undefined || response.data.data.skill == null || response.data.data.skill === ""){
                                         this.items = [
