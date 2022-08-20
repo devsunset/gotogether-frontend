@@ -74,13 +74,13 @@
                                          <tr>
                                             <td><b>Github</b></td>
                                             <td>
-                                                {{member.github}}
+                                               <a :href="member.github" target="_blank"> {{member.github}}</a>
                                             </td>
                                         </tr>
                                          <tr>
                                             <td><b>Homepage</b></td>
                                             <td>
-                                                {{member.homepage}}
+                                                 <a :href="member.homepage" target="_blank"> {{member.homepage}}</a>
                                             </td>
                                         </tr>
                                         <tr>
