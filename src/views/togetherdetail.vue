@@ -404,7 +404,7 @@ export default {
             container.style.height = (this.height-200)+'px'; 
 
             var options = {
-                center: new kakao.maps.LatLng(37.47973476787492, 126.82248036958089), 
+                center: new kakao.maps.LatLng(37.479751116607545, 126.82286755783196), 
                 level: 4 
             };
             var map = new kakao.maps.Map(container, options); 
