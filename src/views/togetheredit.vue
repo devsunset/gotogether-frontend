@@ -28,9 +28,11 @@
                         </div>
                         <div class="card-body">
                         <div class="form-group">
+                         <i class="nav-icon far fa-plus-square"></i>&nbsp;&nbsp;&nbsp; 제목 
                         <input class="form-control" placeholder="Together 제목을 입력 하세요" v-model="title" ref="title">
                         </div>
                         <div class="form-group">
+                        <i class="nav-icon far fa-plus-square"></i>&nbsp;&nbsp;&nbsp; 목적
                                 <select class="form-control" v-model="category"> 
                                       <option value="STUDY">함께 공부해요</option>
                                       <option value="PORTFOLIO">포트폴리오 구축</option> 
@@ -42,24 +44,27 @@
                                   </select>
                         </div>
                          <div class="form-group">
-                             &nbsp;&nbsp;&nbsp;최대 모집 인원 (최대 인원 10명으로 제한)
+                             <i class="nav-icon far fa-plus-square"></i>&nbsp;&nbsp;&nbsp;최대 모집 인원 (최대 인원 10명으로 제한)
                             <select class="form-control" v-model="maxMember"> 
                                 <option :value="data+1"  :key="index" v-for="(data,index) in 9">{{data+1}}</option>
                             </select>
                         </div>
                          <div class="form-group">
-                             &nbsp;&nbsp;&nbsp;현재 참여 인원 (참여 인원 모집시 수정해 주시면  Progress 값이 올라 갑니다. ^^)
+                             <i class="nav-icon far fa-plus-square"></i>&nbsp;&nbsp;&nbsp;현재 참여 인원 (참여 인원 모집시 수정해 주시면  Progress 값이 올라 갑니다. ^^)
                             <select class="form-control" v-model="currentMember"> 
                                 <option :value="data"  :key="index" v-for="(data,index) in 10">{{data}}</option>
                             </select>
                         </div>
                         <div class="form-group">
+                            <i class="nav-icon far fa-plus-square"></i>&nbsp;&nbsp;&nbsp; Kakao Open Chat Link
                         <input class="form-control" placeholder="Open Kakao Chat Link를  입력 하세요 (옵션)" v-model="openKakaoChat" ref="openKakaoChat">
                         </div>
                         <div class="form-group"> 
+                             <i class="nav-icon far fa-plus-square"></i>&nbsp;&nbsp;&nbsp; 상세 설명
                             <QuillEditor theme="snow" toolbar="full"  content-type="html" v-model:content="content" ref="myEditor"/> 
                         </div>
                         <div class="form-group"> 
+                            <i class="nav-icon far fa-plus-square"></i>&nbsp;&nbsp;&nbsp; Skill
                                             <div class="card">
                                             <div class="card-header">
                                             <h3 class="card-title">필요한 Skill 항목을 추가해 보세요.</h3>
@@ -92,6 +97,7 @@
                                         </div>
                                  </div>
                         <div class="form-group">
+                            <i class="nav-icon far fa-plus-square"></i>&nbsp;&nbsp;&nbsp; 참여 방식
                                 <select class="form-control" v-model="involveType"> 
                                     <option value="ONLINE">ON LINE </option>
                                      <option value="OFFLINE">OFF LINE </option> 

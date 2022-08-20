@@ -31,9 +31,11 @@
 
                         <div class="card-body">
                         <div class="form-group">
+                            <i class="nav-icon far fa-plus-square"></i>&nbsp;&nbsp;&nbsp; 제목 
                         <input class="form-control" placeholder="Title" v-model="title" disabled>
                         </div>
                         <div class="form-group">
+                            <i class="nav-icon far fa-plus-square"></i>&nbsp;&nbsp;&nbsp; 목적
                                 <select class="form-control" v-model="category" disabled> 
                                       <option value="STUDY">함께 공부해요</option>
                                       <option value="PORTFOLIO">포트폴리오 구축</option> 
@@ -45,21 +47,23 @@
                                   </select>
                         </div>
                         <div class="form-group">
-                             &nbsp;&nbsp;&nbsp;최대 모집 인원
+                             <i class="nav-icon far fa-plus-square"></i>&nbsp;&nbsp;&nbsp;최대 모집 인원
                             <select class="form-control" v-model="maxMember" disabled> 
                                 <option :value="data+1"  :key="index" v-for="(data,index) in 9">{{data+1}}</option>
                             </select>
                         </div>
                          <div class="form-group">
-                             &nbsp;&nbsp;&nbsp;현재 참여 인원 
+                             <i class="nav-icon far fa-plus-square"></i>&nbsp;&nbsp;&nbsp;현재 참여 인원 
                             <select class="form-control" v-model="currentMember" disabled> 
                                 <option :value="data"  :key="index" v-for="(data,index) in 10">{{data}}</option>
                             </select>
                         </div>
                         <div class="form-group" v-if="openKakaoChat">
+                             <i class="nav-icon far fa-plus-square"></i>&nbsp;&nbsp;&nbsp; Kakao Open Chat Link
                               <a :href="openKakaoChat" target="_blank"> {{openKakaoChat}}</a>
                         </div>
                         <div class="form-group"> 
+                            <i class="nav-icon far fa-plus-square"></i>&nbsp;&nbsp;&nbsp; 상세 설명
                             <div class="col-md" style="padding:0px">
                             <div class="card card-info">
                             <div class="card-header" style="height:40px">
@@ -74,7 +78,7 @@
                             </div>
                         </div>
                         <div class="form-group"> 
-
+                         <i class="nav-icon far fa-plus-square"></i>&nbsp;&nbsp;&nbsp; Skill
                          <div class="card card-info" style="margin:0px">
                             <div class="card-header">
                             <h3 class="card-title">Skill - 
@@ -104,6 +108,7 @@
                         <p/>
                         </div>
                         <div class="form-group">
+                            <i class="nav-icon far fa-plus-square"></i>&nbsp;&nbsp;&nbsp; 참여 방식
                                 <select class="form-control" v-model="involveType" disabled> 
                                     <option value="ONLINE">ON LINE 참여</option>
                                      <option value="OFFLINE">OFF LINE 참여</option> 
