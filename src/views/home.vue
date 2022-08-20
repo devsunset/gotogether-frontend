@@ -178,9 +178,9 @@ export default {
             );
     },
     goTogetherDetail(togetherId){
-       console.log('Together Detail Link Skip  : '+togetherId)
-         this.$router.push({
-            name: "Together",
+        this.$router.push({
+            name: "TogetherDetail",
+            query: { "togetherId": togetherId },
         });
     },
   },
