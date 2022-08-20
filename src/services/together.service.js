@@ -10,7 +10,7 @@ class TogetherService {
     }
 
     setTogether(reqData) {
-      return api.together("/together/",reqData );
+      return api.post("/together/",reqData );
     }
 
     putTogether(togetherId,reqData) {
@@ -35,7 +35,7 @@ class TogetherService {
     }
 
     setTogetherComment(reqData) {
-      return api.together("/togethercomment/",reqData );
+      return api.post("/togethercomment/",reqData );
     }
   
 }

@@ -93,9 +93,9 @@
                                  </div>
                         <div class="form-group">
                                 <select class="form-control" v-model="involveType"> 
-                                     <option value="ONOFFLINE">ON/OFF LINE 참여</option> 
+                                    <option value="ONLINE">ON LINE 참여</option>
                                      <option value="OFFLINE">OFF LINE 참여</option> 
-                                      <option value="ONLINE">ON LINE 참여</option>
+                                     <option value="ONOFFLINE">ON/OFF LINE 참여</option> 
                                   </select> 
                         </div>
                         </div>
@@ -137,13 +137,14 @@ export default {
                 title : '',
                 category : 'STUDY',
                 content : '',
-                involveType : 'ONOFFLINE',
+                involveType : 'ONLINE',
                 openKakaoChat : '',
                 latitude : '',
                 longitude : '', 
                 maxMember : 4, 
                 currentMember : 1, 
                 skill : '', 
+                items : [ ] ,
                 togethers : [ ], 
                 spinnerText: 'Loading ...  ',
                 spinnerShow: false,
@@ -165,12 +166,33 @@ export default {
                                     this.category = response.data.data.category;
                                     this.title = response.data.data.title;
                                     this.content = response.data.data.content;
-                                    this.$refs.myEditor.setHTML(this.content)
+                                    this.$refs.myEditor.setHTML(this.content);
+
+                                    if(response.data.data.skill === undefined || response.data.data.skill == null || response.data.data.skill === ""){
+                                        this.items = [
+                                            {"item" : "", "level" : "INTEREST"}
+                                        ] ;
+                                    }else{
+                                        this.items = [] ;
+                                        var data = response.data.data.skill.split("|");
+                                        var skills = [] ;
+                                        data.forEach(function(d){
+                                            var datasub = d.split('^');
+                                            skills.push({ item:datasub[0], level:datasub[1] });
+                                        })
+                                        this.items = skills; 
+                                    }
                                 }else{
+                                    this.items = [
+                                        {"item" : "", "level" : "INTEREST"}
+                                    ] ;
                                     this.$toast.error(`Fail.`);
                                 }
                             },
                             (error) => {
+                                 this.items = [
+                                        {"item" : "", "level" : "INTEREST"}
+                                    ] ;
                                 this.$toast.error(`Fail.`);
                                 console.log(
                                 (error.response &&
@@ -180,6 +202,10 @@ export default {
                                 error.toString());
                             }
                     );
+            }else{
+                  this.items = [
+                        {"item" : "", "level" : "INTEREST"}
+                    ] ;
             }
         },
         components: {
@@ -212,14 +238,39 @@ export default {
                     return;
                 }
 
-                 if(this.$refs.myEditor.getText().trim()== ''){
+                if(this.$refs.myEditor.getText().trim()== ''){
                     this.$toast.warning(`내용을 입력해 주세요.`);
                     return;
                 }
-                this.$confirm("저장 하시겠습니까?").then(() => {
 
+                var skillitem = "";
+                this.items.forEach(function(d){
+                    let tmp = d.item.trim().replace(/\|/g,'').replace(/\^/g,'');
+                    if(tmp !='' ){
+                        skillitem +=tmp+'^'+d.level+"|"
+                    } 
+                })
+
+                if(skillitem !=''){
+                    skillitem  = skillitem.substring(0,skillitem.length -1)
+                }
+                this.skill = skillitem;
+
+                this.$confirm("저장 하시겠습니까?").then(() => {
+                    var reqData = {
+                        title : this.title,
+                        category : this.category,
+                        content : this.content,
+                        involveType : this.involveType,
+                        openKakaoChat : this.openKakaoChat,
+                        latitude : this.latitude,
+                        longitude : this.longitude, 
+                        maxMember : this.maxMember, 
+                        currentMember : this.currentMember, 
+                        skill : this.skill, 
+                    }
                     if(this.$route.query.togetherId){
-                            TogetherService.putTogether(this.$route.query.togetherId,{"category": this.category, "title" : this.title, "content" : this.content }).then(
+                            TogetherService.putTogether(this.$route.query.togetherId,reqData).then(
                                 (response) => {
                                     if(response.data.result == 'S'){
                                         this.$toast.success(`Success.`);
@@ -241,7 +292,8 @@ export default {
                                 }
                         );
                     }else{
-                        TogetherService.setTogether({"category": this.category, "title" : this.title, "content" : this.content }).then(
+                        alert(JSON.stringify(reqData))
+                        TogetherService.setTogether(reqData).then(
                             (response) => {
                                 if(response.data.result == 'S'){
                                     this.$toast.success(`Success.`);
@@ -249,7 +301,7 @@ export default {
                                         name: "Together",
                                     });
                                 }else{
-                                        this.$toast.error(`Fail.`);
+                                    this.$toast.error(`Fail.`);
                                 }
                             },
                             (error) => {
@@ -265,6 +317,12 @@ export default {
                     }
                  }).catch(() => console.log('no selected'));
             },
+             setAddSkill() {
+                this.items.push({ item:"", level:"INTEREST"});
+             },
+             setMinusSkill(idx) {
+                  this.items.splice(idx, 1)
+             },
         },
 };
 </script>
