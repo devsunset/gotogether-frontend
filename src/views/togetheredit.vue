@@ -350,15 +350,11 @@ export default {
                             var container = document.getElementById("map"); 
                             this.width = window.innerWidth; 
                             this.height = window.innerHeight;
-
                             try {
                                 container.style.height = (this.height-200)+'px';  
                             } catch (err) { 
                                 container.style.height = 300+'px'; 
                             }
-                        
-                            // this.latitude = 37.479751116607545
-                            // this.longitud = 126.82286755783196
 
                             // Default
                             var options = {
@@ -380,95 +376,36 @@ export default {
 
                             var map = new kakao.maps.Map(container, options); 
 
-                            ///////////////////////////////////////////////////////////////////
-                                var positions = []
-                                if(this.$route.query.togetherId == undefined || this.$route.query.togetherId =="" || this.latitude == undefined || this.latitude ==""){
-                                    console.log('xxx')
-                                }else{
-                                    positions.push({
-                                        id: 1,
-                                        together: 'OFF LINE 모임 장소',
-                                        location: '',
-                                        latlng: new kakao.maps.LatLng(this.latitude, this.longitude),
-                                    })
-                                }
+                            alert(map.getCenter())
 
-                                var imageSrc = require('@/assets/img/marker.png'), 
-                                imageSize = new kakao.maps.Size(24, 35), 
-                                imageOption = { offset: new kakao.maps.Point(20, 35) }; 
+                            // 지도를 클릭한 위치에 표출할 마커입니다
+                            var marker = new kakao.maps.Marker({ 
+                                // 지도 중심좌표에 마커를 생성합니다 
+                                position: map.getCenter() 
+                            }); 
 
-                                var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+                            // 지도에 마커를 표시합니다
+                            marker.setMap(map);
 
-                                //for문이 아닌 forEach를 이용하여 dom에 직접 접근해야한다.
-                                positions.forEach(function(pos) {
-                                // 마커를 생성합니다
-                                var marker = new kakao.maps.Marker({
-                                    map: map,             // 마커를 표시할 지도
-                                    position: pos.latlng, // 마커의 위치
-                                    image: markerImage,
-                                });
-
-                                var customOverlay = new kakao.maps.CustomOverlay({
-                                    position: pos.latlng,
-                                    xAnchor: 0.5,
-                                    yAnchor: 1.05,
-                                });
-
-                                //  아래 테그를 동적으로 생성 해서 Marker 정보 표시 (example)
-                                // <div class="info-box shadow-sm">
-                                //     <span class="info-box-icon bg-success"><i class="far fa-comments"></i></span>
-                                //     <div class="info-box-content">
-                                //       <span class="info-box-text">Shadows</span>
-                                //       <span class="info-box-number">Small</span>
-                                //       <span><button class='btn btn-block btn-primary btn-sm'>Close</button></span>
-                                //     </div>
-                                // </div>
-
-                                var content = document.createElement('div');
-                                content.className = 'info-box shadow-sm';
-
-                                var spanicon = document.createElement('span');
-                                spanicon.className = 'info-box-icon bg-success';
-
-                                var itag = document.createElement('i');
-                                itag.className = 'far fa-comments';
-                                spanicon.appendChild(itag);
-
-                                var contentSub = document.createElement('div');
-                                contentSub.className = 'info-box-content';
-
-                                var spanTitle = document.createElement('span');
-                                spanTitle.className = 'info-box-number';
-                                spanTitle.appendChild(document.createTextNode(pos.together));
-                                contentSub.appendChild(spanTitle);
-
-                                var spanLocation = document.createElement('span');
-                                spanLocation.className = 'info-box-text';
-                                spanLocation.appendChild(document.createTextNode(pos.location));
-                                contentSub.appendChild(spanLocation);
-
-                                var buttonContainer = document.createElement('span');
-                                var closeBtn = document.createElement('button');
-                                closeBtn.className = 'btn btn-block btn-primary btn-sm';
-                                closeBtn.appendChild(document.createTextNode('Close'));
-                                closeBtn.onclick = function() {
-                                    customOverlay.setMap(null);
-                                };
-
-                                buttonContainer.appendChild(closeBtn);
-                                contentSub.appendChild(buttonContainer);
-
-                                content.appendChild(spanicon);
-                                content.appendChild(contentSub);
-
-                                customOverlay.setContent(content);
-
-                                kakao.maps.event.addListener(marker, 'click', function() {
-                                    customOverlay.setMap(map);
-                                });
+                            // 지도에 클릭 이벤트를 등록합니다
+                            // 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
+                            kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
                                 
-                                });
+                                // 클릭한 위도, 경도 정보를 가져옵니다 
+                                var latlng = mouseEvent.latLng; 
+                                
+                                // 마커 위치를 클릭한 위치로 옮깁니다
+                                marker.setPosition(latlng);
+                                
+                                var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
+                                message += '경도는 ' + latlng.getLng() + ' 입니다';
 
+                                alert(message);
+
+                                this.latitude =  latlng.getLat();
+                                this.longitud =  latlng.getLng();
+                                
+                            });
                             ///////////////////////////////////////////////////////////////////
                             /*
                                 if (navigator.geolocation) {
