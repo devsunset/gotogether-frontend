@@ -220,7 +220,7 @@ export default {
                                     this.modifiedDate = response.data.data.modifiedDate;
                                     this.skill = response.data.data.skill;
 
-                                    if(this.involveType !='ONLINE'){
+                                    if(this.involveType !='ONLINE' && this.latitude !== undefined && this.latitude !=''){
                                            window.kakao && window.kakao.maps
                                             ? this.initMap()
                                             : this.addKakaoMapScript();
@@ -416,7 +416,20 @@ export default {
                 };
                 var map = new kakao.maps.Map(container, options); 
 
-                ///////////////////////////////////////////////////////////////////
+                // 마커가 표시될 위치입니다 
+                var markerPosition  = new kakao.maps.LatLng(this.latitude, this.longitude); 
+
+                // 지도를 클릭한 위치에 표출할 마커입니다
+                var marker = new kakao.maps.Marker({ 
+                    // 지도 중심좌표에 마커를 생성합니다 
+                    position : markerPosition
+                }); 
+
+                // 지도에 마커를 표시합니다
+                marker.setMap(map);
+
+               /*  
+               ### (삭제 금지 - Custom Maker 생성  example) ###
                     var positions = [
                     {
                         id: 1,
@@ -434,73 +447,74 @@ export default {
 
                     //for문이 아닌 forEach를 이용하여 dom에 직접 접근해야한다.
                     positions.forEach(function(pos) {
-                    // 마커를 생성합니다
-                    var marker = new kakao.maps.Marker({
-                        map: map,             // 마커를 표시할 지도
-                        position: pos.latlng, // 마커의 위치
-                        image: markerImage,
-                    });
+                            // 마커를 생성합니다
+                            var marker = new kakao.maps.Marker({
+                                map: map,             // 마커를 표시할 지도
+                                position: pos.latlng, // 마커의 위치
+                                image: markerImage,
+                            });
 
-                    var customOverlay = new kakao.maps.CustomOverlay({
-                        position: pos.latlng,
-                        xAnchor: 0.5,
-                        yAnchor: 1.05,
-                    });
+                            var customOverlay = new kakao.maps.CustomOverlay({
+                                position: pos.latlng,
+                                xAnchor: 0.5,
+                                yAnchor: 1.05,
+                            });
 
-                    //  아래 테그를 동적으로 생성 해서 Marker 정보 표시 (example)
-                    // <div class="info-box shadow-sm">
-                    //     <span class="info-box-icon bg-success"><i class="far fa-comments"></i></span>
-                    //     <div class="info-box-content">
-                    //       <span class="info-box-text">Shadows</span>
-                    //       <span class="info-box-number">Small</span>
-                    //       <span><button class='btn btn-block btn-primary btn-sm'>Close</button></span>
-                    //     </div>
-                    // </div>
+                            //  아래 테그를 동적으로 생성 해서 Marker 정보 표시 (example)
+                            // <div class="info-box shadow-sm">
+                            //     <span class="info-box-icon bg-success"><i class="far fa-comments"></i></span>
+                            //     <div class="info-box-content">
+                            //       <span class="info-box-text">Shadows</span>
+                            //       <span class="info-box-number">Small</span>
+                            //       <span><button class='btn btn-block btn-primary btn-sm'>Close</button></span>
+                            //     </div>
+                            // </div>
 
-                    var content = document.createElement('div');
-                    content.className = 'info-box shadow-sm';
+                            var content = document.createElement('div');
+                            content.className = 'info-box shadow-sm';
 
-                    var spanicon = document.createElement('span');
-                    spanicon.className = 'info-box-icon bg-success';
+                            var spanicon = document.createElement('span');
+                            spanicon.className = 'info-box-icon bg-success';
 
-                    var itag = document.createElement('i');
-                    itag.className = 'far fa-comments';
-                    spanicon.appendChild(itag);
+                            var itag = document.createElement('i');
+                            itag.className = 'far fa-comments';
+                            spanicon.appendChild(itag);
 
-                    var contentSub = document.createElement('div');
-                    contentSub.className = 'info-box-content';
+                            var contentSub = document.createElement('div');
+                            contentSub.className = 'info-box-content';
 
-                    var spanTitle = document.createElement('span');
-                    spanTitle.className = 'info-box-number';
-                    spanTitle.appendChild(document.createTextNode(pos.together));
-                    contentSub.appendChild(spanTitle);
+                            var spanTitle = document.createElement('span');
+                            spanTitle.className = 'info-box-number';
+                            spanTitle.appendChild(document.createTextNode(pos.together));
+                            contentSub.appendChild(spanTitle);
 
-                    var spanLocation = document.createElement('span');
-                    spanLocation.className = 'info-box-text';
-                    spanLocation.appendChild(document.createTextNode(pos.location));
-                    contentSub.appendChild(spanLocation);
+                            var spanLocation = document.createElement('span');
+                            spanLocation.className = 'info-box-text';
+                            spanLocation.appendChild(document.createTextNode(pos.location));
+                            contentSub.appendChild(spanLocation);
 
-                    var buttonContainer = document.createElement('span');
-                    var closeBtn = document.createElement('button');
-                    closeBtn.className = 'btn btn-block btn-primary btn-sm';
-                    closeBtn.appendChild(document.createTextNode('Close'));
-                    closeBtn.onclick = function() {
-                        customOverlay.setMap(null);
-                    };
+                            var buttonContainer = document.createElement('span');
+                            var closeBtn = document.createElement('button');
+                            closeBtn.className = 'btn btn-block btn-primary btn-sm';
+                            closeBtn.appendChild(document.createTextNode('Close'));
+                            closeBtn.onclick = function() {
+                                customOverlay.setMap(null);
+                            };
 
-                    buttonContainer.appendChild(closeBtn);
-                    contentSub.appendChild(buttonContainer);
+                            buttonContainer.appendChild(closeBtn);
+                            contentSub.appendChild(buttonContainer);
 
-                    content.appendChild(spanicon);
-                    content.appendChild(contentSub);
+                            content.appendChild(spanicon);
+                            content.appendChild(contentSub);
 
-                    customOverlay.setContent(content);
+                            customOverlay.setContent(content);
 
-                    kakao.maps.event.addListener(marker, 'click', function() {
-                        customOverlay.setMap(map);
-                    });
+                            kakao.maps.event.addListener(marker, 'click', function() {
+                                customOverlay.setMap(map);
+                            });
                     
                     });
+                    */
             }
         },
 };
