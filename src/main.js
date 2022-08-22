@@ -10,6 +10,7 @@ import Toaster from '@meforma/vue-toaster';
 import VueSimpleAlert from "vue3-simple-alert-next";
 import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
+import Vue3Geolocation from 'vue3-geolocation';
 
 import mitt from 'mitt';
 let emitter = mitt();
@@ -20,7 +21,8 @@ createApp(App)
 .use(router)
 .use(store)
 .use(Toaster)
-.use(VueSimpleAlert )
+.use(VueSimpleAlert)
+.use(Vue3Geolocation) 
 .component("font-awesome-icon", FontAwesomeIcon)
 .component('QuillEditor', QuillEditor)
 .use({
