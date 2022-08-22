@@ -22,7 +22,8 @@ class AuthService {
     TokenService.removeUser();
   }
 
-  register({ username, nickname, email, password }) {
+  register({ username, nickname, password }) {
+    var email = username+'@email.com'
     return api.post("/auth/signup", {
       username,
       nickname,
@@ -30,6 +31,15 @@ class AuthService {
       password
     });
   }
+
+  // register({ username, nickname, email, password }) {
+  //   return api.post("/auth/signup", {
+  //     username,
+  //     nickname,
+  //     email,
+  //     password
+  //   });
+  // }
 }
 
 export default new AuthService();

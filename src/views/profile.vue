@@ -51,14 +51,14 @@
                             <strong>Nickname:</strong>
                             {{nickname}}
                             </p>
-                            <p>
+                            <!-- <p>
                                 <strong>Email:</strong>
                                 {{email}}
-                            </p>
-                            <p>
+                            </p> -->
+                            <!-- <p>
                             <strong>Authorities:</strong>
                                 {{roles}}
-                            </p> 
+                            </p>  -->
                         </div>
                            
                         </div>

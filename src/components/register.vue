@@ -27,7 +27,7 @@
                             </div>
                         </div>
                         <div><ErrorMessage name="nickname" class="error-feedback" /></div>
-                        <div class="input-group mb-1">
+                        <!-- <div class="input-group mb-1">
                             <Field name="email" type="email" class="form-control" placeholder="email" />
                             <div class="input-group-append">
                                 <div class="input-group-text">
@@ -35,7 +35,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div><ErrorMessage name="email" class="error-feedback" /></div>
+                        <div><ErrorMessage name="email" class="error-feedback" /></div> -->
                         <div class="input-group mb-1">
                             <Field name="password" type="password" class="form-control" placeholder="password"/>
                             <div class="input-group-append">
@@ -139,11 +139,11 @@
             .required("nickname is required!")
             .min(2, "Must be at least 2 characters!")
             .max(20, "Must be maximum 20 characters!"),
-        email: yup
-            .string()
-            .required("email is required!")
-            .email("email is invalid!")
-            .max(50, "Must be maximum 50 characters!"),
+        // email: yup
+        //     .string()
+        //     .required("email is required!")
+        //     .email("email is invalid!")
+        //     .max(50, "Must be maximum 50 characters!"),
         password: yup
             .string()
             .required("password is required!")
