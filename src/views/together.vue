@@ -44,7 +44,6 @@
                                     <th>Together</th>                                   
                                     <th style="width: 50px">Progress</th>
                                     <th style="width: 40px"></th>
-                                    <th style="width: 50px">Involve</th>
                                     <th style="width: 50px">Reply</th>
                                     <th style="width: 50px">View</th>
                                     <th style="width: 50px">Nickname</th>
@@ -53,7 +52,7 @@
                             </thead>
                             <tbody>
                                 <tr v-if="togethers.length == 0">
-                                    <td colspan="8" style="text-align:center">No Data.</td>
+                                    <td colspan="7" style="text-align:center">No Data.</td>
                                 </tr>
                                 <!-- progress 0~25 : danger   26~50 :  warning  51~75 :  primary  76~ 100  :  success-->
                                 <tr :key="index" v-for="(together,index) in togethers" @click="goTogetherDetail(together.togetherId)">
@@ -64,7 +63,6 @@
                                         </div>
                                     </td>
                                     <td><span :class="'badge bg-'+together.progressLegend">{{together.progress}}%</span></td>
-                                    <td>{{together.involveType}}</td>
                                     <td>{{together.togetherComment_count}}</td>
                                     <td>{{together.hit}}</td>
                                     <td>{{together.nickname}}</td>

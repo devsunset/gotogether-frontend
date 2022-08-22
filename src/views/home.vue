@@ -110,7 +110,7 @@
                     <th>Together</th>                                   
                     <th style="width: 50px">Progress</th>
                     <th style="width: 40px"></th>
-                    <th style="width: 50px">Involve</th>
+                    <th style="width: 50px">View</th>
                     <th style="width: 50px">Date</th>
                 </tr>
             </thead>
@@ -127,7 +127,7 @@
                         </div>
                     </td>
                     <td><span :class="'badge bg-'+data.progressLegend">{{data.progress}}%</span></td>
-                    <td>{{data.involveType}}</td>
+                    <td>{{data.hit}}</td>
                     <td>{{data.createdDate.substring(2,10)}}</td>
                 </tr>
             </tbody>
