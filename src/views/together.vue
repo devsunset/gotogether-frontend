@@ -42,12 +42,12 @@
                             <thead>
                                 <tr>
                                     <th>Together</th>                                   
-                                    <th style="width: 50px">Progress</th>
+                                    <th class="desktop" style="width: 50px">Progress</th>
                                     <th style="width: 40px"></th>
-                                    <th style="width: 50px">Reply</th>
-                                    <th style="width: 50px">View</th>
-                                    <th style="width: 50px">Nickname</th>
-                                    <th style="width: 150px">Date</th>
+                                    <th class="desktop" style="width: 50px">Reply</th>
+                                    <th class="desktop" style="width: 50px">View</th>
+                                    <th class="desktop" style="width: 50px">Nickname</th>
+                                    <th class="desktop" style="width: 150px">Date</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -56,17 +56,17 @@
                                 </tr>
                                 <!-- progress 0~25 : danger   26~50 :  warning  51~75 :  primary  76~ 100  :  success-->
                                 <tr :key="index" v-for="(together,index) in togethers" @click="goTogetherDetail(together.togetherId)">
-                                    <td>{{together.title}}</td>
-                                    <td>
+                                    <td class="ellipsis">{{together.title}}</td>
+                                    <td class="desktop">
                                         <div class="progress progress-xs">
                                             <div :class="'progress-bar bg-'+together.progressLegend" :style="'width: '+together.progress+'%'"></div>
                                         </div>
                                     </td>
                                     <td><span :class="'badge bg-'+together.progressLegend">{{together.progress}}%</span></td>
-                                    <td>{{together.togetherComment_count}}</td>
-                                    <td>{{together.hit}}</td>
-                                    <td>{{together.nickname}}</td>
-                                    <td> {{together.createdDate.substring(2,16)}}</td>
+                                    <td class="desktop">{{together.togetherComment_count}}</td>
+                                    <td class="desktop">{{together.hit}}</td>
+                                    <td class="desktop">{{together.nickname}}</td>
+                                    <td class="desktop">{{together.createdDate.substring(2,16)}}</td>
                                 </tr>
                             </tbody>
                         </table>

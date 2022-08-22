@@ -57,7 +57,7 @@
                         </div>
                         <div class="card-footer">
                         <div class="float-right">
-                        <button v-if="roles == 'ROLE_ADMIN'" type="submit" class="btn btn-warning" style="margin-left: 15px;" @click="setUpdate">Change Category</button>    
+                        <button v-if="roles == 'ROLE_ADMIN'" type="submit" class="btn btn-warning" @click="setUpdate">C</button>    
                         <button v-if="userid == writerUsername || roles == 'ROLE_ADMIN'" type="submit" class="btn btn-danger" style="margin-left: 15px;" @click="setDelete">Delete</button>
                         <button v-if="userid == writerUsername || roles == 'ROLE_ADMIN'" type="submit" class="btn btn-primary" style="margin-left: 15px;" @click="goEdit">Edit</button>
                         <button type="submit" class="btn btn-info" style="margin-left: 15px;" @click="goPost">List</button>

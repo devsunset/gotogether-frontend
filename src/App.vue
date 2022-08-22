@@ -35,15 +35,12 @@
         display: none;
     }
 
-    /* .ellip {
-        word-break:break-all;
-        text-overflow-mode:ellipsis-word;
-        text-overflow-mode:ellipsis;
-        text-overflow-mode:clip;
-        text-overflow:ellipsis;
-        overflow:hidden;
-        white-space:nowrap;
-    } */
+    .ellipsis {
+        max-width: 250px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 
   }
 

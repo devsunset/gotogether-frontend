@@ -48,19 +48,19 @@
                                     <tr>
                                         <th v-if="category == 'TALK'">Talk</th>
                                         <th v-else-if="category == 'QA'">Q&A</th>
-                                        <th style="width: 5%">Reply</th>
-                                        <th style="width: 5%">View</th>
-                                        <th style="width: 5%">Nickname</th>
-                                        <th style="width: 5%">Date</th>
+                                        <th class="desktop" style="width: 5%">Reply</th>
+                                        <th class="desktop" style="width: 5%">View</th>
+                                        <th class="desktop" style="width: 5%">Nickname</th>
+                                        <th class="desktop" style="width: 5%">Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr :key="index" v-for="(post,index) in posts" @click="goPostDetail(post.postId)">
-                                        <td>{{post.title}}</td>
-                                        <td>{{post.comment_count}}</td>
-                                        <td>{{post.hit}}</td>
-                                        <td>{{post.nickname}}</td>
-                                        <td> {{post.createdDate.substring(2,16)}}</td>
+                                        <td class="ellipsis">{{post.title}}</td>
+                                        <td class="desktop">{{post.comment_count}}</td>
+                                        <td class="desktop">{{post.hit}}</td>
+                                        <td class="desktop">{{post.nickname}}</td>
+                                        <td class="desktop"> {{post.createdDate.substring(2,16)}}</td>
                                     </tr>
                                     <tr v-if="posts.length == 0">
                                         <td colspan="5" style="text-align:center">No Data.</td>
