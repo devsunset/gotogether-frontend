@@ -29,4 +29,23 @@
       margin-right: 0;
       margin-left: -8px;
   }
+
+  @media (max-width: 600px) {
+    .desktop {
+        display: none;
+    }
+
+    /* .ellip {
+        word-break:break-all;
+        text-overflow-mode:ellipsis-word;
+        text-overflow-mode:ellipsis;
+        text-overflow-mode:clip;
+        text-overflow:ellipsis;
+        overflow:hidden;
+        white-space:nowrap;
+    } */
+
+  }
+
+
 </style>

@@ -108,10 +108,10 @@
             <thead>
                 <tr>
                     <th>Together</th>                                   
-                    <th style="width: 50px">Progress</th>
+                    <th class="desktop" style="width: 50px">Progress</th>
                     <th style="width: 40px"></th>
-                    <th style="width: 50px">View</th>
-                    <th style="width: 50px">Date</th>
+                    <th class="desktop" style="width: 50px">View</th>
+                    <th class="desktop" style="width: 50px">Date</th>
                 </tr>
             </thead>
             <tbody>
@@ -120,15 +120,15 @@
                 </tr>
                 <!-- progress 0~25 : danger   26~50 :  warning  51~75 :  primary  76~ 100  :  success-->
                 <tr :key="index" v-for="(data,index) in recentTogether" @click="goTogetherDetail(data.togetherId)">
-                    <td>{{data.title}}</td>
-                    <td>
+                    <td class="ellip">{{data.title}}</td>
+                    <td class="desktop">
                         <div class="progress progress-xs">
                             <div :class="'progress-bar bg-'+data.progressLegend" :style="'width: '+data.progress+'%'"></div>
                         </div>
                     </td>
                     <td><span :class="'badge bg-'+data.progressLegend">{{data.progress}}%</span></td>
-                    <td>{{data.hit}}</td>
-                    <td>{{data.createdDate.substring(2,10)}}</td>
+                    <td class="desktop">{{data.hit}}</td>
+                    <td class="desktop">{{data.createdDate.substring(2,10)}}</td>
                 </tr>
             </tbody>
         </table>

@@ -97,7 +97,7 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <div class="tab-content">
-                                <div class="active tab-pane" id="activity">
+                                <div class="active tab-pane" id="activity" style="min-height:285px">
                                         <div class="form-group row">
                                         <label for="inputName" class="col-sm-2 col-form-label"><i class="far fa-file-alt mr-1"></i>Introduce</label>
                                         <div class="col-sm-10">

@@ -29,7 +29,7 @@
                         <div class="card-body">
                         <div class="form-group">
                          <i class="nav-icon far fa-plus-square"></i>&nbsp;&nbsp;&nbsp; 제목 
-                        <input class="form-control" placeholder="Together 제목을 입력 하세요" v-model="title" ref="title">
+                        <input class="form-control" placeholder="Together 제목을 입력 하세요" v-model="title" ref="title" maxlength="120">
                         </div>
                         <div class="form-group">
                         <i class="nav-icon far fa-plus-square"></i>&nbsp;&nbsp;&nbsp; 목적
@@ -57,7 +57,7 @@
                         </div>
                         <div class="form-group">
                             <i class="nav-icon far fa-plus-square"></i>&nbsp;&nbsp;&nbsp; Kakao Open Chat Link
-                        <input class="form-control" placeholder="Open Kakao Chat Link를  입력 하세요 (옵션)" v-model="openKakaoChat" ref="openKakaoChat">
+                        <input class="form-control" placeholder="Open Kakao Chat Link를  입력 하세요 (옵션)" v-model="openKakaoChat" ref="openKakaoChat" maxlength="120">
                         </div>
                         <div class="form-group"> 
                              <i class="nav-icon far fa-plus-square"></i>&nbsp;&nbsp;&nbsp; 상세 설명

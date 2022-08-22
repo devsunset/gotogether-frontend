@@ -36,7 +36,7 @@
                                   </select>
                         </div>
                         <div class="form-group">
-                        <input class="form-control" placeholder="Title" v-model="title" ref="title">
+                        <input class="form-control" placeholder="Title" v-model="title" ref="title" maxlength="120">
                         </div>
                         <div class="form-group"> 
                             <QuillEditor theme="snow" toolbar="full"  content-type="html" v-model:content="content" ref="myEditor"/>
