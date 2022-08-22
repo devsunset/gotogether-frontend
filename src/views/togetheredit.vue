@@ -99,12 +99,12 @@
                         <div class="form-group">
                             <i class="nav-icon far fa-plus-square"></i>&nbsp;&nbsp;&nbsp; 참여 방식
                                 <select class="form-control" v-model="involveType"> 
+                                    <option value="ONOFFLINE">ON/OFF LINE </option> 
+                                    <option value="OFFLINE">OFF LINE </option> 
                                     <option value="ONLINE">ON LINE </option>
-                                     <option value="OFFLINE">OFF LINE </option> 
-                                     <option value="ONOFFLINE">ON/OFF LINE </option> 
-                                  </select> 
+                                </select> 
                         </div>
-                        <div class="form-group">
+                        <div class="form-group"  v-show="involveType !='ONLINE'">
                                  ( 모임장소를 클릭 하여 선택해 보세요 )
                                <div id="map" class="map" style="margin-top:20px;height:300px"></div>
                         </div>
@@ -135,7 +135,7 @@ export default {
                 title : '',
                 category : 'STUDY',
                 content : '',
-                involveType : 'ONLINE',
+                involveType : 'ONOFFLINE',
                 openKakaoChat : '',
                 latitude : '',
                 longitude : '', 
@@ -263,21 +263,50 @@ export default {
                 }
                 this.skill = skillitem;
 
-                this.$confirm("저장 하시겠습니까?").then(() => {
+                if( this.skill.trim() == ''){
+                    this.$toast.warning(`필요한 Skill 항목을 입력해 주세요.`);
+                    return;
+                }
 
-                    alert(this.latitude +" : "+this.longitude)
-                    var reqData = {
-                        title : this.title,
-                        category : this.category,
-                        content : this.content,
-                        involveType : this.involveType,
-                        openKakaoChat : this.openKakaoChat,
-                        latitude : this.latitude,
-                        longitude : this.longitude, 
-                        maxMember : this.maxMember, 
-                        currentMember : this.currentMember, 
-                        skill : this.skill, 
+                if(this.involveType !='ONLINE'){
+                    if(this.latitude == undefined || this.latitude == ''){
+                         this.$toast.warning('모임 장소를 지도에서 클릭해 선택해 주세요.');
+                         return;
                     }
+                }
+
+                this.$confirm("저장 하시겠습니까?").then(() => {
+                    var reqData = {}
+
+                     if(this.involveType =='ONLINE'){
+                         reqData = {
+                            title : this.title,
+                            category : this.category,
+                            content : this.content,
+                            involveType : this.involveType,
+                            openKakaoChat : this.openKakaoChat,
+                            latitude : '',
+                            longitude : '', 
+                            maxMember : this.maxMember, 
+                            currentMember : this.currentMember, 
+                            skill : this.skill, 
+                        }
+                     }else{
+                         reqData = {
+                            title : this.title,
+                            category : this.category,
+                            content : this.content,
+                            involveType : this.involveType,
+                            openKakaoChat : this.openKakaoChat,
+                            latitude : this.latitude,
+                            longitude : this.longitude, 
+                            maxMember : this.maxMember, 
+                            currentMember : this.currentMember, 
+                            skill : this.skill, 
+                        }
+                     }
+
+
                     if(this.$route.query.togetherId){
                             TogetherService.putTogether(this.$route.query.togetherId,reqData).then(
                                 (response) => {
@@ -369,6 +398,8 @@ export default {
                                     center: new kakao.maps.LatLng(37.56683319828021, 126.97857302284947), 
                                     level: 9
                                 };
+                                this.latitude = 37.56683319828021;
+                                this.longitude = 126.97857302284947;
                             }else{
                                 options = {
                                     center: new kakao.maps.LatLng(this.latitude, this.longitude), 
