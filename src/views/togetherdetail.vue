@@ -140,7 +140,7 @@
                                 </div>
                                 </div>
                                 <div class="card-body">
-                                    <pre>{{comment.content}}</pre>
+                                    <div style="white-space:pre-wrap;word-break:break-all">{{comment.content}}</div>
                                 </div>
                                 </div>
                             </div>

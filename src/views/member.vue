@@ -64,23 +64,23 @@
                                         <tr>
                                             <td width="10%"><b>Introduce</b></td>
                                             <td>
-                                                {{member.introduce}}
+                                               <div style="white-space:pre-wrap;word-break:break-all">  {{member.introduce}} </div>
                                             </td>
                                         </tr>
                                          <tr>
                                             <td><b>Note</b></td>
-                                            <td><pre>{{member.note}}</pre></td>
+                                            <td><div style="white-space:pre-wrap;word-break:break-all">{{member.note}}</div></td>
                                         </tr>
                                          <tr>
                                             <td><b>Github</b></td>
                                             <td>
-                                               <a :href="member.github" target="_blank"> {{member.github}}</a>
+                                              <div style="white-space:pre-wrap;word-break:break-all"> <a :href="member.github" target="_blank"> {{member.github}}</a></div>
                                             </td>
                                         </tr>
                                          <tr>
                                             <td><b>Homepage</b></td>
                                             <td>
-                                                 <a :href="member.homepage" target="_blank"> {{member.homepage}}</a>
+                                               <div style="white-space:pre-wrap;word-break:break-all">  <a :href="member.homepage" target="_blank"> {{member.homepage}}</a></div>
                                             </td>
                                         </tr>
                                         <tr>

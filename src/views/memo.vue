@@ -80,7 +80,7 @@
                                             <span v-if="memoFlag == 'S' && memo.readflag === 'Y' " class="right badge badge-success">수신일시</span><br>
                                             <span v-if="memoFlag == 'S' && memo.readflag === 'Y' " >{{memo.modifiedDate.substring(5,16)}}</span>
                                             </td>
-                                            <td><pre>{{memo.memo}}</pre></td>
+                                            <td><div style="white-space:pre-wrap;word-break:break-all">{{memo.memo}}</div></td>
                                         </tr>
                                         <tr>
                                             <td><i class="nav-icon fas fa-edit"></i>&nbsp;<b v-if="memoFlag == 'R'">답장전송</b><b v-else-if="memoFlag == 'S'">다시전송</b><br><pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader><button type="submit" v-if="memoFlag == 'R'" v-show="!loading" class="btn btn-success" style="width:85px" @click="sendMemo(index)">Send</button><button type="submit" v-else-if="memoFlag == 'S'" v-show="!loading" class="btn btn-warning" style="width:85px" @click="sendMemo(index)">Send</button></td>
