@@ -30,7 +30,7 @@
       margin-left: -8px;
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 755px) {
     .desktop {
         display: none;
     }
