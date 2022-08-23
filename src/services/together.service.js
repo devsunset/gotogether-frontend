@@ -35,7 +35,7 @@ class TogetherService {
     }
 
     setTogetherComment(reqData) {
-      return api.post("/togethercomment/",reqData );
+      return api.post("/togethercomment/",JSON.stringify(reqData));
     }
   
 }

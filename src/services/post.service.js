@@ -11,11 +11,11 @@ class PostService {
   }
 
   setPost(reqData) {
-    return api.post("/post/",reqData );
+    return api.post("/post/",JSON.stringify(reqData));
   }
 
   putPost(postId,reqData) {
-    return api.put("/post/"+postId,reqData );
+    return api.put("/post/"+postId,JSON.stringify(reqData));
   }
 
   deletePost(postId) {
@@ -36,7 +36,7 @@ class PostService {
   }
 
   setPostComment(reqData) {
-    return api.post("/postcomment/",reqData );
+    return api.post("/postcomment/",JSON.stringify(reqData));
   }
 
 }

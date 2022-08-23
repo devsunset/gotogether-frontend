@@ -6,7 +6,7 @@ class UserService {
   }
 
   setUserInfoSave(reqData) {
-    return api.post("/userinfo/",reqData );
+    return api.post("/userinfo/",JSON.stringify(reqData));
   }
 
   getUserInfoList(page,size,reqData) {

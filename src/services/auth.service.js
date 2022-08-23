@@ -9,7 +9,6 @@ class AuthService {
         password
       })
       .then((response) => {
-        //alert(JSON.stringify(response.data.data));
         if (response.data.data.token) {
           TokenService.setUser(response.data.data);
         }

@@ -6,7 +6,7 @@ class MemoService {
   }
 
   sendMemo(reqData) {
-    return api.post("/memo/",reqData );
+    return api.post("/memo/", JSON.stringify(reqData) );
   }
 
   getReceiveMemo(page,size){
