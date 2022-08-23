@@ -30,19 +30,24 @@
       margin-left: -8px;
   }
 
-  @media (max-width: 755px) {
+  @media (max-width: 600px) {
     .desktop {
         display: none;
     }
 
-    .ellipsis {
+    .ellipsisMobile {
         max-width: 250px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
     }
-
+   
   }
 
-
+    .ellipsisDesktop {
+        max-width: 450px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 </style>

@@ -120,7 +120,7 @@
                 </tr>
                 <!-- progress 0~25 : danger   26~50 :  warning  51~75 :  primary  76~ 100  :  success-->
                 <tr :key="index" v-for="(data,index) in recentTogether" @click="goTogetherDetail(data.togetherId)">
-                    <td class="ellipsis">{{data.title}}</td>
+                    <td class="ellipsisMobile ellipsisDesktop">{{data.title}}</td>
                     <td class="desktop">
                         <div class="progress progress-xs">
                             <div :class="'progress-bar bg-'+data.progressLegend" :style="'width: '+data.progress+'%'"></div>
