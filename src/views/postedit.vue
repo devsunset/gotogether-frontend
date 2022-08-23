@@ -159,7 +159,7 @@ export default {
                 this.$confirm("저장 하시겠습니까?").then(() => {
 
                     if(this.$route.query.postId){
-                            PostService.putPost(this.$route.query.postId,{"category": this.category, "title" : this.title, "content" : this.content }).then(
+                            PostService.putPost(this.$route.query.postId,{"category": this.category, "title" : this.title, "content" : this.content}).then(
                                 (response) => {
                                     if(response.data.result == 'S'){
                                         this.$toast.success(`Success.`);
@@ -182,7 +182,7 @@ export default {
                                 }
                         );
                     }else{
-                        PostService.setPost({"category": this.category, "title" : this.title, "content" : this.content }).then(
+                        PostService.setPost({"category": this.category, "title" : this.title, "content" : this.content.replace(/"/gi, "'") }).then(
                             (response) => {
                                 if(response.data.result == 'S'){
                                     this.$toast.success(`Success.`);

@@ -1,4 +1,5 @@
 import api from './api';
+import Common from './common.js'
 
 class TogetherService {
     getTogetherList(page,size,reqData) {
@@ -6,15 +7,15 @@ class TogetherService {
     }
 
     getTogether(togetherId) {
-      return api.get("/together/"+togetherId );
+      return api.get("/together/"+togetherId);
     }
 
     setTogether(reqData) {
-      return api.post("/together/",reqData );
+      return api.post("/together/",reqData);
     }
 
     putTogether(togetherId,reqData) {
-      return api.put("/together/"+togetherId,reqData );
+      return api.put("/together/"+togetherId, reqData);
     }
 
     deleteTogether(togetherId) {
@@ -35,8 +36,10 @@ class TogetherService {
     }
 
     setTogetherComment(reqData) {
-      return api.post("/togethercomment/",JSON.stringify(reqData));
+      alert(Common.replaceDoubleQuotes(reqData))
+      return api.post("/togethercomment/",Common.replaceDoubleQuotes(reqData));
     }
   
+
 }
 export default new TogetherService (); 
