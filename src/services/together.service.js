@@ -11,11 +11,11 @@ class TogetherService {
     }
 
     setTogether(reqData) {
-      return api.post("/together/",reqData);
+      return api.post("/together/",Common.preRequestHandler(reqData));
     }
 
     putTogether(togetherId,reqData) {
-      return api.put("/together/"+togetherId, reqData);
+      return api.put("/together/"+togetherId, Common.preRequestHandler(reqData));
     }
 
     deleteTogether(togetherId) {
@@ -36,8 +36,7 @@ class TogetherService {
     }
 
     setTogetherComment(reqData) {
-      alert(Common.replaceDoubleQuotes(reqData))
-      return api.post("/togethercomment/",Common.replaceDoubleQuotes(reqData));
+      return api.post("/togethercomment/",Common.preRequestHandler(reqData));
     }
   
 

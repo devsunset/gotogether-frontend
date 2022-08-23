@@ -1,4 +1,5 @@
 import api from './api';
+import Common from './common.js'
 
 class MemoService {
   getNewReceiveMemo() {
@@ -6,7 +7,7 @@ class MemoService {
   }
 
   sendMemo(reqData) {
-    return api.post("/memo/", JSON.stringify(reqData) );
+    return api.post("/memo/", Common.preRequestHandler(reqData));
   }
 
   getReceiveMemo(page,size){

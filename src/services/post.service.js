@@ -1,4 +1,5 @@
 import api from './api';
+import Common from './common.js'
 
 class PostService {
   // Post
@@ -11,11 +12,11 @@ class PostService {
   }
 
   setPost(reqData) {
-    return api.post("/post/",JSON.stringify(reqData));
+    return api.post("/post/",Common.preRequestHandler(reqData));
   }
 
   putPost(postId,reqData) {
-    return api.put("/post/"+postId,JSON.stringify(reqData));
+    return api.put("/post/"+postId,Common.preRequestHandler(reqData));
   }
 
   deletePost(postId) {
@@ -36,7 +37,7 @@ class PostService {
   }
 
   setPostComment(reqData) {
-    return api.post("/postcomment/",JSON.stringify(reqData));
+    return api.post("/postcomment/",Common.preRequestHandler(reqData));
   }
 
 }

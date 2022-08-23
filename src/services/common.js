@@ -1,18 +1,12 @@
 class Common {
-  replaceDoubleQuotes(reqData) {
-    alert(reqData)
+  preRequestHandler(reqData) {
     if(typeof reqData === 'object' && reqData !== null){
-       alert("x")
-      var convertReqData = {};
       for (const [key, value] of Object.entries(reqData)) {
-        var rvalue = ''
         if(value !==null && value !=''){
-          rvalue = value.replace(/"/g,'\'')
+          reqData[key]= value.replace(/"/gi, "'");
         }
-        convertReqData.push({key,rvalue})
       }
-
-      return JSON.stringify(convertReqData)
+      return JSON.stringify(reqData)
     }else{
       return reqData
     }

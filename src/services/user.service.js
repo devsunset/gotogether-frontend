@@ -1,4 +1,5 @@
 import api from './api';
+import Common from './common.js'
 
 class UserService {
   getUserInfo() {
@@ -6,7 +7,7 @@ class UserService {
   }
 
   setUserInfoSave(reqData) {
-    return api.post("/userinfo/",JSON.stringify(reqData));
+    return api.post("/userinfo/",Common.preRequestHandler(reqData));
   }
 
   getUserInfoList(page,size,reqData) {
