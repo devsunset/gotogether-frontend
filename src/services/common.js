@@ -3,14 +3,14 @@ class Common {
     alert(reqData)
     if(typeof reqData === 'object' && reqData !== null){
        alert("x")
-     var convertReqData = {};
-      for(key in json) {
-          var value = json[key]
-          if(value !==null && value !=''){
-             value = value.replace(/\"/g,'\'')
-          }
-          convertReqData.push({key,value})
+      var convertReqData = {};
+      for (const [key, value] of Object.entries(reqData)) {
+        if(value !==null && value !=''){
+          value = value.replace(/\"/g,'\'')
+        }
+        convertReqData.push({key,value})
       }
+
       return JSON.stringify(convertReqData)
     }else{
       return reqData
