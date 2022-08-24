@@ -262,6 +262,7 @@ export default {
         },
           methods: {
             goTogether() {
+                sessionStorage.setItem('together_back', "Y");
                 this.$router.push({
                     name: "Together",
                     query: { category: this.category },

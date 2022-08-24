@@ -155,6 +155,10 @@ export default {
                 });
             },
             goTogetherDetail(togetherId) {
+                sessionStorage.setItem('together_page', this.page);
+                sessionStorage.setItem('together_totalPages', this.totalPages);
+                sessionStorage.setItem('together_rangeSize', this.rangeSize);
+                sessionStorage.setItem('together_keyword', this.keyword);
                 this.$router.push({
                     name: "TogetherDetail",
                     query: { "togetherId": togetherId },
@@ -166,6 +170,19 @@ export default {
                     this.totalPages = 0;
                     this.rangeSize  = 0;
                 }
+
+                if(sessionStorage.getItem('together_back') == 'Y' && sessionStorage.getItem('together_page') !==null && sessionStorage.getItem('together_page') !==''){
+                    this.page = sessionStorage.getItem('together_page');
+                    this.totalPages = sessionStorage.getItem('together_totalPages');
+                    this.rangeSize  = sessionStorage.getItem('together_rangeSize');
+                    this.keyword  = sessionStorage.getItem('together_keyword');
+                }
+
+                sessionStorage.setItem('together_back', 'N');
+                sessionStorage.setItem('together_page', '');
+                sessionStorage.setItem('together_totalPages', '');
+                sessionStorage.setItem('together_rangeSize', '');
+                sessionStorage.setItem('together_keyword', '');
 
                 this.spinnerShow = true;
                 TogetherService.getTogetherList(this.page-1,5,{"category": '', "keyword" : this.keyword}).then(

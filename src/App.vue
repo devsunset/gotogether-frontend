@@ -45,7 +45,7 @@
   }
 
     .ellipsisDesktop {
-        max-width: 450px;
+        max-width: 350px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;

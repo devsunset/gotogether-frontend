@@ -140,6 +140,7 @@ export default {
         },
           methods: {
             goPost() {
+                sessionStorage.setItem('post_back', 'Y');
                 this.$router.push({
                     name: "Post",
                     query: { category: this.category },

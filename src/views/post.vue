@@ -56,7 +56,7 @@
                                 </thead>
                                 <tbody>
                                     <tr :key="index" v-for="(post,index) in posts" @click="goPostDetail(post.postId)">
-                                        <td class="ellipsis">{{post.title}}</td>
+                                        <td class="ellipsisMobile ellipsisDesktop">{{post.title}}</td>
                                         <td class="desktop">{{post.comment_count}}</td>
                                         <td class="desktop">{{post.hit}}</td>
                                         <td class="desktop">{{post.nickname}}</td>
@@ -156,6 +156,11 @@ export default {
                 });
             },
             goPostDetail(postId) {
+                sessionStorage.setItem('post_page', this.page);
+                sessionStorage.setItem('post_totalPages', this.totalPages);
+                sessionStorage.setItem('post_rangeSize', this.rangeSize);
+                sessionStorage.setItem('post_category', this.category);
+                sessionStorage.setItem('post_keyword', this.keyword);
                 this.$router.push({
                     name: "PostDetail",
                     query: { "postId": postId },
@@ -167,6 +172,21 @@ export default {
                     this.totalPages = 0;
                     this.rangeSize  = 0;
                 }
+
+                if(sessionStorage.getItem('post_back') == 'Y' && sessionStorage.getItem('post_page') !==null && sessionStorage.getItem('post_page') !==''){
+                    this.page = sessionStorage.getItem('post_page');
+                    this.totalPages = sessionStorage.getItem('post_totalPages');
+                    this.rangeSize  = sessionStorage.getItem('post_rangeSize');
+                    this.category =  sessionStorage.getItem('post_category');
+                    this.keyword  = sessionStorage.getItem('post_keyword');
+                }
+
+                sessionStorage.setItem('post_back', 'N');
+                sessionStorage.setItem('post_page', '');
+                sessionStorage.setItem('post_totalPages', '');
+                sessionStorage.setItem('post_rangeSize', '');
+                sessionStorage.setItem('post_category', '');
+                sessionStorage.setItem('post_keyword', '');
 
                 this.spinnerShow = true;
                 PostService.getPostList(this.page-1,10,{"category": this.category, "keyword" : this.keyword}).then(
