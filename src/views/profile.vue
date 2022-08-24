@@ -127,7 +127,7 @@
                                  <!-- /.tab-pane -->
                                 <div class="tab-pane" id="Skill">
                                     
-                                    <div class="card">
+                                    <div class="card" style="margin-bottom:70px">
                                             <div class="card-header">
                                             <h3 class="card-title">Skill 항목을 추가해 주세요.</h3>
                                             </div>
@@ -159,7 +159,6 @@
                                             </div>
 
                                             </div>
-
 
                                 </div>
                                 <!-- /.tab-pane -->
