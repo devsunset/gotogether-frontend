@@ -206,7 +206,7 @@ export default {
                             }
                          );
                     }
-                 }).catch(() => console.log('no selected'));
+                  }).catch((e) => e !== undefined ?  this.$toast.error(`Fail. ->`+e) : console.log('no selected =>'+e));
             },
         },
 };

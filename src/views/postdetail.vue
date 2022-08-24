@@ -210,7 +210,7 @@ export default {
                                 }
                         );
                     
-                 }).catch(() => console.log('no selected'));
+                  }).catch((e) => e !== undefined ?  this.$toast.error(`Fail. ->`+e) : console.log('no selected =>'+e));
             },
              setUpdate() {
                     this.$confirm("Category를 변경 하시겠습니까?").then(() => {
@@ -237,7 +237,7 @@ export default {
                                 }
                         );
                     
-                 }).catch(() => console.log('no selected'));
+                  }).catch((e) => e !== undefined ?  this.$toast.error(`Fail. ->`+e) : console.log('no selected =>'+e));
             },
             getPostCommentList(){
                 PostService.getPostCommentList(this.$route.query.postId).then(
@@ -286,7 +286,7 @@ export default {
                                 }
                         );
                     
-                 }).catch(() => console.log('no selected'));
+                 }).catch((e) => e !== undefined ?  this.$toast.error(`Fail. ->`+e) : console.log('no selected =>'+e));
             },
             setComment() {
                  if( this.comment.trim() == ''){
@@ -318,7 +318,7 @@ export default {
                                 }
                         );
                     
-                 }).catch(() => console.log('no selected'));
+                  }).catch((e) => e !== undefined ?  this.$toast.error(`Fail. ->`+e) : console.log('no selected =>'+e));
             },
         },
 };

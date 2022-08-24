@@ -2,7 +2,7 @@ class Common {
   preRequestHandler(reqData) {
     if(typeof reqData === 'object' && reqData !== null){
       for (const [key, value] of Object.entries(reqData)) {
-        if(value !==null && value !=''){
+        if(value !==undefined && value !==null && typeof(value) =='string' &&  value !=''){
           reqData[key]= value.replace(/"/gi, "'");
         }
       }

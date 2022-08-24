@@ -299,7 +299,7 @@ export default {
                                 }
                         );
                     
-                 }).catch(() => console.log('no selected'));
+                  }).catch((e) => e !== undefined ?  this.$toast.error(`Fail. ->`+e) : console.log('no selected =>'+e));
             },
             getTogetherCommentList(){
                 TogetherService.getTogetherCommentList(this.$route.query.togetherId).then(
@@ -348,7 +348,7 @@ export default {
                                 }
                         );
                     
-                 }).catch(() => console.log('no selected'));
+                  }).catch((e) => e !== undefined ?  this.$toast.error(`Fail. ->`+e) : console.log('no selected =>'+e));
             },
             setComment() {
                  if( this.comment.trim() == ''){
@@ -380,7 +380,7 @@ export default {
                                 }
                         );
                     
-                 }).catch(() => console.log('no selected'));
+                  }).catch((e) => e !== undefined ?  this.$toast.error(`Fail. ->`+e) : console.log('no selected =>'+e));
             },
             addKakaoMapScript() {
             const script = document.createElement("script");

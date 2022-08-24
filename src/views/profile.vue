@@ -260,7 +260,7 @@ import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
                         error.toString());
                     }
                 );
-                 }).catch(() => console.log('no selected'));
+                  }).catch((e) => e !== undefined ?  this.$toast.error(`Fail. ->`+e) : console.log('no selected =>'+e));
              },
              setAddSkill() {
                 this.items.push({ item:"", level:"INTEREST"});
