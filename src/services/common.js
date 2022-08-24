@@ -9,7 +9,7 @@ class Common {
       return JSON.stringify(reqData)
     }else{
       return reqData
-    }
+    } 
   }
 }
 
