@@ -198,11 +198,11 @@ export default {
                             this.totalPages = response.data.data.totalPages;
                             this.rangeSize  = response.data.data.number;
                             this.memos = response.data.data.content;
-                            this.memoData = []
-                            this.memoBodyDisplay = []
+                            this.memoData = [];
+                            this.memoBodyDisplay = [];
                             response.data.data.content.forEach((data) => {
-                                this.memoData.push({"check":false, "memo": '' , "memoId": data.memoId, "senderUsername": data.senderUsername, "receiverUsername": data.receiverUsername })
-                                this.memoBodyDisplay.push(this.detailView)
+                                this.memoData.push({"check":false, "memo": '' , "memoId": data.memoId, "senderUsername": data.senderUsername, "receiverUsername": data.receiverUsername });
+                                this.memoBodyDisplay.push(this.detailView);
                             });
 
                               this.spinnerShow = false;
@@ -232,11 +232,11 @@ export default {
                             this.totalPages = response.data.data.totalPages;
                             this.rangeSize  = response.data.data.number;
                             this.memos = response.data.data.content;
-                            this.memoData = []
-                            this.memoBodyDisplay = []
+                            this.memoData = [];
+                            this.memoBodyDisplay = [];
                             response.data.data.content.forEach((data) => {
-                                this.memoData.push({"check":false, "memo": '' , "memoId": data.memoId, "senderUsername": data.senderUsername, "receiverUsername": data.receiverUsername })
-                                this.memoBodyDisplay.push(this.detailView)
+                                this.memoData.push({"check":false, "memo": '' , "memoId": data.memoId, "senderUsername": data.senderUsername, "receiverUsername": data.receiverUsername });
+                                this.memoBodyDisplay.push(this.detailView);
                             });
                               this.spinnerShow = false;
                               this.checkAll();
@@ -247,9 +247,9 @@ export default {
                               this.totalPages = 0;
                               this.rangeSize  = 0;
                               this.spinnerShow = false;
-                              this.memos = [] 
-                              this.memoData = []
-                              this.memoBodyDisplay = []
+                              this.memos = [] ;
+                              this.memoData = [];
+                              this.memoBodyDisplay = [];
                               console.log(
                               (error.response &&
                                   error.response.data &&
@@ -316,7 +316,7 @@ export default {
                      if(this.detailView && this.memoFlag === 'R'){
                         this.setReadMemo(i);
                      }
-                     this.memoBodyDisplay[i++] = this.detailView
+                     this.memoBodyDisplay[i++] = this.detailView;
                 });
 
                 if(this.detailView && this.memoFlag === 'R'){

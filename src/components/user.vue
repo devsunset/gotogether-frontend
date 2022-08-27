@@ -69,10 +69,10 @@
         methods : {
          login(){
             if(this.currentUser){
-                this.$store.dispatch('auth/logout')
-                this.$router.push('/')
+                this.$store.dispatch('auth/logout');
+                this.$router.push('/');
             }else{
-                this.$router.push('/login')
+                this.$router.push('/login');
             }
          },
          toggleDropdown(){

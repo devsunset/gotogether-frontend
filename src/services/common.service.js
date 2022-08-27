@@ -1,8 +1,8 @@
-import api from './api';
+import api from "./api";
 
 class CommonService {
   getHome() {
-    return api.get('/common/home');
+    return api.get("/common/home");
   }
 }
 

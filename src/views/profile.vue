@@ -182,7 +182,7 @@
 
 <script>
 import UserService from "../services/user.service";
-import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 
     export default {
         name: "profile",
@@ -234,7 +234,7 @@ import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
                 })
 
                 if(skill !=''){
-                    skill  = skill.substring(0,skill.length -1)
+                    skill  = skill.substring(0,skill.length -1);
                 }
 
                 this.$confirm("저장 하시겠습니까?").then(() => {
@@ -266,7 +266,7 @@ import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
                 this.items.push({ item:"", level:"INTEREST"});
              },
              setMinusSkill(idx) {
-                  this.items.splice(idx, 1)
+                  this.items.splice(idx, 1);
              },
             getUserInfo() {
                 UserService.getUserInfo().then(

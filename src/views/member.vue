@@ -150,7 +150,7 @@ import MemoService from "../services/memo.service";
 import VueElementLoading from "vue-element-loading";
 import VPagination from "@hennge/vue3-pagination";
 import "@hennge/vue3-pagination/dist/vue3-pagination.css";
-import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 
 export default {
   name: "member",
@@ -214,8 +214,8 @@ export default {
                        this.memo = [];
                        this.membersBodyDisplay = []
                        response.data.data.content.forEach((data) => {
-                           this.memo.push({"memo": '' , 'username': data.username})
-                           this.membersBodyDisplay.push(this.memberDetailView)
+                           this.memo.push({"memo": '' , 'username': data.username});
+                           this.membersBodyDisplay.push(this.memberDetailView);
                        });
                        this.spinnerShow = false;
                     },
@@ -240,7 +240,7 @@ export default {
               
                 if(this.memo[index].memo.trim() == ""){
                    this.$toast.warning(`메모 내용을 입력해 주세요.`);
-                    return
+                    return;
                 }
                 this.loading = true;
                 
@@ -276,7 +276,7 @@ export default {
              detailVisible : function(){
                 let i = 0;
                 this.membersBodyDisplay.forEach(() => {
-                    this.membersBodyDisplay[i++] = this.memberDetailView
+                    this.membersBodyDisplay[i++] = this.memberDetailView;
                 });
              }
         },

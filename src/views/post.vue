@@ -202,7 +202,7 @@ export default {
                         this.totalPages = 0;
                         this.rangeSize  = 0;
                         this.spinnerShow = false;
-                        this.posts = [] 
+                        this.posts = [] ;
                         console.log(
                         (error.response &&
                             error.response.data &&

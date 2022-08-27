@@ -184,5 +184,5 @@ export default {
         });
     },
   },
-};
+}; 
 </script>

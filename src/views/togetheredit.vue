@@ -255,12 +255,12 @@ export default {
                 this.items.forEach(function(d){
                     let tmp = d.item.trim().replace(/\|/g,'').replace(/\^/g,'');
                     if(tmp !='' ){
-                        skillitem +=tmp+'^'+d.level+"|"
+                        skillitem +=tmp+'^'+d.level+"|";
                     } 
                 })
 
                 if(skillitem !=''){
-                    skillitem  = skillitem.substring(0,skillitem.length -1)
+                    skillitem  = skillitem.substring(0,skillitem.length -1);
                 }
                 this.skill = skillitem;
 
@@ -328,7 +328,7 @@ export default {
                                         error.response.data.message) ||
                                     error.message ||
                                     error.toString());
-                                }
+                                } 
                         );
                     }else{
                         TogetherService.setTogether(reqData).then(
@@ -359,7 +359,7 @@ export default {
                 this.items.push({ item:"", level:"INTEREST"});
              },
              setMinusSkill(idx) {
-                  this.items.splice(idx, 1)
+                  this.items.splice(idx, 1);
              },
              addKakaoMapScript() {
                 const script = document.createElement("script");
@@ -403,7 +403,7 @@ export default {
                             //         center: new kakao.maps.LatLng(defaultlatitude, defaultlongitude), 
                             //         level: 9
                             //     };
-                                
+                                 
 
                             //     if(this.$route.query.togetherId == undefined || this.$route.query.togetherId =="" || this.latitude == undefined || this.latitude ==""){
                             //         options = {
@@ -511,15 +511,12 @@ export default {
                                     
                                     var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
                                     message += '경도는 ' + latlng.getLng() + ' 입니다';
-                                    console.log(message)
+                                    console.log(message);
 
                                     self.latitude =  latlng.getLat();
                                     self.longitude =  latlng.getLng();
                                 });
                             // });
-
-
-                            
 
             }
         },

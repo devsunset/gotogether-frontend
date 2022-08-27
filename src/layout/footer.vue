@@ -13,7 +13,6 @@
     </footer>
 </template>
 
-
 <script>
     import {version} from '../../package.json';
 

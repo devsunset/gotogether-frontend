@@ -6,7 +6,7 @@ class AuthService {
     return api
       .post("/auth/signin", {
         username,
-        password
+        password,
       })
       .then((response) => {
         if (response.data.data.token) {
@@ -22,12 +22,12 @@ class AuthService {
   }
 
   register({ username, nickname, password }) {
-    var email = username+'@email.com'
+    var email = username + "@email.com";
     return api.post("/auth/signup", {
       username,
       nickname,
       email,
-      password
+      password,
     });
   }
 

@@ -102,10 +102,10 @@ export default {
                                     this.category = response.data.data.category;
                                     this.title = response.data.data.title;
                                     this.content = response.data.data.content;
-                                    this.$refs.myEditor.setHTML(this.content)
+                                    this.$refs.myEditor.setHTML(this.content);
                                 }else{
                                     this.$toast.error(`Fail.`);
-                                }
+                                } 
                             },
                             (error) => {
                                 this.$toast.error(`Fail.`);

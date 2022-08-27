@@ -198,7 +198,7 @@ export default {
                         this.totalPages = 0;
                         this.rangeSize  = 0;
                         this.spinnerShow = false;
-                        this.togethers = [] 
+                        this.togethers = [];
                         console.log(
                         (error.response &&
                             error.response.data &&
