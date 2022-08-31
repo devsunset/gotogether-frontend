@@ -1,4 +1,4 @@
-# gotogether-frontend-vue
-gotogether-frontend-vue - frontend go together (vue.js) 
+# gotogether-frontend
+gotogether-frontend - frontend go together (vue.js) 
 
 http://gotogether.ga/
