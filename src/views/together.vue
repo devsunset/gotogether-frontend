@@ -22,11 +22,9 @@
         <div>
                 <div class="card">
                    <div class="card-header">
-                            <span class="card-title">
-                                <button type="button" class="btn btn-block btn-success" style="width:100px;padding:0px;margin:0px" @click="goTogetherNew()" v-if="currentUser"> New</button>
-                            </span>
-                            <div class="card-tools">
-                                <div class="input-group input-group-sm" style="width: 300px;">
+                            <div class="card-tools" style="width: 100%;">
+                                <div class="input-group input-group-sm" >
+                                    <button type="button" class="btn btn-block btn-success" style="width:50px;padding:0px;margin:0px;margin-right:10px" @click="goTogetherNew()" v-if="currentUser"> New</button>
                                     <input type="text" name="keyword" class="form-control float-right" v-model="keyword" placeholder="Search" @keyup.enter="getTogetherList('INIT')">
                                     <div class="input-group-append">
                                         <button type="submit" class="btn btn-default" @click="getTogetherList('INIT')">

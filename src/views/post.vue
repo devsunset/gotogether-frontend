@@ -23,11 +23,9 @@
         <div>
                 <div class="card">
                    <div class="card-header">
-                            <span class="card-title">
-                                <button type="button" class="btn btn-block btn-success" style="width:100px;padding:0px;margin:0px" @click="goPostNew()" v-if="currentUser"> New</button>
-                            </span>
-                            <div class="card-tools">
-                                <div class="input-group input-group-sm" style="width: 300px;">
+                            <div class="card-tools" style="width:100%">
+                                <div class="input-group input-group-sm" style="width:100%" >
+                                    <button type="button" class="btn btn-block btn-success" style="width:50px;padding:0px;margin:0px;margin-right:10px" @click="goPostNew()" v-if="currentUser"> New</button>
                                      <select class="form-control" v-model="category" @change="getPostList('INIT')"> 
                                       <option value="TALK">Talk</option>
                                       <option value="QA">Q&A</option> 

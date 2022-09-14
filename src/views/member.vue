@@ -21,18 +21,18 @@
         <div>
                 <div class="card">
                    <div class="card-header">
-                            <span class="card-title">
+                            <span class="card-title" style="margin-left:15px">
                                     <span class="badge bg-success"  style="margin-right:3px">기본 학습</span>
                                     <span class="badge bg-danger"  style="margin-right:3px">업무 사용</span>
                                     <span class="badge bg-warning"  style="margin-right:3px">관심 있음</span>
                                     <span class="badge bg-primary"  style="margin-right:3px">Toy Pjt.</span>
                             </span>
-                            <div class="card-tools">
+                            <div class="card-tools" style="width:100%">
                                   <span class="custom-control custom-switch" style="margin-bottom:5px">
                                     <input type="checkbox" class="custom-control-input" id="userDetailView"  v-model="memberDetailView" @change="detailVisible($event)">
                                     <label class="custom-control-label" for="userDetailView">Detail Display</label>
                                 </span>
-                                <div class="input-group input-group-sm" style="width: 300px;">
+                                <div class="input-group input-group-sm">
                                     <input type="text" name="keyword" class="form-control float-right" v-model="keyword" placeholder="Search" @keyup.enter="getUserInfoList('INIT')">
                                     <div class="input-group-append">
                                         <button type="submit" class="btn btn-default" @click="getUserInfoList('INIT')">

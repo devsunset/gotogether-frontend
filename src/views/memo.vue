@@ -31,13 +31,13 @@
                                     </div>
                                 </span>
                             </span>
-                            <div class="card-tools">
+                            <div class="card-tools" style="width:100%">
                                 <span class="custom-control custom-switch" style="margin-bottom:5px">
                                         <input type="checkbox" class="custom-control-input" id="memoDetailView"  v-model="detailView" @change="detailVisible($event)">
                                         <label class="custom-control-label" for="memoDetailView">Detail Display
                                         </label> 
                                 </span>
-                                <div class="input-group input-group-sm" style="width:300px"> 
+                                <div class="input-group input-group-sm"> 
                                   <select class="form-control" v-model="memoFlag" @change="getMemoList('INIT')"> 
                                       <option value="R">수신 메모함</option>
                                       <option value="S">발신 메모함</option> 
