@@ -5,7 +5,7 @@
             <li class="nav-item">
                 <router-link to="/">
                 <button class="nav-link" role="button">
-                    <i class="fas fa-bars"></i>
+                    <i class="fas fa-home"></i>
                 </button>
                </router-link>
             </li>
