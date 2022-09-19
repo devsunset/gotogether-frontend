@@ -34,7 +34,7 @@ const setup = (store) => {
 
           try {
             if (TokenService.getLocalRefreshToken() === undefined) {
-              alert("로그인 정보가 유효하지 않습니다.");
+              //alert("로그인 정보가 유효하지 않습니다.");
               store.dispatch("auth/logout");
               TokenService.removeUser();
               return;
@@ -51,7 +51,7 @@ const setup = (store) => {
             return axiosInstance(originalConfig);
           } catch (_error) {
             if (_error.message == "Request failed with status code 403") {
-              alert("로그인 정보가 만료되었습니다 다시 로그인해 주세요.");
+              //alert("로그인 정보가 만료되었습니다 다시 로그인해 주세요.");
               store.dispatch("auth/logout");
               TokenService.removeUser();
             }
