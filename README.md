@@ -6,7 +6,7 @@ http://gotogether.ga/
 
 --------------------------------------------------------
 
-nginx spa 배포시 404 에러 해결
+nginx spa 모듈 배포시 Refresh시 404 해결 처리 법
 
 nginx.conf 파일 하단 내용 수정
 
