@@ -19,3 +19,7 @@ location / {
           try_files $uri $uri/ /index.html;
           
 }
+
+
+
+Template : https://github.com/erdkse/adminlte-3-vue
