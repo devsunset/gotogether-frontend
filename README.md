@@ -1,7 +1,9 @@
 # gotogether-frontend-vue
 gotogether-frontend - frontend go together (vue.js) 
 
-http://193.123.252.22
+https://gotogether-vue.web.app  - service running  (firebase web hosting)
+
+http://193.123.252.22 - service stop (http apache)
 
 --------------------------------------------------------
 
